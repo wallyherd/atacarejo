@@ -1,0 +1,3387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERP Distribuidora de Bebidas • Sistema Integrado de Gestão</title>
+  <meta name="description" content="Sistema integrado ERP e PDV corporativo com gestão completa de Clientes, Vendas, Fiscal, Caixa, Estoque, Compras, Relatórios e Financeiro.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Corporativa com Menu Sanfona (Accordion) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">AC</div>
+        <div class="brand-info">
+          <div class="brand-title">Atacarejo/Cba</div>
+          <div class="brand-subtitle">ERP Comercial & Fiscal</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" id="sidebar-accordion-nav">
+        
+        <!-- 0. Menu Dashboard Geral (Inicial Padrão) -->
+        <div class="nav-accordion-group open" id="group-dashboard">
+          <button class="nav-group-header active-group" data-group="group-dashboard">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span>Dashboard</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem active" data-view="view-dashboard-geral">- Visão Geral & KPIs</button>
+          </div>
+        </div>
+
+        <!-- 1. Menu Cliente -->
+        <div class="nav-accordion-group" id="group-cliente">
+          <button class="nav-group-header" data-group="group-cliente">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Cliente</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem" data-view="view-cliente-cadastro">- Cadastro</button>
+            <button class="nav-subitem" data-view="view-cliente-consulta">- Consulta</button>
+          </div>
+        </div>
+
+        <!-- 2. Menu Vendas -->
+        <div class="nav-accordion-group" id="group-vendas">
+          <button class="nav-group-header" data-group="group-vendas">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Vendas</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem" data-view="view-vendas-varejo">- Varejo (PDV)</button>
+            <button class="nav-subitem" data-view="view-vendas-atacado">- Atacado (B2B)</button>
+            <button class="nav-subitem" data-view="view-vendas-orcamento">- Orçamento</button>
+          </div>
+        </div>
+
+        <!-- 3. Menu Fiscal -->
+        <div class="nav-accordion-group" id="group-fiscal">
+          <button class="nav-group-header" data-group="group-fiscal">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>Fiscal</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem" data-view="view-fiscal-geradas">- Notas geradas</button>
+            <button class="nav-subitem" data-view="view-fiscal-pendentes">- Notas pendentes</button>
+            <button class="nav-subitem" data-view="view-fiscal-conciliacao">- Conciliação de notas</button>
+          </div>
+        </div>
+
+        <!-- 4. Menu Caixa -->
+        <div class="nav-accordion-group" id="group-caixa">
+          <button class="nav-group-header" data-group="group-caixa">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              <span>Caixa</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem" data-view="view-caixa-abertura">- Abertura</button>
+            <button class="nav-subitem" data-view="view-caixa-fechamento">- Fechamento</button>
+            <button class="nav-subitem" data-view="view-caixa-movimentacao">- Sangria / Entrada / Saída</button>
+            <button class="nav-subitem" data-view="view-caixa-todos">- Todos os Caixas</button>
+          </div>
+        </div>
+
+        <!-- 5. Menu Estoque -->
+        <div class="nav-accordion-group" id="group-estoque">
+          <button class="nav-group-header" data-group="group-estoque">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              <span>Estoque</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem" data-view="view-estoque-avulsa">- Entrada / Saída avulsa</button>
+            <button class="nav-subitem" data-view="view-estoque-cadastro">- Cadastro</button>
+            <button class="nav-subitem" data-view="view-estoque-historico">- Histórico</button>
+            <button class="nav-subitem" data-view="view-estoque-todos">- Todos os itens</button>
+            <button class="nav-subitem" data-view="view-estoque-lote">- Alteração em lote</button>
+            <button class="nav-subitem" data-view="view-estoque-minmax">- Estoque mínimo / máximo</button>
+            <button class="nav-subitem" data-view="view-estoque-movimentacao">- Movimentação entre estoques</button>
+          </div>
+        </div>
+
+        <!-- 6. Menu Compras -->
+        <div class="nav-accordion-group" id="group-compras">
+          <button class="nav-group-header" data-group="group-compras">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              <span>Compras</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem" data-view="view-compras-sugestao">- Sugestão de compra</button>
+            <button class="nav-subitem" data-view="view-compras-saida">- Análise de saída por período</button>
+            <button class="nav-subitem" data-view="view-compras-teto">- Teto de compra por fornecedor</button>
+            <button class="nav-subitem" data-view="view-compras-precos">- Análise de preços</button>
+          </div>
+        </div>
+
+        <!-- 7. Menu Relatórios -->
+        <div class="nav-accordion-group" id="group-relatorios">
+          <button class="nav-group-header" data-group="group-relatorios">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span>Relatórios</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem" data-view="view-rel-dashboard">- Painel Multi-Relatórios</button>
+            <button class="nav-subitem" data-view="view-rel-movimento">- Movimento estoque</button>
+            <button class="nav-subitem" data-view="view-rel-auditoria">- Auditoria</button>
+            <button class="nav-subitem" data-view="view-rel-vendas">- Vendas</button>
+            <button class="nav-subitem" data-view="view-rel-compras">- Compras</button>
+            <button class="nav-subitem" data-view="view-rel-variacao">- Variação custo</button>
+            <button class="nav-subitem" data-view="view-rel-lucro">- Lucro</button>
+            <button class="nav-subitem" data-view="view-rel-dre">- DRE</button>
+            <button class="nav-subitem" data-view="view-rel-funcionarios">- Funcionários</button>
+          </div>
+        </div>
+
+        <!-- 8. Menu Financeiro -->
+        <div class="nav-accordion-group" id="group-financeiro">
+          <button class="nav-group-header" data-group="group-financeiro">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span>Financeiro</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem" data-view="view-fin-vendas">- Analytics de Vendas</button>
+            <button class="nav-subitem" data-view="view-fin-pagar">- Contas a pagar</button>
+            <button class="nav-subitem" data-view="view-fin-receber">- Contas a receber</button>
+            <button class="nav-subitem" data-view="view-fin-boletos">- Boletos</button>
+            <button class="nav-subitem" data-view="view-fin-previsao">- Previsão financeira</button>
+          </div>
+        </div>
+
+        <!-- 9. Menu Admin -->
+        <div class="nav-accordion-group" id="group-admin">
+          <button class="nav-group-header" data-group="group-admin">
+            <div class="nav-group-header-left">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span>Admin</span>
+            </div>
+            <span class="nav-group-arrow">▶</span>
+          </button>
+          <div class="nav-submenu">
+            <button class="nav-subitem" data-view="view-admin-exportar">- Exportar Relatório</button>
+            <button class="nav-subitem" data-view="view-admin-usuarios">- Criar usuário</button>
+            <button class="nav-subitem" data-view="view-admin-permissoes">- Permissões</button>
+          </div>
+        </div>
+
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status-row">
+          <span>Servidor Local</span>
+          <div class="status-indicator">
+            <div class="status-dot"></div>
+            <span>Conectado</span>
+          </div>
+        </div>
+        <div style="font-size: 10px; color: #475569;">Sefaz SP: Normal (12ms) • TEF v4.2</div>
+      </div>
+    </aside>
+
+    <!-- Overlay Mobile do Menu Lateral -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Área Principal de Conteúdo -->
+    <main class="main-content">
+      
+      <!-- Topbar Geral -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn-mobile-toggle" id="btn-mobile-menu" aria-label="Abrir Menu">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <h1 class="topbar-title" id="header-view-title">
+            Cliente • Consulta & Ficha 360º
+          </h1>
+          <span class="tag-badge tag-b2b" id="header-view-tag">Módulo Comercial</span>
+        </div>
+
+        <div class="topbar-right">
+          <div class="terminal-meta-group">
+            <span>Caixa: <strong>02</strong></span>
+            <span>Turno: <strong>Manhã</strong></span>
+            <span>Série Fiscal: <strong>1</strong></span>
+          </div>
+
+          <div class="operator-badge">
+            <div class="operator-avatar">JS</div>
+            <div>
+              <div style="font-weight: 600; font-size: 12px;">Juliana Silva</div>
+              <div style="font-size: 10px; color: var(--text-dim);">Operadora de Caixa Sênior</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ====================================================================
+           0. DASHBOARD GERAL RESUMIDO (Tela Inicial do Sistema)
+           ==================================================================== -->
+      <section class="view-container active" id="view-dashboard-geral">
+        <div class="module-view-layout" style="gap:16px;">
+          
+          <!-- Linha de KPIs Superiores do Dia -->
+          <div class="dash-kpi-grid">
+            
+            <div class="dash-kpi-card highlight-main">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">TOTAL FATURADO HOJE</span>
+                <span class="kpi-pill-badge green">+14.8% vs média</span>
+              </div>
+              <div class="dash-kpi-value" id="dash-total-vendas-hoje">R$ 53.210,00</div>
+              <div class="dash-kpi-sub">
+                <span>160 operações concluídas</span>
+                <span>Ticket Médio: <strong>R$ 332,56</strong></span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">PDV • BALCÃO & VAREJO</span>
+                <span class="kpi-pill-badge blue">31.9% do dia</span>
+              </div>
+              <div class="dash-kpi-value" style="color:var(--b2c-blue);" id="dash-vendas-pdv-hoje">R$ 16.970,00</div>
+              <div class="dash-kpi-sub">
+                <span>142 cupons fiscais emitidos</span>
+                <span>Caixas 01 e 02 Ativos</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">B2B • ATACADO CORPORATIVO</span>
+                <span class="kpi-pill-badge purple">68.1% do dia</span>
+              </div>
+              <div class="dash-kpi-value" style="color:var(--b2b-purple);" id="dash-vendas-b2b-hoje">R$ 36.240,00</div>
+              <div class="dash-kpi-sub">
+                <span>18 pedidos faturados / rotas</span>
+                <span>Barris: <strong>32 un</strong> • Cx 600: <strong>140 cx</strong></span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">ORÇAMENTOS EM ABERTO</span>
+                <span class="kpi-pill-badge yellow">8 orçamentos</span>
+              </div>
+              <div class="dash-kpi-value" style="color:var(--status-warning);" id="dash-orcamentos-total">R$ 24.500,00</div>
+              <div class="dash-kpi-sub">
+                <span>Taxa conversão: <strong>76.4%</strong></span>
+                <span>Validade média: 48 horas</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Grade Principal do Dashboard (2 Colunas) -->
+          <div class="dash-main-grid">
+            
+            <!-- Coluna Esquerda: Alerta de Estoque Baixo & Gráfico de Tendência -->
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              
+              <!-- Card: Alerta de Estoque Crítico -->
+              <div class="b2b-panel-card">
+                <div class="b2b-panel-header">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-weight:700; font-size:14px; color:var(--text-main);">🚨 Produtos Próximos de Acabar (Estoque Crítico)</span>
+                    <span class="status-pill rejeitada" id="dash-stock-alert-count">3 Itens Críticos</span>
+                  </div>
+                  <button class="btn-secondary" style="height:28px; font-size:11px; padding:0 10px;" onclick="handleSubmenuNavigation('view-compras-sugestao', '- Sugestão de compra');">
+                    📦 Sugestão de Compras
+                  </button>
+                </div>
+
+                <div style="overflow-x:auto;">
+                  <table class="enterprise-table" style="font-size:12px;">
+                    <thead>
+                      <tr>
+                        <th>SKU</th>
+                        <th>Produto</th>
+                        <th>Categoria</th>
+                        <th>Estoque Atual</th>
+                        <th>Mínimo</th>
+                        <th>Status</th>
+                        <th style="text-align:right;">Ação</th>
+                      </tr>
+                    </thead>
+                    <tbody id="dash-stock-critical-tbody">
+                      <!-- Renderizado via JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Card: Gráfico / Barras de Desempenho dos Últimos 7 Dias -->
+              <div class="b2b-panel-card">
+                <div class="b2b-panel-header">
+                  <div>
+                    <span style="font-weight:700; font-size:14px;">📊 Desempenho de Vendas Semanal (PDV vs B2B)</span>
+                    <p style="font-size:11px; color:var(--text-dim); margin:2px 0 0 0;">Volume faturado diário com comparativo de canal</p>
+                  </div>
+                  <div style="display:flex; gap:12px; font-size:11px; align-items:center;">
+                    <span style="display:flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; background:var(--b2c-blue); border-radius:2px;"></span> PDV (Varejo)</span>
+                    <span style="display:flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; background:var(--b2b-purple); border-radius:2px;"></span> B2B (Atacado)</span>
+                  </div>
+                </div>
+
+                <div class="dash-chart-bars-container" id="dash-weekly-chart-bars">
+                  <!-- Gerado via JS / CSS -->
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Coluna Direita: NFs Recentes, Contas a Vencer e Caixas do Turno -->
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              
+              <!-- Card: Contas a Pagar (Títulos de Fornecedores a Vencer) -->
+              <div class="b2b-panel-card">
+                <div class="b2b-panel-header">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-weight:700; font-size:13px;">📑 Títulos a Pagar Vinculados às Notas (Próximos)</span>
+                  </div>
+                  <button class="btn-secondary" style="height:28px; font-size:11px; padding:0 10px;" onclick="handleSubmenuNavigation('view-fin-pagar', '- Contas a pagar');">
+                    Ver Todos
+                  </button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px;" id="dash-payable-mini-list">
+                  <!-- Renderizado via JS -->
+                </div>
+              </div>
+
+              <!-- Card: Últimas Notas Fiscais Emitidas -->
+              <div class="b2b-panel-card">
+                <div class="b2b-panel-header">
+                  <span style="font-weight:700; font-size:13px;">⚡ Últimas Emissões Fiscais (NFC-e / NF-e 55)</span>
+                  <button class="btn-secondary" style="height:28px; font-size:11px; padding:0 10px;" onclick="handleSubmenuNavigation('view-fiscal-geradas', '- Notas geradas');">
+                    Painel Fiscal
+                  </button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:6px;" id="dash-fiscal-mini-list">
+                  <!-- Renderizado via JS -->
+                </div>
+              </div>
+
+              <!-- Card: Operação de Caixa & Turno -->
+              <div class="b2b-panel-card">
+                <div class="b2b-panel-header">
+                  <span style="font-weight:700; font-size:13px;">🏧 Frente de Caixa • Turno Atual</span>
+                  <span class="status-pill ativo">Caixas Operando</span>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                  <div style="background:var(--bg-surface-subtle); border:1px solid var(--border-subtle); padding:10px; border-radius:var(--radius-xs);">
+                    <div style="display:flex; justify-content:space-between; font-size:11px;">
+                      <strong>Terminal 01</strong>
+                      <span style="color:var(--status-success); font-weight:700;">Ativo</span>
+                    </div>
+                    <div style="font-family:var(--font-mono); font-size:15px; font-weight:700; margin-top:4px;">R$ 8.940,00</div>
+                    <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">Op: Carlos Mendes (Manhã)</div>
+                  </div>
+                  <div style="background:var(--bg-surface-subtle); border:1px solid var(--border-subtle); padding:10px; border-radius:var(--radius-xs);">
+                    <div style="display:flex; justify-content:space-between; font-size:11px;">
+                      <strong>Terminal 02</strong>
+                      <span style="color:var(--status-success); font-weight:700;">Ativo</span>
+                    </div>
+                    <div style="font-family:var(--font-mono); font-size:15px; font-weight:700; margin-top:4px;">R$ 8.030,00</div>
+                    <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">Op: Juliana Silva (Manhã)</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           1. CLIENTE • CADASTRO
+           ==================================================================== -->
+      <section class="view-container" id="view-cliente-cadastro">
+        <div class="module-view-layout">
+          <div class="b2b-panel-card" style="max-width: 900px; margin: 0 auto; width: 100%;">
+            <div class="b2b-panel-header">
+              <div>
+                <span style="font-weight: 700; font-size: 15px; color: var(--text-main);">Cadastro de Novo Cliente / Empresa PJ</span>
+                <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;">Preencha os dados cadastrais, fiscais e limite de crédito corporativo</p>
+              </div>
+              <span class="tag-badge tag-b2b">Pessoa Jurídica / Física</span>
+            </div>
+
+            <form id="form-cadastrar-cliente-view" style="display: flex; flex-direction: column; gap: 14px; padding-top: 10px;" onsubmit="event.preventDefault(); window.salvarNovoClienteFromView();">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label">Razão Social / Nome Completo *</label>
+                  <input type="text" class="form-input" id="view-cad-razao" required placeholder="Ex: Cervejaria e Bar Paulistano Ltda">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Nome Fantasia *</label>
+                  <input type="text" class="form-input" id="view-cad-fantasia" required placeholder="Ex: Paulistano Pub & Chopp">
+                </div>
+              </div>
+
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">CNPJ ou CPF *</label>
+                  <input type="text" class="form-input" id="view-cad-cnpj" required placeholder="00.000.000/0000-00">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Inscrição Estadual (IE)</label>
+                  <input type="text" class="form-input" id="view-cad-ie" placeholder="Isento ou 110.000.000.000">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Segmento de Atuação</label>
+                  <select class="form-input" id="view-cad-segmento">
+                    <option value="Bar & Gastronomia">Bar & Gastronomia</option>
+                    <option value="Rede de Supermercados">Rede de Supermercados</option>
+                    <option value="Eventos & Buffet">Eventos & Buffet</option>
+                    <option value="Distribuidora Parceira">Distribuidora Parceira</option>
+                    <option value="Conveniência & Posto">Conveniência & Posto</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">Contato / Comprador Responsável</label>
+                  <input type="text" class="form-input" id="view-cad-contato" placeholder="Ex: Mariana Silveira">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Telefone / WhatsApp Comercial</label>
+                  <input type="text" class="form-input" id="view-cad-telefone" placeholder="(11) 98888-7777">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">E-mail para Faturamento / XML</label>
+                  <input type="email" class="form-input" id="view-cad-email" placeholder="financeiro@empresa.com.br">
+                </div>
+              </div>
+
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">CEP</label>
+                  <input type="text" class="form-input" id="view-cad-cep" placeholder="01001-000">
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                  <label class="form-label">Endereço Completo de Entrega</label>
+                  <input type="text" class="form-input" id="view-cad-endereco" placeholder="Av. Paulista, 1000 - Bela Vista, São Paulo - SP">
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label">Limite de Crédito Inicial (R$)</label>
+                  <input type="number" class="form-input" id="view-cad-limite" value="25000" min="0" step="500">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Condição de Pagamento Padrão</label>
+                  <select class="form-input" id="view-cad-prazo">
+                    <option value="Faturado 15/30 Dias">Faturado 15/30 Dias</option>
+                    <option value="Boleto Bancário 21/42 DDL">Boleto Bancário 21/42 DDL</option>
+                    <option value="Boleto 7/14 DDL">Boleto 7/14 DDL</option>
+                    <option value="PIX ou Cartão no Ato">PIX ou Cartão no Ato (À Vista)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px; border-top:1px solid var(--border-subtle); padding-top:14px;">
+                <button type="button" class="btn-secondary" onclick="handleSubmenuNavigation('view-cliente-consulta', '- Consulta');">
+                  Cancelar
+                </button>
+                <button type="submit" class="btn-add-client" style="height:38px; padding:0 22px;">
+                  💾 Salvar Cadastro da Empresa
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           1. CLIENTE • CONSULTA & CADASTRO (Ativo por Padrão)
+           ==================================================================== -->
+      <section class="view-container" id="view-cliente-consulta">
+        <div class="clients-module-layout">
+          
+          <div class="clients-sidebar-list">
+            <div class="clients-list-toolbar">
+              <div class="clients-list-toolbar-actions">
+                <span style="font-weight: 700; font-size: 13px;">Empresas Cadastradas</span>
+                <button class="btn-add-client" id="btn-open-new-client-modal">
+                  + Nova Empresa
+                </button>
+              </div>
+              <input 
+                type="text" 
+                class="form-input" 
+                id="clients-search-input" 
+                placeholder="Buscar por Razão, CNPJ ou Fantasia..."
+                style="height: 32px;"
+              >
+            </div>
+
+            <div class="clients-scroll-list" id="clients-items-list">
+              <!-- Lista de empresas gerada via JS -->
+            </div>
+          </div>
+
+          <div class="client-detail-view" id="client-detail-container">
+            <!-- Header do Cliente -->
+            <div class="client-header-card">
+              <div class="client-identity-row">
+                <div class="company-names">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <h2 id="client-view-trade-name">Boteco Vila Madalena</h2>
+                    <span class="status-pill ativo" id="client-view-status">Ativo</span>
+                  </div>
+                  <span id="client-view-corp-name">Boteco & Gastronomia Vila Madalena Ltda</span>
+                  <div style="display:flex; gap:12px; margin-top:4px; font-size:12px; color:var(--text-dim);">
+                    <span>CNPJ: <strong style="font-family:var(--font-mono);" id="client-view-cnpj">18.342.981/0001-44</strong></span>
+                    <span>IE: <strong style="font-family:var(--font-mono);" id="client-view-ie">109.842.190.114</strong></span>
+                    <span>Cliente desde: <strong id="client-view-since">14/03/2023</strong></span>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:8px;">
+                  <button class="btn-secondary" id="btn-edit-client-limits">
+                    ⚙️ Ajustar Limite
+                  </button>
+                  <button class="btn-add-client" id="btn-create-b2b-order-for-client">
+                    + Novo Pedido B2B
+                  </button>
+                </div>
+              </div>
+
+              <!-- KPIs do Cliente PJ -->
+              <div class="client-kpi-summary-grid">
+                <div class="client-kpi-box">
+                  <span class="kpi-sub-label">Limite Disponível</span>
+                  <span class="kpi-main-num" style="color: var(--status-success);" id="client-view-credit-avail">R$ 20.800,00</span>
+                  <span style="font-size: 10px; color: var(--text-dim);" id="client-view-credit-total">de R$ 35.000,00 total</span>
+                </div>
+
+                <div class="client-kpi-box">
+                  <span class="kpi-sub-label">Total Faturado Histórico</span>
+                  <span class="kpi-main-num" id="client-view-total-purchases">R$ 184.520,00</span>
+                  <span style="font-size: 10px; color: var(--text-dim);" id="client-view-orders-count">42 pedidos realizados</span>
+                </div>
+
+                <div class="client-kpi-box">
+                  <span class="kpi-sub-label">Condição Padrão</span>
+                  <span class="kpi-main-num" style="font-size: 13px;" id="client-view-terms">Faturado 15/30 Dias</span>
+                  <span style="font-size: 10px; color: var(--text-dim);">Boleto Bancário</span>
+                </div>
+
+                <div class="client-kpi-box">
+                  <span class="kpi-sub-label">Vasilhames em Posse</span>
+                  <span class="kpi-main-num" style="color: var(--b2b-purple);" id="client-view-cascos-posse">69 unidades</span>
+                  <span style="font-size: 10px; color: var(--text-dim);">Barris e Caixas</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Abas da Ficha do Cliente -->
+            <div class="client-tabs-container">
+              <div class="client-nav-tabs">
+                <button class="client-tab-btn active" data-tab="client-tab-orders">
+                  Histórico de Compras & Vendas
+                </button>
+                <button class="client-tab-btn" data-tab="client-tab-info">
+                  Ficha Cadastral & Contatos
+                </button>
+                <button class="client-tab-btn" data-tab="client-tab-vasilhames">
+                  Posição de Vasilhames & Cascos
+                </button>
+              </div>
+
+              <div class="client-tab-content-panel active" id="client-tab-orders">
+                <table class="enterprise-table">
+                  <thead>
+                    <tr>
+                      <th>Pedido / Nº</th>
+                      <th>Data</th>
+                      <th>NF-e Vinculada</th>
+                      <th>Qtd Itens</th>
+                      <th>Valor Total</th>
+                      <th>Status Entrega</th>
+                      <th>Status Financeiro</th>
+                      <th style="text-align: right;">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="client-orders-history-tbody">
+                    <!-- Gerado dinamicamente via JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="client-tab-content-panel" id="client-tab-info">
+                <div class="corporate-data-grid">
+                  <div class="data-field-group">
+                    <span class="data-field-label">Endereço Comercial</span>
+                    <span class="data-field-value" id="client-info-address">Rua Fradique Coutinho, 890 - Pinheiros</span>
+                  </div>
+                  <div class="data-field-group">
+                    <span class="data-field-label">CEP / Município</span>
+                    <span class="data-field-value" id="client-info-cep">05416-001 • São Paulo - SP</span>
+                  </div>
+                  <div class="data-field-group">
+                    <span class="data-field-label">Segmento de Atuação</span>
+                    <span class="data-field-value" id="client-info-segment">Bar & Gastronomia</span>
+                  </div>
+                  <div class="data-field-group">
+                    <span class="data-field-label">Contato Comercial</span>
+                    <span class="data-field-value" id="client-info-contact">Carlos Mendonça (Gerente de Compras)</span>
+                  </div>
+                  <div class="data-field-group">
+                    <span class="data-field-label">Telefone Principal</span>
+                    <span class="data-field-value" id="client-info-phone">(11) 98765-4321</span>
+                  </div>
+                  <div class="data-field-group">
+                    <span class="data-field-label">E-mail para Faturamento / XML</span>
+                    <span class="data-field-value" id="client-info-email">compras@botecovilamadalena.com.br</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="client-tab-content-panel" id="client-tab-vasilhames">
+                <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                  <div class="client-kpi-box">
+                    <span class="kpi-sub-label">Barril 50L Inox</span>
+                    <span class="kpi-main-num" id="client-casco-b50">8 unidades</span>
+                    <span style="font-size: 11px; color: var(--text-dim);">Em comodato</span>
+                  </div>
+                  <div class="client-kpi-box">
+                    <span class="kpi-sub-label">Barril 30L Inox</span>
+                    <span class="kpi-main-num" id="client-casco-b30">4 unidades</span>
+                    <span style="font-size: 11px; color: var(--text-dim);">Em comodato</span>
+                  </div>
+                  <div class="client-kpi-box">
+                    <span class="kpi-sub-label">Caixas Garrafa 600ml</span>
+                    <span class="kpi-main-num" id="client-casco-cx600">45 caixas</span>
+                    <span style="font-size: 11px; color: var(--text-dim);">1.080 cascos</span>
+                  </div>
+                  <div class="client-kpi-box">
+                    <span class="kpi-sub-label">Caixas Litrão 1L</span>
+                    <span class="kpi-main-num" id="client-casco-litro">12 caixas</span>
+                    <span style="font-size: 11px; color: var(--text-dim);">144 cascos</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           2. VENDAS • VAREJO (PDV FRENTE DE CAIXA)
+           ==================================================================== -->
+      <section class="view-container" id="view-vendas-varejo">
+        <div class="pdv-full-layout">
+          
+          <!-- Toolbar Superior de Alta Produtividade -->
+          <div class="pdv-full-toolbar">
+            <div class="search-bar-row">
+              <div class="search-input-wrapper" style="position: relative; flex: 1;">
+                <input 
+                  type="text" 
+                  class="form-input" 
+                  id="pdv-search-input" 
+                  placeholder="Pesquisar por Código, Descrição, SKU ou Código de Barras (F2 ou Enter para inserir)..."
+                  autocomplete="off"
+                >
+                <div class="search-autocomplete-dropdown" id="pdv-search-autocomplete"></div>
+              </div>
+
+              <button class="btn-secondary" id="btn-pdv-scanner" title="Leitor de Código de Barras Habilitado">
+                <span style="display:inline-block; width:8px; height:8px; background:#22c55e; border-radius:50%;"></span>
+                <span>Leitor Óptico Ativo</span>
+              </button>
+
+              <button class="btn-primary-action" id="btn-open-products-modal" style="height: 38px; display: flex; align-items: center; gap: 8px; font-weight: 600; padding: 0 16px;">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+                <span>Ver Produtos</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Cupom Fiscal de Venda (PDV) - Ocupando todo o espaço principal -->
+          <div class="pdv-cupom-full-panel">
+            
+            <div class="cupom-full-header">
+              <div class="cupom-header-left">
+                <div class="cupom-main-title">
+                  <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <span>Cupom Fiscal de Venda (PDV)</span>
+                </div>
+                <div class="cupom-header-metadata">
+                  <span>Terminal: <strong>PDV-02</strong></span>
+                  <span>Operador: <strong>Juliana Silva</strong></span>
+                  <span>Cliente: <strong id="pdv-client-indicator">Consumidor Final (Balcão)</strong></span>
+                  <span>Série: <strong>1 (NFC-e)</strong></span>
+                </div>
+              </div>
+
+              <div class="cupom-header-right">
+                <button class="btn-secondary" id="btn-clear-cart" style="height: 32px; padding: 0 12px; color: var(--status-danger);">
+                  🗑️ Limpar Cupom
+                </button>
+              </div>
+            </div>
+
+            <!-- Tabela Principal de Itens do Cupom Fiscal -->
+            <div class="cupom-table-container">
+              <table class="enterprise-table pdv-full-table">
+                <thead>
+                  <tr>
+                    <th style="width: 48px; text-align: center;">#</th>
+                    <th style="width: 130px;">Código / SKU</th>
+                    <th>Descrição do Item</th>
+                    <th style="width: 140px; text-align: right;">Preço Unit.</th>
+                    <th style="width: 160px; text-align: center;">Quantidade</th>
+                    <th style="width: 180px; text-align: center;">Desconto Item</th>
+                    <th style="width: 150px; text-align: right;">Total Líquido</th>
+                    <th style="width: 60px; text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+                <tbody id="pdv-cart-items-tbody">
+                  <!-- Gerado dinamicamente via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Rodapé / Barra de Totais do Cupom Fiscal -->
+            <div class="cupom-full-footer">
+              <div class="cupom-footer-left">
+                <div class="cupom-kpi-pill">
+                  <span class="kpi-label">Itens / Volumes</span>
+                  <span class="kpi-val" id="cart-volumes-count">0</span>
+                </div>
+                <div class="cupom-kpi-pill">
+                  <span class="kpi-label">Subtotal Bruto</span>
+                  <span class="kpi-val" id="cart-subtotal-val">R$ 0,00</span>
+                </div>
+                <div class="cupom-kpi-pill" style="border-color: rgba(34, 197, 94, 0.3);">
+                  <span class="kpi-label">Descontos Aplicados</span>
+                  <span class="kpi-val" id="cart-discount-val" style="color: var(--status-success);">R$ 0,00</span>
+                </div>
+              </div>
+
+              <div class="cupom-footer-right">
+                <div class="cupom-grand-total-box">
+                  <span class="total-label">TOTAL A PAGAR</span>
+                  <span class="total-value" id="cart-final-total">R$ 0,00</span>
+                </div>
+
+                <div class="cupom-action-buttons">
+                  <button class="btn-secondary" id="btn-open-order-discount" style="height: 48px; font-weight: 600; padding: 0 16px;">
+                    🏷️ Desconto Pedido
+                  </button>
+                  <button class="btn-primary-action" id="btn-finalize-pay" style="height: 48px; font-size: 14px; font-weight: 700; padding: 0 24px; letter-spacing: 0.2px;">
+                    Finalizar Venda (F10)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           3. VENDAS • ATACADO (B2B & RETORNÁVEIS)
+           ==================================================================== -->
+      <section class="view-container" id="view-vendas-atacado">
+        <div class="module-view-layout">
+          
+          <div class="b2b-client-selector-card">
+            <div style="flex: 1; min-width: 260px;">
+              <label class="form-label" style="font-size: 11px; text-transform:uppercase;">Empresa Selecionada para o Pedido</label>
+              <select class="form-input" id="b2b-order-client-select" style="font-weight: 600;">
+                <!-- Preenchido via JS -->
+              </select>
+            </div>
+
+            <div class="credit-progress-bar-box" style="flex: 1.2; min-width: 280px;">
+              <div style="display:flex; justify-content:space-between; font-size:11px;">
+                <span>Limite Disponível: <strong style="color:var(--status-success);" id="b2b-screen-credit-avail">R$ 20.800,00</strong></span>
+                <span id="b2b-screen-credit-total" style="color:var(--text-dim);">Total: R$ 35.000,00</span>
+              </div>
+              <div class="credit-progress-track">
+                <div class="credit-progress-fill" id="b2b-screen-credit-bar" style="width: 40%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <button class="btn-secondary" id="btn-repeat-last-order-b2b" style="height: 38px; border-color: var(--b2b-purple-border); color: var(--b2b-purple); font-weight: 600; display:flex; align-items:center; gap:6px;">
+                🔄 Repetir Pedido
+              </button>
+            </div>
+          </div>
+
+          <div class="b2b-two-columns-grid">
+            <!-- Vasilhames -->
+            <div class="b2b-panel-card">
+              <div class="b2b-panel-header">
+                <span style="font-weight: 700; font-size: 13px;">Conta Corrente de Vasilhames & Retornáveis</span>
+                <span class="tag-badge tag-b2b">Logística Reversa</span>
+              </div>
+
+              <div class="vasilhames-subgrid">
+                <div class="vasilhame-item-card">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600;">
+                    <span>Barril Inox 50L</span>
+                    <span style="font-family:var(--font-mono); color:var(--text-dim);" id="vas-bal-b50">8 devidos</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:11px; color:var(--text-dim);">Entregues no ato:</span>
+                    <div class="qty-control-group">
+                      <button class="qty-btn btn-vas-step" data-target="val-vas-b50" data-dir="-">-</button>
+                      <span class="qty-number" id="val-vas-b50">6</span>
+                      <button class="qty-btn btn-vas-step" data-target="val-vas-b50" data-dir="+">+</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vasilhame-item-card">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600;">
+                    <span>Barril Inox 30L</span>
+                    <span style="font-family:var(--font-mono); color:var(--text-dim);" id="vas-bal-b30">4 devidos</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:11px; color:var(--text-dim);">Entregues no ato:</span>
+                    <div class="qty-control-group">
+                      <button class="qty-btn btn-vas-step" data-target="val-vas-b30" data-dir="-">-</button>
+                      <span class="qty-number" id="val-vas-b30">4</span>
+                      <button class="qty-btn btn-vas-step" data-target="val-vas-b30" data-dir="+">+</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vasilhame-item-card">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600;">
+                    <span>Caixas 600ml (24 un)</span>
+                    <span style="font-family:var(--font-mono); color:var(--text-dim);" id="vas-bal-cx600">45 devidos</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:11px; color:var(--text-dim);">Entregues no ato:</span>
+                    <div class="qty-control-group">
+                      <button class="qty-btn btn-vas-step" data-target="val-vas-cx600" data-dir="-">-</button>
+                      <span class="qty-number" id="val-vas-cx600">15</span>
+                      <button class="qty-btn btn-vas-step" data-target="val-vas-cx600" data-dir="+">+</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vasilhame-item-card">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600;">
+                    <span>Caixas Litrão (12 un)</span>
+                    <span style="font-family:var(--font-mono); color:var(--text-dim);" id="vas-bal-litro">12 devidos</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:11px; color:var(--text-dim);">Entregues no ato:</span>
+                    <div class="qty-control-group">
+                      <button class="qty-btn btn-vas-step" data-target="val-vas-litro" data-dir="-">-</button>
+                      <span class="qty-number" id="val-vas-litro">0</span>
+                      <button class="qty-btn btn-vas-step" data-target="val-vas-litro" data-dir="+">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background-color:var(--bg-surface-subtle); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs); font-size:12px; display:flex; justify-content:space-between;">
+                <span>Total de vasilhames a retornar no romaneio:</span>
+                <strong style="color:var(--primary-navy);" id="vas-total-returned-summary">25 unidades</strong>
+              </div>
+            </div>
+
+            <!-- Itens do Pedido B2B -->
+            <div class="b2b-panel-card" style="display:flex; flex-direction:column; gap:12px;">
+              <div class="b2b-panel-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-weight: 700; font-size: 13px;">Itens do Pedido de Venda Corporativo</span>
+                  <span class="tag-badge tag-b2b">Estoque Atacado (Fardos / Paletes)</span>
+                </div>
+                <button class="btn-secondary" id="btn-open-catalog-b2b" style="height:28px; padding:0 10px; font-size:11px;">
+                  📦 Catálogo de Produtos
+                </button>
+              </div>
+
+              <!-- Barra de Adição de Produtos ao Pedido Atacado -->
+              <div class="b2b-add-item-bar" style="background:var(--bg-surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-xs); padding:10px 12px; display:flex; flex-direction:column; gap:8px;">
+                <div style="font-size:11px; font-weight:600; color:var(--text-muted); display:flex; justify-content:space-between;">
+                  <span>Adicionar Produto ao Pedido (Tabela B2B)</span>
+                  <span style="color:var(--b2b-purple); font-weight:700;">Estoque Dedicado Atacado</span>
+                </div>
+                
+                <div style="display:grid; grid-template-columns: 2.2fr 1.1fr 1fr 1fr auto; gap:8px; align-items:flex-end;">
+                  <div>
+                    <label class="form-label" style="font-size:10px; margin-bottom:2px;">Selecionar Produto</label>
+                    <input type="text" class="form-input" id="b2b-item-product-select" list="b2b-product-datalist" placeholder="Digite para buscar produto..." style="font-size:12px; height:36px;">
+                    <datalist id="b2b-product-datalist">
+                      <!-- Opções preenchidas via JS -->
+                    </datalist>
+                  </div>
+
+                  <div>
+                    <label class="form-label" style="font-size:10px; margin-bottom:2px;">Embalagem / Tipo</label>
+                    <input type="text" class="form-input" id="b2b-item-package-display" readonly style="font-size:11px; height:36px; background:var(--bg-surface); color:var(--text-main); font-weight:600;" value="Fardo / Caixa">
+                  </div>
+
+                  <div>
+                    <label class="form-label" style="font-size:10px; margin-bottom:2px;">Quantidade</label>
+                    <div class="qty-control-group" style="height:36px; width:100%; justify-content:space-between;">
+                      <button class="qty-btn" id="b2b-add-qty-minus" type="button">-</button>
+                      <input type="number" id="b2b-item-qty-input" value="1" min="1" style="width:40px; border:none; text-align:center; font-weight:700; font-family:var(--font-mono); background:transparent;">
+                      <button class="qty-btn" id="b2b-add-qty-plus" type="button">+</button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="form-label" style="font-size:10px; margin-bottom:2px;">Desc. Item (%)</label>
+                    <input type="number" class="form-input" id="b2b-item-discount-input" min="0" max="90" step="0.5" placeholder="0%" style="font-size:12px; height:36px; font-family:var(--font-mono);">
+                  </div>
+
+                  <div>
+                    <button class="btn-add-client" id="btn-add-product-b2b" type="button" style="height:36px; padding:0 14px; white-space:nowrap; background:var(--b2b-purple);">
+                      + Adicionar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tabela de Itens B2B -->
+              <div style="flex:1; max-height:260px; overflow-y:auto; border:1px solid var(--border-subtle); border-radius:var(--radius-xs);">
+                <table class="enterprise-table">
+                  <thead>
+                    <tr>
+                      <th>Item / SKU / Embalagem</th>
+                      <th style="width:110px; text-align:center;">Qtd (Atacado)</th>
+                      <th style="width:110px; text-align:right;">Unit. B2B</th>
+                      <th style="width:110px; text-align:center;">Desc. Item</th>
+                      <th style="width:120px; text-align:right;">Total Líquido</th>
+                      <th style="width:50px; text-align:center;"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="b2b-order-items-tbody">
+                    <!-- Itens inseridos via JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Totais & Desconto Global no Pedido -->
+              <div style="background:var(--bg-surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-xs); padding:10px 14px; display:flex; flex-direction:column; gap:8px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px;">
+                  <span style="color:var(--text-muted);">Subtotal Bruto:</span>
+                  <span style="font-family:var(--font-mono); font-weight:600;" id="b2b-screen-subtotal">R$ 0,00</span>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px;">
+                  <span style="color:var(--status-success);">(-) Descontos por Item:</span>
+                  <span style="font-family:var(--font-mono); font-weight:600; color:var(--status-success);" id="b2b-screen-items-discount">- R$ 0,00</span>
+                </div>
+
+                <!-- Desconto Geral no Pedido -->
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; padding:6px 0; border-top:1px dashed var(--border-subtle); border-bottom:1px dashed var(--border-subtle);">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-weight:600; color:var(--text-main);">🏷️ Desconto Geral no Pedido:</span>
+                    <select class="form-input" id="b2b-global-disc-type" style="height:28px; padding:0 6px; font-size:11px; width:80px;">
+                      <option value="percent">% Porc.</option>
+                      <option value="value">R$ Fixo</option>
+                    </select>
+                    <input type="number" class="form-input" id="b2b-global-disc-val" value="0" min="0" step="0.5" style="height:28px; width:75px; font-size:11px; font-family:var(--font-mono);">
+                  </div>
+                  <span style="font-family:var(--font-mono); font-weight:600; color:var(--status-success);" id="b2b-screen-global-discount">- R$ 0,00</span>
+                </div>
+
+                <!-- Total Faturado e Ação -->
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:4px;">
+                  <div>
+                    <span style="font-size:11px; color:var(--text-dim); display:block;">Valor Final Faturado (Boleto/Prazo):</span>
+                    <span style="font-size:20px; font-weight:800; font-family:var(--font-mono); color:var(--b2b-purple);" id="b2b-screen-order-total">R$ 0,00</span>
+                  </div>
+                  <button class="btn-add-client" style="height: 40px; padding: 0 20px; background:var(--status-success); font-weight:700;" onclick="window.transmitirPedidoB2B()">
+                    Gerar Pedido & Faturar
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           4. VENDAS • ORÇAMENTO (com Visualizador 360 Completo)
+           ==================================================================== -->
+      <section class="view-container" id="view-vendas-orcamento">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <input type="text" class="form-input" id="orcamentos-search-input" style="width: 320px;" placeholder="Pesquisar orçamento por Nº ou Cliente...">
+              <button class="btn-secondary active" data-filter="all">Todos</button>
+              <button class="btn-secondary" data-filter="pendente">Pendentes</button>
+              <button class="btn-secondary" data-filter="aprovado">Aprovados</button>
+              <button class="btn-secondary" data-filter="cancelado">Cancelados</button>
+            </div>
+            <button class="btn-add-client" onclick="window.abrirNovoOrcamento()">
+              + Novo Orçamento
+            </button>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Nº Orçamento</th>
+                  <th>Cliente PJ</th>
+                  <th>Data Emissão</th>
+                  <th>Validade</th>
+                  <th>Vendedor</th>
+                  <th>Itens</th>
+                  <th>Valor Total</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Ações Comerciais</th>
+                </tr>
+              </thead>
+              <tbody id="orcamentos-grid-tbody">
+                <!-- Linhas inseridas via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           5. FISCAL • NOTAS GERADAS / NOTAS PENDENTES / CONCILIAÇÃO
+           ==================================================================== -->
+      <!-- A. Notas Geradas / Autorizadas -->
+      <section class="view-container" id="view-fiscal-geradas">
+        <div class="module-view-layout">
+          <div class="fiscal-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center; width:450px;">
+              <input type="text" class="form-input" id="fiscal-search-input" placeholder="Pesquisar por Nº NF-e, Chave de Acesso ou Destinatário...">
+            </div>
+
+            <div style="display:flex; gap:8px;">
+              <span class="status-pill autorizada" id="fiscal-count-aut">3 Autorizadas</span>
+              <span class="status-pill processando" id="fiscal-count-proc">1 Processando</span>
+              <span class="status-pill rejeitada" id="fiscal-count-rej">1 Rejeitada</span>
+            </div>
+          </div>
+
+          <div class="fiscal-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Nº Documento / Modelo</th>
+                  <th>Data & Hora</th>
+                  <th>Destinatário</th>
+                  <th>Valor Total</th>
+                  <th>Status Sefaz</th>
+                  <th>Operador / Canal</th>
+                  <th style="text-align: right;">Ações Fiscais</th>
+                </tr>
+              </thead>
+              <tbody id="fiscal-grid-tbody">
+                <!-- Linhas fiscais geradas no JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- B. Notas Pendentes / Contingência / Rejeitadas -->
+      <section class="view-container" id="view-fiscal-pendentes">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px; color:var(--text-main);">Fila de Transmissão Sefaz • Notas Pendentes & Rejeitadas</span>
+              <span class="status-pill analise" id="fiscal-pending-badge">2 Pendentes</span>
+            </div>
+            <button class="btn-add-client" id="btn-transmit-all-fiscal" style="background:var(--b2b-purple);">
+              🚀 Transmitir Lote Pendente
+            </button>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Nº Documento</th>
+                  <th>Data/Hora Emissão</th>
+                  <th>Cliente / Destinatário</th>
+                  <th>Valor (R$)</th>
+                  <th>Status Atual</th>
+                  <th>Motivo da Pendência</th>
+                  <th style="text-align: right;">Ação de Lançamento</th>
+                </tr>
+              </thead>
+              <tbody id="fiscal-pendentes-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- C. Conciliação Fiscal -->
+      <section class="view-container" id="view-fiscal-conciliacao">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px; color:var(--text-main);">Conciliação Fiscal de Documentos (NFC-e / NF-e vs TEF / PIX Bancário)</span>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-secondary" id="btn-import-xml-fiscal">📥 Importar XML</button>
+              <button class="btn-add-client" id="btn-auto-reconcile">⚙️ Conciliar Automaticamente</button>
+            </div>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Documento Fiscal</th>
+                  <th>Destinatário</th>
+                  <th>Status Sefaz</th>
+                  <th>Status Financeiro</th>
+                  <th>Divergência</th>
+                  <th>Status Conciliação</th>
+                  <th style="text-align: right;">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="fiscal-conciliacao-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           6. CAIXA • ABERTURA / FECHAMENTO / SANGRIA / TODOS OS CAIXAS
+           ==================================================================== -->
+      <!-- A. Abertura & Detalhamento dos Caixas -->
+      <section class="view-container" id="view-caixa-abertura">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px;">Terminais de Caixa • Abertura e Status de Turno</span>
+            </div>
+            <span style="font-size:12px; color:var(--text-muted);">💡 Clique em qualquer caixa para abrir e visualizar todo o detalhamento.</span>
+          </div>
+
+          <div class="caixas-terminals-grid" id="caixas-terminals-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;">
+            <!-- Cards dos caixas preenchidos dinamicamente via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- B. Fechamento de Caixa -->
+      <section class="view-container" id="view-caixa-fechamento">
+        <div class="module-view-layout">
+          <div class="b2b-panel-card" style="max-width: 800px; margin: 0 auto; width: 100%;">
+            <div class="b2b-panel-header">
+              <div>
+                <span style="font-weight: 700; font-size: 14px; color: var(--text-main);">Conferência Cega & Fechamento de Turno (Caixa 01)</span>
+                <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;">Informe os valores apurados fisicamente para conferência e emissão da Leitura Z</p>
+              </div>
+              <span class="status-pill analise">Turno em Aberto</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; padding-top:10px;">
+              <div class="form-group">
+                <label class="form-label">💵 Dinheiro em Espécie (Contado na Gaveta)</label>
+                <input type="number" class="form-input" id="fechamento-input-dinheiro" value="1840.00" step="0.5">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">📱 Comprovantes PIX (Total Conferido)</label>
+                <input type="number" class="form-input" id="fechamento-input-pix" value="4920.50" step="0.5">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">💳 Cartão de Débito (Total Relatório TEF)</label>
+                <input type="number" class="form-input" id="fechamento-input-debito" value="5120.00" step="0.5">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">💳 Cartão de Crédito (Total Relatório TEF)</label>
+                <input type="number" class="form-input" id="fechamento-input-credito" value="3530.00" step="0.5">
+              </div>
+            </div>
+
+            <div style="background:var(--bg-surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-xs); padding:14px; margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-size:11px; color:var(--text-dim);">Diferença / Quebra Apurada:</div>
+                <div style="font-size:16px; font-weight:700; color:var(--status-success);" id="fechamento-diff-val">R$ 0,00 (Caixa Perfeito)</div>
+              </div>
+              <button class="btn-add-client" style="height:38px; padding:0 20px; background:var(--status-danger);" onclick="window.confirmarFechamentoCaixa();">
+                🔒 Fechar Caixa & Emitir Leitura Z
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- C. Sangria / Entrada / Saída -->
+      <section class="view-container" id="view-caixa-movimentacao">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px;">
+              <button class="btn-add-client" id="btn-open-sangria-modal">
+                🛑 Registrar Sangria (Retirada)
+              </button>
+              <button class="btn-secondary" id="btn-open-suprimento-modal">
+                💵 Registrar Entrada / Suprimento
+              </button>
+            </div>
+            <div>
+              <span style="font-size:12px; color:var(--text-muted);">Saldo Atual Consolidado em Gavetas: <strong style="font-family:var(--font-mono); color:var(--status-success); font-size:14px;">R$ 18.340,00</strong></span>
+            </div>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>ID Movimento</th>
+                  <th>Horário</th>
+                  <th>Tipo</th>
+                  <th>Terminal</th>
+                  <th>Motivo / Descrição</th>
+                  <th>Operador</th>
+                  <th>Supervisor</th>
+                  <th style="text-align: right;">Valor</th>
+                </tr>
+              </thead>
+              <tbody id="caixa-movimentacoes-tbody">
+                <!-- Inserido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- D. Todos os Caixas (Histórico Auditorial) -->
+      <section class="view-container" id="view-caixa-todos">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px;">Histórico Auditorial de Sessões e Turnos Anteriores</span>
+            </div>
+            <button class="btn-secondary" onclick="window.showToast('Exportando auditoria de fechamento de caixas...', 'success')">
+              📥 Exportar Auditoria
+            </button>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Sessão ID</th>
+                  <th>Terminal</th>
+                  <th>Operador</th>
+                  <th>Data</th>
+                  <th>Horário Abertura/Fechamento</th>
+                  <th>Fundo Inicial</th>
+                  <th>Faturamento Bruto</th>
+                  <th>Diferença / Quebra</th>
+                  <th>Status Auditoria</th>
+                </tr>
+              </thead>
+              <tbody id="caixa-todos-tbody">
+                <!-- Inserido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           7. ESTOQUE • CADASTRO / HISTÓRICO / TODOS / LOTE / MIN-MAX / MOVIMENTAÇÃO
+           ==================================================================== -->
+      <!-- A. Entrada / Saída Avulsa -->
+      <section class="view-container" id="view-estoque-avulsa">
+        <div class="module-view-layout">
+          <div class="b2b-panel-card" style="max-width:750px; margin:0 auto; width:100%;">
+            <div class="b2b-panel-header">
+              <div>
+                <span style="font-weight: 700; font-size: 14px;">Lançamento de Entrada / Saída Avulsa de Estoque</span>
+                <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;">Ajuste manual para quebras, avarias, bonificações, brindes e inventário</p>
+              </div>
+            </div>
+
+            <form style="display:flex; flex-direction:column; gap:12px; padding-top:10px;" onsubmit="event.preventDefault(); window.lancarAjusteEstoqueAvulso();">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label">Tipo de Movimentação *</label>
+                  <select class="form-input" id="avulso-tipo">
+                    <option value="saida-avaria">Saída por Avaria / Quebra</option>
+                    <option value="saida-brinde">Saída por Brinde / Degustação</option>
+                    <option value="entrada-ajuste">Entrada por Ajuste de Inventário</option>
+                    <option value="saida-ajuste">Saída por Ajuste de Inventário</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Produto *</label>
+                  <input type="text" class="form-input" id="avulso-produto-search" placeholder="Buscar produto..." style="margin-bottom:8px;" onkeyup="window.filterSelect('avulso-produto-search', 'avulso-produto')">
+                  <select class="form-input" id="avulso-produto">
+                    <!-- Preenchido via JS -->
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">Tipo de Estoque Afetado</label>
+                  <select class="form-input" id="avulso-estoque-tipo">
+                    <option value="atacado">Estoque Atacado (Fardos / Caixas)</option>
+                    <option value="varejo">Estoque Varejo (Balcão)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Quantidade *</label>
+                  <input type="number" class="form-input" id="avulso-qtd" value="1" min="1" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Responsável / Operador</label>
+                  <input type="text" class="form-input" id="avulso-operador" value="Marcos Almoxarife" readonly>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Justificativa / Observação *</label>
+                <textarea class="form-input" id="avulso-motivo" rows="2" required placeholder="Explique o motivo do ajuste manual de estoque..."></textarea>
+              </div>
+
+              <div style="display:flex; justify-content:flex-end; gap:8px; border-top:1px solid var(--border-subtle); padding-top:12px;">
+                <button type="submit" class="btn-add-client">
+                  💾 Confirmar Ajuste de Estoque
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- B. Cadastro de Produtos -->
+      <section class="view-container" id="view-estoque-cadastro">
+        <div class="module-view-layout">
+          <div class="b2b-panel-card" style="max-width:900px; margin:0 auto; width:100%;">
+            <div class="b2b-panel-header">
+              <div>
+                <span style="font-weight: 700; font-size: 14px;">Cadastrar Novo Produto no Estoque</span>
+                <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;">Defina códigos fiscais, tributação, custos, estoques segregados (Atacado x Varejo) e localização</p>
+              </div>
+              <button type="button" class="btn-secondary" id="btn-open-import-nf-modal" style="border-color:var(--primary-navy); color:var(--primary-navy); font-weight:700;">
+                📄 Adicionar por Nota Fiscal de Fornecedor
+              </button>
+            </div>
+
+            <form style="display:flex; flex-direction:column; gap:12px; padding-top:10px;" onsubmit="event.preventDefault(); window.salvarNovoProdutoEstoque();">
+              
+              <!-- Seção de Identificação -->
+              <div class="form-row-3">
+                <div class="form-group" style="grid-column:span 2;">
+                  <label class="form-label">Descrição Completa do Produto *</label>
+                  <input type="text" class="form-input" id="cad-prod-nome" required placeholder="Ex: Chopp Stout Artesanal 30L">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">SKU / Código Interno *</label>
+                  <input type="text" class="form-input" id="cad-prod-sku" required placeholder="Ex: CHP-STOUT-30L">
+                </div>
+              </div>
+
+              <!-- Classificação e Fornecedor -->
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">Categoria *</label>
+                  <select class="form-input" id="cad-prod-categoria">
+                    <option value="barris">Barris de Chopp</option>
+                    <option value="cervejas">Cervejas & Packs</option>
+                    <option value="destilados">Destilados</option>
+                    <option value="nao-alcoolicos">Não Alcoólicos</option>
+                    <option value="outros">Gelo & Outros</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Código de Barras (EAN-13)</label>
+                  <input type="text" class="form-input" id="cad-prod-barcode" placeholder="789123456099">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Fornecedor Principal</label>
+                  <select class="form-input" id="cad-prod-fornecedor">
+                    <option value="Cervejaria Paulistana S/A">Cervejaria Paulistana S/A</option>
+                    <option value="Ambev Distribuição S/A">Ambev Distribuição S/A</option>
+                    <option value="Heineken Brasil Indústria Ltda">Heineken Brasil Indústria Ltda</option>
+                    <option value="Coca-Cola FEMSA Brasil">Coca-Cola FEMSA Brasil</option>
+                    <option value="Diageo Brasil">Diageo Brasil</option>
+                    <option value="Gelo Polar Ltda">Gelo Polar Ltda</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- DADOS FISCAIS & OPERAÇÃO TRIBUTÁRIA (NCM, CEST, CST, CFOP) -->
+              <div style="background-color:var(--bg-surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-xs); padding:12px 14px; display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-weight:700; font-size:12px; color:var(--text-main);">
+                    🏛️ Dados Fiscais Obrigatórios & Operação Tributária
+                  </span>
+                  <span class="tag-badge tag-b2c">SEFAZ / SPED Fiscal</span>
+                </div>
+
+                <div class="form-row-3">
+                  <div class="form-group">
+                    <label class="form-label">NCM (Classificação Fiscal) *</label>
+                    <input type="text" class="form-input" id="cad-prod-ncm" value="2203.00.00" required placeholder="Ex: 2203.00.00">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">CEST (Substituição Tributária) *</label>
+                    <input type="text" class="form-input" id="cad-prod-cest" value="03.001.00" required placeholder="Ex: 03.001.00">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Regime Tributário do Item</label>
+                    <select class="form-input" id="cad-prod-regime">
+                      <option value="Simples Nacional">Simples Nacional (ME/EPP)</option>
+                      <option value="Lucro Presumido">Regime Normal (Lucro Presumido)</option>
+                      <option value="Lucro Real">Regime Normal (Lucro Real)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row-3">
+                  <div class="form-group">
+                    <label class="form-label">CST / CSOSN ICMS *</label>
+                    <select class="form-input" id="cad-prod-cst">
+                      <option value="500">500 - ICMS Cobrado Anteriormente por ST</option>
+                      <option value="102">102 - Tributada pelo Simples sem crédito</option>
+                      <option value="060">060 - ICMS Cobrado por Substituição (Normal)</option>
+                      <option value="000">000 - Tributada Integralmente</option>
+                      <option value="040">040 - Isenta ou Não Tributada</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">CFOP Padrão de Saída</label>
+                    <input type="text" class="form-input" id="cad-prod-cfop" value="5.405" placeholder="5.405 ou 5.102">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Regra PIS / COFINS (Bebidas)</label>
+                    <select class="form-input" id="cad-prod-piscofins">
+                      <option value="Monofasico">Alíquota Zero / Regime Monofásico</option>
+                      <option value="Tributavel">Tributável Normal (0,65% / 3,00%)</option>
+                      <option value="Isento">Isento / Não Incidência</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Preços e Custos -->
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">Valor de Custo (R$)</label>
+                  <input type="number" class="form-input" id="cad-prod-custo" value="180.00" step="0.5">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preço Varejo PDV (R$)</label>
+                  <input type="number" class="form-input" id="cad-prod-preco-varejo" value="290.00" step="0.5">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preço Atacado B2B (R$)</label>
+                  <input type="number" class="form-input" id="cad-prod-preco-atacado" value="265.00" step="0.5">
+                </div>
+              </div>
+
+              <!-- Estoques e Embalagens -->
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">Tipo Embalagem B2B</label>
+                  <input type="text" class="form-input" id="cad-prod-embalagem" value="Barril 30L Inox" placeholder="Ex: Fardo c/ 12, Caixa c/ 24, Palete">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Estoque Inicial Atacado</label>
+                  <input type="number" class="form-input" id="cad-prod-stock-atacado" value="20" min="0">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Estoque Inicial Varejo</label>
+                  <input type="number" class="form-input" id="cad-prod-stock-varejo" value="5" min="0">
+                </div>
+              </div>
+
+              <!-- Localização e Mínimo -->
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">Estoque Mínimo de Segurança</label>
+                  <input type="number" class="form-input" id="cad-prod-min" value="10" min="1">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Estoque Máximo</label>
+                  <input type="number" class="form-input" id="cad-prod-max" value="60" min="1">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Localização Física</label>
+                  <input type="text" class="form-input" id="cad-prod-local" value="Câmara Fria A3" placeholder="Ex: Câmara Fria A1, Galpão R2">
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:flex-end; gap:8px; border-top:1px solid var(--border-subtle); padding-top:12px;">
+                <button type="button" class="btn-secondary" onclick="handleSubmenuNavigation('view-estoque-todos', '- Todos os itens');">Cancelar</button>
+                <button type="submit" class="btn-add-client">💾 Salvar Produto no Estoque</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- C. Histórico / Kardex de Estoque -->
+      <section class="view-container" id="view-estoque-historico">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px;">Extrato Analítico Kardex • Todas as Entradas e Saídas</span>
+            </div>
+            <button class="btn-secondary" onclick="window.showToast('Exportando livro Kardex em PDF...', 'success')">
+              📥 Exportar Kardex
+            </button>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>ID Registro</th>
+                  <th>Data & Hora</th>
+                  <th>Produto</th>
+                  <th>Tipo Movimento</th>
+                  <th>Documento Origem</th>
+                  <th>Qtd Movimentada</th>
+                  <th>Saldo Anterior ➔ Novo</th>
+                  <th>Localização</th>
+                  <th>Operador</th>
+                </tr>
+              </thead>
+              <tbody id="estoque-historico-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- D. Todos os Itens -->
+      <section class="view-container" id="view-estoque-todos">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <input type="text" class="form-input" id="estoque-search-input" style="width:340px;" placeholder="Filtrar por SKU, Descrição, NCM ou Localização...">
+              <button class="btn-secondary active" data-cat="all">Todos os Itens</button>
+              <button class="btn-secondary" data-cat="barris">Barris</button>
+              <button class="btn-secondary" data-cat="cervejas">Cervejas</button>
+              <button class="btn-secondary" data-cat="destilados">Destilados</button>
+            </div>
+            <button class="btn-add-client" onclick="handleSubmenuNavigation('view-estoque-cadastro', '- Cadastro');">
+              + Cadastrar Produto
+            </button>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>SKU / Código</th>
+                  <th>Descrição do Produto & Embalagem</th>
+                  <th>Categoria</th>
+                  <th>Localização</th>
+                  <th style="text-align:center;">Estoque Atacado / Varejo</th>
+                  <th>Mín. / Máx.</th>
+                  <th>Custo Médio</th>
+                  <th>Preço B2B / PDV</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="estoque-grid-tbody">
+                <!-- Inserido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- E. Alterações em Lote -->
+      <section class="view-container" id="view-estoque-lote">
+        <div class="module-view-layout">
+          <div class="module-filter-bar" style="flex-wrap:wrap; gap:10px;">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px;">Filtro:</span>
+              <select class="form-input" id="lote-category-filter" style="height:34px; width:180px;">
+                <option value="todos">Todas Categorias</option>
+                <option value="cervejas">Cervejas</option>
+                <option value="destilados">Destilados</option>
+                <option value="não-alcoólicos">Não-Alcoólicos</option>
+                <option value="vinhos">Vinhos</option>
+                <option value="mercearia">Mercearia</option>
+              </select>
+              <span style="font-weight:700; font-size:13px; margin-left:15px;">Ação:</span>
+              <select class="form-input" id="lote-action-type" style="height:34px; width:220px;">
+                <option value="markup-pct">Reajustar Preço Venda (+X%)</option>
+                <option value="markup-fixed">Reajustar Preço Venda (+R$ X)</option>
+                <option value="discount-pct">Desconto em Lote (-X%)</option>
+                <option value="change-location">Alterar Localização Física</option>
+              </select>
+              <input type="number" class="form-input" id="lote-action-val" placeholder="Ex: 5" style="height:34px; width:90px;" value="5">
+              <button class="btn-add-client" id="btn-apply-bulk-edit" style="background:var(--b2b-purple);">
+                ⚡ Aplicar aos Selecionados (<span id="lote-selected-count">0</span>)
+              </button>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <button class="btn-secondary" id="btn-select-all-lote">Marcar Todos</button>
+              <button class="btn-secondary" id="btn-deselect-all-lote">Desmarcar</button>
+            </div>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th style="width:40px; text-align:center;">✓</th>
+                  <th>SKU</th>
+                  <th>Produto</th>
+                  <th>Categoria</th>
+                  <th>Preço PDV Atual</th>
+                  <th>Preço B2B Atual</th>
+                  <th>Estoque Total</th>
+                  <th>Local Atual</th>
+                </tr>
+              </thead>
+              <tbody id="estoque-lote-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- F. Estoque Mínimo e Máximo (Controle de Ruptura) -->
+      <section class="view-container" id="view-estoque-minmax">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px; color:var(--text-main);">Monitor de Segurança & Ponto de Reposição (Ruptura)</span>
+            </div>
+            <button class="btn-add-client" onclick="window.showToast('Ordem de reposição gerada para todos os produtos abaixo do mínimo!', 'success'); handleSubmenuNavigation('view-compras-sugestao', '- Sugestão de compra');">
+              ⚡ Gerar Ordem de Compra Automática
+            </button>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Produto / SKU</th>
+                  <th>Estoque Atual</th>
+                  <th>Mínimo de Segurança</th>
+                  <th>Estoque Máximo</th>
+                  <th>Déficit / Falta</th>
+                  <th>Status de Risco</th>
+                  <th>Fornecedor Sugerido</th>
+                  <th style="text-align:right;">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="estoque-minmax-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- G. Movimentação entre Estoques -->
+      <section class="view-container" id="view-estoque-movimentacao">
+        <div class="module-view-layout">
+          <div class="b2b-panel-card" style="max-width:850px; margin:0 auto; width:100%;">
+            <div class="b2b-panel-header">
+              <div>
+                <span style="font-weight: 700; font-size: 14px;">Transferência Interna de Mercadorias entre Zonas</span>
+                <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;">Ex: Galpão Central ➔ Câmara Fria A1 ➔ Gôndolas de Frente de Caixa</p>
+              </div>
+            </div>
+
+            <form style="display:flex; flex-direction:column; gap:12px; padding-top:10px;" onsubmit="event.preventDefault(); window.executarTransferenciaEstoque();">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label">Zona de Origem *</label>
+                  <select class="form-input" id="trf-origem">
+                    <option value="Galpão Principal - R2">Galpão Principal - R2 (Depósito Geral)</option>
+                    <option value="Galpão Principal - R1">Galpão Principal - R1</option>
+                    <option value="Câmara Fria A1">Câmara Fria A1 (Barris Chopp)</option>
+                    <option value="Depósito Seguro D1">Depósito Seguro D1 (Destilados)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Zona de Destino *</label>
+                  <select class="form-input" id="trf-destino">
+                    <option value="Câmara Fria A1">Câmara Fria A1 (Barris Chopp)</option>
+                    <option value="Gôndolas Varejo Balcão">Gôndolas Varejo Balcão (Frente PDV)</option>
+                    <option value="Expositor Frente de Caixa">Expositor Frente de Caixa</option>
+                    <option value="Galpão Principal - R2">Galpão Principal - R2</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row-3">
+                <div class="form-group" style="grid-column:span 2;">
+                  <label class="form-label">Produto a Transferir *</label>
+                  <input type="text" class="form-input" id="trf-produto-search" placeholder="Buscar produto..." style="margin-bottom:8px;" onkeyup="window.filterSelect('trf-produto-search', 'trf-produto')">
+                  <select class="form-input" id="trf-produto">
+                    <!-- Preenchido via JS -->
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Quantidade a Mover *</label>
+                  <input type="number" class="form-input" id="trf-qtd" value="5" min="1" required>
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:flex-end; gap:8px; border-top:1px solid var(--border-subtle); padding-top:12px;">
+                <button type="submit" class="btn-add-client">
+                  🚚 Transferir e Emitir Romaneio
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="module-table-container" style="margin-top:10px;">
+            <div style="padding:10px 14px; border-bottom:1px solid var(--border-subtle); background:var(--bg-surface-subtle); font-weight:700; font-size:12px;">
+              Histórico de Transferências Recentes
+            </div>
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Nº Transferência</th>
+                  <th>Data/Hora</th>
+                  <th>Produto</th>
+                  <th>Quantidade</th>
+                  <th>Origem</th>
+                  <th>Destino</th>
+                  <th>Operador</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="estoque-transferencias-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           8. COMPRAS • SUGESTÃO / SAÍDA POR PERÍODO / TETO FORNECEDOR / PREÇOS
+           ==================================================================== -->
+      <!-- A. Sugestão de Compra -->
+      <section class="view-container" id="view-compras-sugestao">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px;">
+              <span style="font-weight:700; font-size:13px; align-self:center;">Sugestão Automática de Reposição por Ponto de Pedido</span>
+            </div>
+            <button class="btn-add-client" onclick="window.showToast('Gerando Pedido de Compra consolidado para Fornecedores...', 'success')">
+              Gerar Pedido de Compra (Cotação)
+            </button>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Produto / Descrição</th>
+                  <th>Fornecedor A (Atual)</th>
+                  <th>Fornecedor B (Comparativo)</th>
+                  <th>Estoque / Mín</th>
+                  <th>Qtd Sugerida</th>
+                  <th style="text-align:right;">Vantagem Estimada</th>
+                  <th style="text-align:center;">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="compras-sugestao-tbody">
+                <!-- Inserido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- B. Análise de Saída por Período (Curva ABC / Giro) -->
+      <section class="view-container" id="view-compras-saida">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px;">Giro de Estoque & Curva ABC de Vendas (Últimos 30 Dias)</span>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <button class="btn-secondary active">Curva A (80% Faturamento)</button>
+              <button class="btn-secondary">Curva B (15%)</button>
+              <button class="btn-secondary">Curva C (5%)</button>
+            </div>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Classificação ABC</th>
+                  <th>Produto</th>
+                  <th>Categoria</th>
+                  <th>Saídas (Volume/Mês)</th>
+                  <th>Média Diária</th>
+                  <th>Faturamento Gerado</th>
+                  <th>Giro de Estoque</th>
+                  <th>Previsão de Esgotamento</th>
+                </tr>
+              </thead>
+              <tbody id="compras-saida-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- C. Teto de Compra por Fornecedor -->
+      <section class="view-container" id="view-compras-teto">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px;">Gestão de Verbas & Teto de Compra por Fornecedor</span>
+            </div>
+            <button class="btn-secondary" onclick="window.showToast('Abrindo ajuste de limite de verba...', 'info')">
+              ⚙️ Ajustar Tetos Mensais
+            </button>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Fabricante / Fornecedor</th>
+                  <th>Linha / Categoria</th>
+                  <th>Teto Mensal Aprovado</th>
+                  <th>Total Comprado no Mês</th>
+                  <th>Saldo Disponível</th>
+                  <th>Utilização do Teto</th>
+                  <th>Prazo Padrão</th>
+                  <th>Rating</th>
+                </tr>
+              </thead>
+              <tbody id="compras-teto-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- D. Análise de Preços e Variação de Custo -->
+      <section class="view-container" id="view-compras-precos">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span style="font-weight:700; font-size:13px;">Histórico de Aquisição & Simulador de Margem Bruta</span>
+            </div>
+            <button class="btn-secondary" onclick="window.showToast('Atualizando cotações do mercado cervejeiro...', 'info')">
+              🔄 Atualizar Cotações de Mercado
+            </button>
+          </div>
+
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Custo Atual (R$)</th>
+                  <th>Último Custo (R$)</th>
+                  <th>Variação</th>
+                  <th>Melhor Fornecedor</th>
+                  <th>Média de Mercado</th>
+                  <th>Preço Sugerido</th>
+                  <th>Margem Bruta</th>
+                </tr>
+              </thead>
+              <tbody id="compras-precos-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           9. RELATÓRIOS • PAINEL DINÂMICO & TELAS ESPECIALIZADAS
+           ==================================================================== -->
+      <!-- 0. Painel Multi-Relatórios (Cards Lado a Lado Fecháveis) -->
+      <section class="view-container" id="view-rel-dashboard">
+        <div class="module-view-layout" style="gap:14px;">
+          
+          <div class="module-filter-bar" style="flex-wrap:wrap; gap:10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span style="font-weight:700; font-size:14px; color:var(--text-main);">📋 Painel Dinâmico de Relatórios Lado a Lado</span>
+              <span class="tag-badge tag-b2b" id="reports-open-count-badge">4 Relatórios Abertos</span>
+            </div>
+            
+            <div style="display:flex; gap:8px; align-items:center;">
+              <button class="btn-add-client" id="btn-open-add-report-modal" style="height:34px;">
+                ➕ Abrir Relatório no Painel
+              </button>
+              <button class="btn-secondary" id="btn-reset-reports-board" style="height:34px;">
+                🔄 Restaurar Padrão
+              </button>
+              <button class="btn-secondary" id="btn-clear-all-reports" style="height:34px; color:var(--status-danger);">
+                🗑️ Fechar Todos
+              </button>
+            </div>
+          </div>
+
+          <!-- Grade Dinâmica de Relatórios Abertos -->
+          <div class="reports-board-grid" id="reports-board-container">
+            <!-- Cards de Relatórios gerados e gerenciados via JS -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- A. Movimento de Estoque -->
+      <section class="view-container" id="view-rel-movimento">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Relatório de Movimentação Física de Mercadorias</span>
+            <button class="btn-secondary" onclick="window.showToast('Exportando relatório...', 'success')">Exportar PDF</button>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Tipo</th>
+                  <th>Entradas (Vol)</th>
+                  <th>Saídas (Vol)</th>
+                  <th>Perdas/Avarias</th>
+                  <th>Saldo Líquido</th>
+                </tr>
+              </thead>
+              <tbody id="rel-movimento-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- B. Auditoria -->
+      <section class="view-container" id="view-rel-auditoria">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Log de Auditoria e Operações Críticas do Sistema</span>
+            <button class="btn-secondary" onclick="window.showToast('Exportando log...', 'success')">Exportar CSV</button>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Data & Hora</th>
+                  <th>Usuário</th>
+                  <th>Módulo</th>
+                  <th>Ação Executada</th>
+                  <th>Documento / ID</th>
+                  <th>Nível de Risco</th>
+                </tr>
+              </thead>
+              <tbody id="rel-auditoria-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- C. Vendas -->
+      <section class="view-container" id="view-rel-vendas">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Faturamento Consolidado & Vendas por Canal</span>
+            <button class="btn-secondary" onclick="window.showToast('Exportando...', 'success')">Exportar PDF</button>
+          </div>
+          <div class="reports-macro-kpis">
+            <div class="kpi-enterprise-card">
+              <span class="kpi-enterprise-title">Faturamento Consolidado</span>
+              <span class="kpi-enterprise-num" id="kpi-rep-rev">R$ 48.930,50</span>
+              <span style="font-size:11px; color:var(--status-success);">+14.8% vs dia anterior</span>
+            </div>
+            <div class="kpi-enterprise-card">
+              <span class="kpi-enterprise-title">Ticket Médio Geral</span>
+              <span class="kpi-enterprise-num" id="kpi-rep-ticket">R$ 342,17</span>
+              <span style="font-size:11px; color:var(--status-success);">B2B: R$ 4.890 | B2C: R$ 382</span>
+            </div>
+            <div class="kpi-enterprise-card">
+              <span class="kpi-enterprise-title">Inadimplência Carteira PJ</span>
+              <span class="kpi-enterprise-num" id="kpi-rep-default">2.1%</span>
+              <span style="font-size:11px; color:var(--text-dim);">Zona segura (&lt; 3%)</span>
+            </div>
+            <div class="kpi-enterprise-card">
+              <span class="kpi-enterprise-title">Vasilhames em Circulação</span>
+              <span class="kpi-enterprise-num" id="kpi-rep-cascos">2.450 un</span>
+              <span style="font-size:11px; color:var(--primary-navy);">94.2% retorno</span>
+            </div>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>ID Venda</th>
+                  <th>Horário</th>
+                  <th>Cliente</th>
+                  <th>Canal</th>
+                  <th>Desconto</th>
+                  <th>Valor Líquido</th>
+                </tr>
+              </thead>
+              <tbody id="reports-drilldown-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- D. Compras -->
+      <section class="view-container" id="view-rel-compras">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Relatório de Compras e Entregas por Fornecedor</span>
+            <button class="btn-secondary">Exportar</button>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Fornecedor</th>
+                  <th>Ordens Emitidas</th>
+                  <th>Total Comprado (R$)</th>
+                  <th>Prazo Médio</th>
+                  <th>Lead Time Real</th>
+                </tr>
+              </thead>
+              <tbody id="rel-compras-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- E. Variação de Custo -->
+      <section class="view-container" id="view-rel-variacao">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Índice de Oscilação e Variação de Custos de Aquisição</span>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Insumo / Bebida</th>
+                  <th>Custo Base (Janeiro)</th>
+                  <th>Custo Atual</th>
+                  <th>Variação Acumulada</th>
+                  <th>Impacto na Margem</th>
+                </tr>
+              </thead>
+              <tbody id="rel-variacao-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- F. Lucro & Rentabilidade -->
+      <section class="view-container" id="view-rel-lucro">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Margem de Contribuição e Lucratividade por Linha</span>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Linha / Categoria</th>
+                  <th>Faturamento Bruto</th>
+                  <th>CMV (Custo Mercadoria)</th>
+                  <th>Lucro Bruto (R$)</th>
+                  <th>Margem de Lucro (%)</th>
+                </tr>
+              </thead>
+              <tbody id="rel-lucro-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- G. DRE Gerencial -->
+      <section class="view-container" id="view-rel-dre">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Demonstrativo do Resultado do Exercício (DRE Gerencial Consolidado)</span>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table" id="rel-dre-table">
+              <!-- Renderizado via JS com linhas do DRE -->
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- H. Funcionários & Vendedores -->
+      <section class="view-container" id="view-rel-funcionarios">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Produtividade Comercial, Metas e Comissões</span>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Colaborador</th>
+                  <th>Função</th>
+                  <th>Vendas Concluídas</th>
+                  <th>Faturamento Total</th>
+                  <th>Meta Atingida</th>
+                  <th>Comissão Gerada (R$)</th>
+                </tr>
+              </thead>
+              <tbody id="rel-funcionarios-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           10. FINANCEIRO • ANALYTICS DE VENDAS / CONTAS A PAGAR / RECEBER / PREVISÃO
+           ==================================================================== -->
+      <!-- 0. Analytics de Vendas & Dados Financeiros -->
+      <section class="view-container" id="view-fin-vendas">
+        <div class="module-view-layout" style="gap:16px;">
+          
+          <!-- Filtros de Período e Canal -->
+          <div class="module-filter-bar" style="flex-wrap:wrap; gap:10px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-weight:700; font-size:14px;">📈 Analytics & Inteligência Financeira de Vendas</span>
+            </div>
+            
+            <div style="display:flex; gap:8px; align-items:center;">
+              <div class="category-tabs" id="fin-period-tabs">
+                <button class="category-btn" data-period="hoje">Hoje</button>
+                <button class="category-btn active" data-period="7d">Últimos 7 Dias</button>
+                <button class="category-btn" data-period="30d">Últimos 30 Dias</button>
+                <button class="category-btn" data-period="ano">Ano 2026</button>
+              </div>
+              <button class="btn-secondary" onclick="window.showToast('Exportando relatório analítico...', 'success');">
+                📥 Exportar Dados
+              </button>
+            </div>
+          </div>
+
+          <!-- 4 KPIs Financeiros -->
+          <div class="dash-kpi-grid">
+            <div class="dash-kpi-card highlight-main">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">FATURAMENTO CONSOLIDADO</span>
+                <span class="kpi-pill-badge green">+18.4% Meta</span>
+              </div>
+              <div class="dash-kpi-value">R$ 384.520,00</div>
+              <div class="dash-kpi-sub">
+                <span>Período Selecionado</span>
+                <span>Lucro Bruto: <strong>R$ 138.420,00</strong></span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">TICKET MÉDIO GERAL</span>
+                <span class="kpi-pill-badge blue">318 Pedidos</span>
+              </div>
+              <div class="dash-kpi-value" style="color:var(--primary-navy);">R$ 1.209,18</div>
+              <div class="dash-kpi-sub">
+                <span>PDV: <strong>R$ 119,50</strong></span>
+                <span>B2B: <strong>R$ 2.416,00</strong></span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">MARGEM LÍQUIDA MÉDIA</span>
+                <span class="kpi-pill-badge green">Zona Ótima</span>
+              </div>
+              <div class="dash-kpi-value" style="color:var(--status-success);">36.0%</div>
+              <div class="dash-kpi-sub">
+                <span>Markup Médio: <strong>1.56x</strong></span>
+                <span>Margem de Contribuição Alta</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">PRAZO MÉDIO RECEBIMENTO</span>
+                <span class="kpi-pill-badge purple">B2B Faturado</span>
+              </div>
+              <div class="dash-kpi-value" style="color:var(--b2b-purple);">18.4 Dias</div>
+              <div class="dash-kpi-sub">
+                <span>Inadimplência: <strong>2.1%</strong></span>
+                <span>Status: Muito Saudável</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid 2 Colunas: Horários de Pico e Dias da Semana -->
+          <div class="dash-main-grid">
+            
+            <!-- Card 1: Horários de Maior Volume de Vendas -->
+            <div class="b2b-panel-card">
+              <div class="b2b-panel-header">
+                <div>
+                  <span style="font-weight:700; font-size:13px;">⏰ Faixas de Horário com Maior Fluxo & Faturamento (Pico)</span>
+                  <p style="font-size:11px; color:var(--text-dim); margin:2px 0 0 0;">Identifique os turnos de maior carga no PDV e expedição B2B</p>
+                </div>
+                <span class="status-pill ativo">Pico: 14h às 17h</span>
+              </div>
+
+              <div style="overflow-x:auto;">
+                <table class="enterprise-table" style="font-size:12px;">
+                  <thead>
+                    <tr>
+                      <th>Faixa Horária</th>
+                      <th>Qtd Vendas</th>
+                      <th>Faturamento</th>
+                      <th>Ticket Médio</th>
+                      <th>Participação</th>
+                    </tr>
+                  </thead>
+                  <tbody id="fin-peakhours-tbody">
+                    <!-- Gerado via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Card 2: Melhores Dias da Semana -->
+            <div class="b2b-panel-card">
+              <div class="b2b-panel-header">
+                <div>
+                  <span style="font-weight:700; font-size:13px;">📅 Faturamento por Dia da Semana (Segunda a Domingo)</span>
+                  <p style="font-size:11px; color:var(--text-dim); margin:2px 0 0 0;">Quinta, Sexta e Sábado concentram 74.3% da receita semanal</p>
+                </div>
+              </div>
+
+              <div id="fin-weekdays-container" style="display:flex; flex-direction:column; gap:10px; padding:6px 0;">
+                <!-- Barras e métricas geradas via JS -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Meios de Pagamento & Canais -->
+          <div class="b2b-panel-card">
+            <div class="b2b-panel-header">
+              <span style="font-weight:700; font-size:13px;">💳 Distribuição Financeira por Meio de Pagamento & Liquidação</span>
+              <span class="tag-badge tag-b2c">Sem Glosa / TEF Homologado</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px;" id="fin-payment-methods-grid">
+              <!-- Gerado via JS -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- A. Contas a Pagar Vinculado aos Títulos das Notas -->
+      <section class="view-container" id="view-fin-pagar">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span style="font-weight:700; font-size:13px;">Contas a Pagar • Títulos Vinculados às Notas Fiscais dos Fornecedores</span>
+              <span class="status-pill analise" id="fin-tit-pendentes-badge">4 Títulos a Vencer</span>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-secondary" onclick="window.showToast('Filtrando títulos com notas vinculadas...', 'info')">📑 Apenas c/ NF-e</button>
+              <button class="btn-add-client" onclick="document.getElementById('modal-new-title').classList.add('active')">+ Novo Título</button>
+            </div>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Nº Título / Duplicata</th>
+                  <th>NF-e Vinculada</th>
+                  <th>Fornecedor / Razão Social</th>
+                  <th>Emissão</th>
+                  <th>Vencimento</th>
+                  <th>Categoria / Insumo</th>
+                  <th>Valor do Título</th>
+                  <th>Linha Digitável / Boleto</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="financeiro-pagar-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- B. Contas a Receber -->
+      <section class="view-container" id="view-fin-receber">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Contas a Receber & Faturamento Carteira B2B</span>
+            <span class="status-pill pago">Carteira 97.9% Adimplente</span>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>ID Título</th>
+                  <th>Cliente PJ</th>
+                  <th>Documento Fiscal</th>
+                  <th>Vencimento</th>
+                  <th>Forma Cobrança</th>
+                  <th>Banco</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="financeiro-receber-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- C. Boletos Bancários -->
+      <section class="view-container" id="view-fin-boletos">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Gestão de Boletos Bancários & Remessa CNAB</span>
+            <button class="btn-secondary" onclick="window.showToast('Gerando arquivo de remessa CNAB 240...', 'success')">📄 Gerar Remessa CNAB</button>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Nosso Número</th>
+                  <th>Cliente Sacado</th>
+                  <th>Banco Emissor</th>
+                  <th>Emissão</th>
+                  <th>Vencimento</th>
+                  <th>Valor</th>
+                  <th>Status Registro</th>
+                  <th style="text-align:right;">Linha Digitável / Ação</th>
+                </tr>
+              </thead>
+              <tbody id="financeiro-boletos-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- D. Previsão Financeira / Fluxo de Caixa -->
+      <section class="view-container" id="view-fin-previsao">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Projeção de Fluxo de Caixa Futuro (30 / 60 / 90 Dias)</span>
+          </div>
+          <div class="reports-macro-kpis">
+            <div class="kpi-enterprise-card">
+              <span class="kpi-enterprise-title">Saldo Disponível Hoje</span>
+              <span class="kpi-enterprise-num" style="color:var(--status-success);">R$ 142.800,00</span>
+            </div>
+            <div class="kpi-enterprise-card">
+              <span class="kpi-enterprise-title">A Receber (Próx. 30 Dias)</span>
+              <span class="kpi-enterprise-num" style="color:var(--primary-navy);">R$ 84.500,00</span>
+            </div>
+            <div class="kpi-enterprise-card">
+              <span class="kpi-enterprise-title">A Pagar (Próx. 30 Dias)</span>
+              <span class="kpi-enterprise-num" style="color:var(--status-danger);">R$ 41.920,00</span>
+            </div>
+            <div class="kpi-enterprise-card">
+              <span class="kpi-enterprise-title">Saldo Líquido Projetado</span>
+              <span class="kpi-enterprise-num" style="color:var(--status-success);">R$ 185.380,00</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           11. ADMIN • EXPORTAR RELATÓRIO / USUÁRIOS / PERMISSÕES
+           ==================================================================== -->
+      <!-- 0. Central de Exportação Geral 100% de Tudo -->
+      <section class="view-container" id="view-admin-exportar">
+        <div class="module-view-layout" style="gap:16px;">
+          
+          <div class="b2b-panel-card" style="max-width:900px; margin:0 auto; width:100%;">
+            <div class="b2b-panel-header">
+              <div>
+                <span style="font-weight:700; font-size:15px; color:var(--text-main);">🌐 Central de Exportação Integral • Relatório de Dados do Sistema</span>
+                <p style="font-size:11px; color:var(--text-dim); margin:2px 0 0 0;">Exporte a totalidade dos registros operacionais, cadastrais, fiscais e contábeis em Excel (.XLSX / .CSV) e Relatório Executivo PDF</p>
+              </div>
+              <span class="tag-badge tag-b2b">Backup & Auditoria</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:16px; padding:10px 0;">
+              
+              <!-- Seletor de Módulos para Exportação -->
+              <div style="background:var(--bg-surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-xs); padding:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                  <span style="font-weight:700; font-size:12px; color:var(--text-main);">
+                    📦 Selecione os Módulos Incluídos na Exportação:
+                  </span>
+                  <div style="display:flex; gap:8px;">
+                    <button type="button" class="btn-secondary" style="height:26px; font-size:11px; padding:0 8px;" id="btn-export-select-all">Marcar Todos</button>
+                    <button type="button" class="btn-secondary" style="height:26px; font-size:11px; padding:0 8px;" id="btn-export-deselect-all">Desmarcar</button>
+                  </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px;" id="export-modules-checkboxes">
+                  <label style="display:flex; align-items:center; gap:8px; font-size:12px; cursor:pointer;">
+                    <input type="checkbox" checked value="estoque" class="export-chk" style="accent-color:var(--primary-navy); width:16px; height:16px;">
+                    <span><strong>Estoque & Produtos</strong> (SKU, NCM, Preços, Saldos)</span>
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; font-size:12px; cursor:pointer;">
+                    <input type="checkbox" checked value="vendas_pdv" class="export-chk" style="accent-color:var(--primary-navy); width:16px; height:16px;">
+                    <span><strong>Vendas PDV & Varejo</strong> (Cupons, Itens, Meios)</span>
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; font-size:12px; cursor:pointer;">
+                    <input type="checkbox" checked value="vendas_b2b" class="export-chk" style="accent-color:var(--primary-navy); width:16px; height:16px;">
+                    <span><strong>Vendas B2B & Atacado</strong> (Pedidos, Vasilhames)</span>
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; font-size:12px; cursor:pointer;">
+                    <input type="checkbox" checked value="clientes" class="export-chk" style="accent-color:var(--primary-navy); width:16px; height:16px;">
+                    <span><strong>Clientes & Empresas PJ</strong> (Limites, IE, Fichas)</span>
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; font-size:12px; cursor:pointer;">
+                    <input type="checkbox" checked value="fiscal" class="export-chk" style="accent-color:var(--primary-navy); width:16px; height:16px;">
+                    <span><strong>Notas Fiscais Emitidas</strong> (NF-e 55, NFC-e 65)</span>
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; font-size:12px; cursor:pointer;">
+                    <input type="checkbox" checked value="compras" class="export-chk" style="accent-color:var(--primary-navy); width:16px; height:16px;">
+                    <span><strong>Compras & Fornecedores</strong> (Entradas, Cotações)</span>
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; font-size:12px; cursor:pointer;">
+                    <input type="checkbox" checked value="financeiro" class="export-chk" style="accent-color:var(--primary-navy); width:16px; height:16px;">
+                    <span><strong>Contas a Pagar & Receber</strong> (Títulos de NF)</span>
+                  </label>
+                  <label style="display:flex; align-items:center; gap:8px; font-size:12px; cursor:pointer;">
+                    <input type="checkbox" checked value="dre" class="export-chk" style="accent-color:var(--primary-navy); width:16px; height:16px;">
+                    <span><strong>Balanço DRE & Lucros</strong> (Demonstrativo Gerencial)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Resumo do Volume de Dados Pronto para Exportação -->
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px;">
+                <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs);">
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-dim); font-weight:700;">Produtos Cadastrados</div>
+                  <div style="font-family:var(--font-mono); font-size:16px; font-weight:700; margin-top:2px;">15 Itens Ativos</div>
+                </div>
+                <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs);">
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-dim); font-weight:700;">Vendas Totais Registradas</div>
+                  <div style="font-family:var(--font-mono); font-size:16px; font-weight:700; margin-top:2px;">160 Transações</div>
+                </div>
+                <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs);">
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-dim); font-weight:700;">Clientes PJ na Base</div>
+                  <div style="font-family:var(--font-mono); font-size:16px; font-weight:700; margin-top:2px;">5 Empresas</div>
+                </div>
+                <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs);">
+                  <div style="font-size:10px; text-transform:uppercase; color:var(--text-dim); font-weight:700;">Notas Fiscais Eletrônicas</div>
+                  <div style="font-family:var(--font-mono); font-size:16px; font-weight:700; margin-top:2px;">12 Documentos</div>
+                </div>
+              </div>
+
+              <!-- Botões de Ação de Exportação -->
+              <div style="display:flex; gap:12px; flex-wrap:wrap; border-top:1px solid var(--border-subtle); padding-top:16px;">
+                <button type="button" class="btn-add-client" id="btn-export-all-excel" style="height:44px; padding:0 20px; font-size:13px; background-color:#15803d; flex:1; justify-content:center;">
+                  📊 Exportar Planilha Excel (.CSV / .XLSX Completo)
+                </button>
+                <button type="button" class="btn-add-client" id="btn-export-all-pdf" style="height:44px; padding:0 20px; font-size:13px; background-color:var(--primary-navy); flex:1; justify-content:center;">
+                  📄 Exportar Relatório Executivo em PDF (Consolidado)
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- A. Criar / Gerenciar Usuários -->
+      <section class="view-container" id="view-admin-usuarios">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Gestão de Colaboradores & Operadores do Sistema</span>
+            <button class="btn-add-client" onclick="document.getElementById('modal-new-user').classList.add('active')">+ Novo Usuário</button>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome Completo</th>
+                  <th>Login</th>
+                  <th>Perfil de Acesso</th>
+                  <th>Filial / Unidade</th>
+                  <th>Último Acesso</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="admin-usuarios-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- B. Permissões de Acesso por Perfil -->
+      <section class="view-container" id="view-admin-permissoes">
+        <div class="module-view-layout">
+          <div class="module-filter-bar">
+            <span style="font-weight:700; font-size:13px;">Matriz de Controle de Permissões por Perfil de Acesso</span>
+            <button class="btn-add-client" onclick="window.showToast('Matriz de permissões salva com sucesso!', 'success')">💾 Salvar Permissões</button>
+          </div>
+          <div class="module-table-container">
+            <table class="enterprise-table" id="admin-permissoes-table">
+              <!-- Renderizado via JS com checkboxes por módulo -->
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ========================================================================
+       MODAIS
+       ======================================================================== -->
+
+  <!-- Modal 1: Cadastro de Nova Empresa PJ -->
+  <div class="modal-overlay" id="modal-new-client">
+    <div class="modal-dialog" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3>Cadastrar Nova Empresa (Cliente PJ)</h3>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">CNPJ *</label>
+            <input type="text" class="form-input" id="new-client-cnpj" placeholder="00.000.000/0001-00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Inscrição Estadual (IE)</label>
+            <input type="text" class="form-input" id="new-client-ie" placeholder="Isento ou Nº Estadual">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Razão Social *</label>
+          <input type="text" class="form-input" id="new-client-corp-name" placeholder="Nome Empresarial Completo Ltda / S.A.">
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Nome Fantasia *</label>
+            <input type="text" class="form-input" id="new-client-trade-name" placeholder="Nome do Estabelecimento">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Segmento</label>
+            <select class="form-input" id="new-client-segment">
+              <option value="Bar & Gastronomia">Bar & Gastronomia</option>
+              <option value="Restaurante & Pizzaria">Restaurante & Pizzaria</option>
+              <option value="Supermercado / Empório">Supermercado / Empório</option>
+              <option value="Hotel & Eventos">Hotel & Eventos</option>
+              <option value="Conveniência">Conveniência</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Limite de Crédito Aprovado (R$)</label>
+            <input type="number" class="form-input" id="new-client-credit-limit" value="20000" step="1000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Condição de Pagamento</label>
+            <select class="form-input" id="new-client-terms">
+              <option value="Faturado 15/30 Dias">Faturado 15/30 Dias</option>
+              <option value="Faturado 7/14/21 Dias">Faturado 7/14/21 Dias</option>
+              <option value="Boleto 28 DDL">Boleto 28 DDL</option>
+              <option value="PIX / À Vista no Ato">PIX / À Vista no Ato</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Responsável / Comprador</label>
+            <input type="text" class="form-input" id="new-client-contact" placeholder="Nome do Gerente">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefone / WhatsApp</label>
+            <input type="text" class="form-input" id="new-client-phone" placeholder="(11) 99999-9999">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">E-mail para Envio de NF-e / Boletos</label>
+          <input type="email" class="form-input" id="new-client-email" placeholder="financeiro@empresa.com.br">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Endereço Completo de Entrega</label>
+          <input type="text" class="form-input" id="new-client-address" placeholder="Rua, Número, Bairro, Cidade - UF">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Cancelar</button>
+        <button class="btn-add-client" id="btn-save-new-client">Salvar Cadastro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Desconto PDV (Item e Pedido) -->
+  <div class="modal-overlay" id="modal-discount">
+    <div class="modal-dialog" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3>🏷️ Motor de Descontos</h3>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <button class="btn-secondary active" id="tab-disc-item" style="justify-content:center; font-weight:600;">Desconto no Item</button>
+          <button class="btn-secondary" id="tab-disc-order" style="justify-content:center; font-weight:600;">Desconto no Pedido</button>
+        </div>
+
+        <div style="font-size:12px; color:var(--text-muted); font-weight:500;" id="discount-target-desc">Aplicando desconto...</div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <button class="btn-secondary active" id="btn-disc-percent" style="justify-content:center;">Porcentagem (%)</button>
+          <button class="btn-secondary" id="btn-disc-curr" style="justify-content:center;">Valor em Reais (R$)</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Valor do Desconto</label>
+          <input type="number" class="form-input" id="discount-input-val" value="5" min="0" step="0.5">
+        </div>
+
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <span style="font-size:11px; color:var(--text-dim); align-self:center; margin-right:4px;">Atalhos:</span>
+          <button class="btn-secondary btn-quick-preset" data-type="percentage" data-val="5" style="height:28px; padding:0 8px;">5%</button>
+          <button class="btn-secondary btn-quick-preset" data-type="percentage" data-val="10" style="height:28px; padding:0 8px;">10%</button>
+          <button class="btn-secondary btn-quick-preset" data-type="percentage" data-val="15" style="height:28px; padding:0 8px;">15%</button>
+          <button class="btn-secondary btn-quick-preset" data-type="value" data-val="10" style="height:28px; padding:0 8px;">R$ 10</button>
+          <button class="btn-secondary btn-quick-preset" data-type="value" data-val="20" style="height:28px; padding:0 8px;">R$ 20</button>
+          <button class="btn-secondary btn-quick-preset" data-type="value" data-val="50" style="height:28px; padding:0 8px;">R$ 50</button>
+        </div>
+
+        <div style="background-color:var(--bg-surface-subtle); border:1px solid var(--border-subtle); padding:12px; border-radius:var(--radius-xs); display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:11px; color:var(--text-dim);">Valor Original: <span id="disc-prev-orig" style="font-family:var(--font-mono); font-weight:600;">R$ 0,00</span></div>
+            <div style="font-size:11px; color:var(--status-success);">Abatimento: <span id="disc-prev-val" style="font-family:var(--font-mono); font-weight:600;">- R$ 0,00</span></div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:11px; color:var(--text-dim);">Novo Valor:</div>
+            <div style="font-size:16px; font-weight:700; font-family:var(--font-mono); color:var(--status-success);" id="disc-prev-final">R$ 0,00</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-clear-current-discount" style="color:var(--status-danger);">Remover Desconto</button>
+        <button class="btn-secondary btn-close-modal">Cancelar</button>
+        <button class="btn-add-client" id="btn-apply-discount">Aplicar Desconto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Finalização Split Payment & TEF -->
+  <div class="modal-overlay" id="modal-split-payment">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Recebimento e Pagamento (Split Payment)</h3>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="background-color:var(--bg-surface-subtle); border:1px solid var(--border-color); padding:12px; border-radius:var(--radius-xs); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:600; font-size:13px;">Total da Venda:</span>
+          <span style="font-size:18px; font-weight:700; font-family:var(--font-mono);" id="split-total-amount">R$ 0,00</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:12px; font-weight:600;">PIX Dinâmico (QR Code):</span>
+            <input type="number" class="form-input" id="split-val-pix" style="width:140px; text-align:right; font-family:var(--font-mono);" placeholder="0,00">
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:12px; font-weight:600;">Cartão Débito/Crédito (TEF):</span>
+            <input type="number" class="form-input" id="split-val-tef" style="width:140px; text-align:right; font-family:var(--font-mono);" placeholder="0,00">
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:12px; font-weight:600;">Dinheiro em Espécie:</span>
+            <input type="number" class="form-input" id="split-val-cash" style="width:140px; text-align:right; font-family:var(--font-mono);" placeholder="0,00">
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:12px; font-weight:600;">Faturado / Prazo PJ:</span>
+            <input type="number" class="form-input" id="split-val-faturado" style="width:140px; text-align:right; font-family:var(--font-mono);" placeholder="0,00">
+          </div>
+        </div>
+
+        <div id="split-remaining-balance" style="font-size:12px; font-weight:600; text-align:right;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Cancelar</button>
+        <button class="btn-primary-action" id="btn-process-tef" style="height:36px; padding:0 16px;">
+          Transmitir TEF & Emitir NFC-e
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Visualizador de DANFE / Cupom Fiscal (PDF / XML) -->
+  <div class="modal-overlay" id="modal-view-danfe">
+    <div class="modal-dialog" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 id="danfe-modal-title">📄 Documento Auxiliar da Nota Fiscal (DANFE)</h3>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="danfe-receipt-box" id="danfe-modal-content">
+          <!-- Conteúdo gerado dinamicamente no JS -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Fechar</button>
+        <button class="btn-add-client" onclick="window.showToast('Imprimindo DANFE na impressora fiscal padrão...', 'success')">
+          🖨️ Imprimir DANFE
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Sangria / Entrada / Saída de Caixa -->
+  <div class="modal-overlay" id="modal-movimento-caixa">
+    <div class="modal-dialog" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 id="movimento-caixa-title">Movimentação de Caixa</h3>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Tipo de Movimento</label>
+          <select class="form-input" id="movimento-caixa-tipo">
+            <option value="sangria">Sangria (Retirada de Dinheiro p/ Cofre)</option>
+            <option value="suprimento">Suprimento (Entrada de Troco)</option>
+            <option value="saida">Saída Avulsa (Despesa Operacional)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Valor (R$)</label>
+          <input type="number" class="form-input" id="movimento-caixa-valor" placeholder="0,00" step="10">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Motivo / Justificativa</label>
+          <input type="text" class="form-input" id="movimento-caixa-motivo" placeholder="Ex: Recolhimento de valores para tesouraria">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Cancelar</button>
+        <button class="btn-add-client" id="btn-salvar-movimento-caixa">Confirmar Movimento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: Ajuste de Limite de Crédito -->
+  <div class="modal-overlay" id="modal-adjust-credit">
+    <div class="modal-dialog" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3>⚙️ Ajustar Limite de Crédito & Prazo</h3>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size:12px; color:var(--text-dim);" id="adjust-credit-client-name">Cliente: ...</div>
+        
+        <div class="form-group">
+          <label class="form-label">Novo Limite Total Aprovado (R$)</label>
+          <input type="number" class="form-input" id="adjust-credit-input-limit" step="1000">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Condição de Pagamento Padrão</label>
+          <select class="form-input" id="adjust-credit-select-terms">
+            <option value="Faturado 15/30 Dias">Faturado 15/30 Dias</option>
+            <option value="Faturado 7/14/21 Dias">Faturado 7/14/21 Dias</option>
+            <option value="Boleto 28 DDL">Boleto 28 DDL</option>
+            <option value="Boleto 21/42 DDL">Boleto 21/42 DDL</option>
+            <option value="PIX ou Cartão no Ato">PIX ou Cartão no Ato</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Cancelar</button>
+        <button class="btn-add-client" id="btn-save-credit-adjustment">Salvar Ajuste</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 7: Cancelamento Estratégico Fiscal Sefaz -->
+  <div class="modal-overlay" id="modal-cancel-fiscal">
+    <div class="modal-dialog" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 style="color: var(--status-danger);">Cancelamento de Documento Fiscal</h3>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="background-color:var(--bg-surface-subtle); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs); font-size:12px;" id="cancel-fiscal-doc-info">
+          NF-e nº 000.084.219
+        </div>
+
+        <div class="cancel-strategy-cards">
+          <div class="cancel-card selected" id="cancel-card-note-only">
+            <div style="font-weight:700; font-size:12px; color:var(--status-warning);">1. Cancelar Apenas a Nota</div>
+            <p style="font-size:11px; color:var(--text-muted); line-height:1.4;">
+              Mantém a venda, o estoque e o financeiro ativos para posterior correção e <strong>reemissão fiscal</strong>.
+            </p>
+          </div>
+
+          <div class="cancel-card" id="cancel-card-note-and-sale">
+            <div style="font-weight:700; font-size:12px; color:var(--status-danger);">2. Cancelar Nota e Venda</div>
+            <p style="font-size:11px; color:var(--text-muted); line-height:1.4;">
+              Ação destrutiva. <strong>Estorna o estoque físico</strong>, cancela os títulos a receber e reverte comissões.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Justificativa Sefaz * (Mínimo 15 caracteres)</label>
+          <textarea class="form-input" id="sefaz-justification-text" style="height:70px; resize:none;" placeholder="Informe a justificativa legal perante o fisco..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Abortar</button>
+        <button class="btn-add-client" id="btn-confirm-cancel-fiscal" style="background-color:var(--status-danger);">
+          Transmitir Cancelamento
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 8: Catálogo de Produtos Cadastrados (Pop-up Elegante "Ver Produtos") -->
+  <div class="modal-overlay" id="modal-products-catalog">
+    <div class="modal-dialog modal-dialog-xl" style="max-width: 1100px; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header" style="padding: 14px 20px; border-bottom: 1px solid var(--border-color); background: var(--bg-surface-subtle);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:32px; height:32px; border-radius:var(--radius-xs); background:var(--primary-navy); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin: 0;">Catálogo de Produtos Cadastrados</h3>
+            <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;">Lista corporativa com valor de custo, valor final, quantidade em estoque e inclusão no PDV</p>
+          </div>
+        </div>
+        <button class="btn-remove btn-close-modal" id="btn-close-products-modal" title="Fechar (ESC)" style="font-size: 16px; padding: 4px 8px;">✕</button>
+      </div>
+
+      <!-- Barra de Filtros e Ordenação -->
+      <div class="catalog-modal-toolbar">
+        <div class="catalog-toolbar-row">
+          <div class="catalog-search-box" style="flex: 1; position: relative;">
+            <input 
+              type="text" 
+              class="form-input" 
+              id="catalog-search-input" 
+              placeholder="🔍 Filtrar produtos por nome, descrição, SKU ou código..."
+              style="padding-left: 14px;"
+            >
+          </div>
+
+          <div class="catalog-sort-group">
+            <label class="catalog-sort-label">Ordenar por:</label>
+            <select class="form-input catalog-sort-select" id="catalog-sort-select">
+              <option value="name-asc">Ordem Alfabética (A → Z)</option>
+              <option value="name-desc">Ordem Alfabética (Z → A)</option>
+              <option value="price-desc">Valor Final: Maior para Menor</option>
+              <option value="price-asc">Valor Final: Menor para Maior</option>
+              <option value="date-desc">Data de Registro: Mais Recente</option>
+              <option value="date-asc">Data de Registro: Mais Antigo</option>
+              <option value="stock-desc">Estoque: Maior para Menor</option>
+              <option value="stock-asc">Estoque: Menor para Maior</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="catalog-categories-row">
+          <div class="category-tabs" id="catalog-category-tabs">
+            <button class="category-btn active" data-cat="all">Todos os Produtos</button>
+            <button class="category-btn" data-cat="cervejas">Cervejas & Packs</button>
+            <button class="category-btn" data-cat="barris">Barris de Chopp</button>
+            <button class="category-btn" data-cat="destilados">Destilados</button>
+            <button class="category-btn" data-cat="nao-alcoolicos">Não Alcoólicos</button>
+            <button class="category-btn" data-cat="outros">Gelo & Outros</button>
+          </div>
+          <div class="catalog-counter-badge" id="catalog-count-badge">12 produtos</div>
+        </div>
+      </div>
+
+      <!-- Tabela Corporativa de Produtos -->
+      <div class="modal-body" style="padding: 0; overflow-y: auto; flex: 1;">
+        <table class="enterprise-table catalog-modal-table">
+          <thead>
+            <tr>
+              <th style="width: 110px;">Código / SKU</th>
+              <th>Descrição do Produto</th>
+              <th style="width: 120px;">Cód. Barras</th>
+              <th style="width: 110px;">Cadastro</th>
+              <th style="width: 120px; text-align: right;">Valor Custo</th>
+              <th style="width: 125px; text-align: right;">Valor Final</th>
+              <th style="width: 110px; text-align: center;">Estoque</th>
+              <th style="width: 130px; text-align: right;">Ação</th>
+            </tr>
+          </thead>
+          <tbody id="catalog-products-table-tbody">
+            <!-- Renderizado dinamicamente via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer" style="padding: 12px 20px; justify-content: space-between; background: var(--bg-surface-subtle); border-top: 1px solid var(--border-color);">
+        <div style="font-size: 11px; color: var(--text-dim);">
+          💡 Clique em <strong>"+ Inserir"</strong> para adicionar diretamente ao Cupom Fiscal de Venda.
+        </div>
+        <button class="btn-secondary btn-close-modal" style="height: 34px; padding: 0 16px;">
+          Fechar Janela
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 9: Repetir Pedido B2B (Histórico Completo do Cliente) -->
+  <div class="modal-overlay" id="modal-repeat-b2b-order">
+    <div class="modal-dialog modal-dialog-lg" style="max-width: 800px; max-height: 85vh; display: flex; flex-direction: column;">
+      <div class="modal-header" style="padding: 14px 20px; border-bottom: 1px solid var(--border-color); background: var(--bg-surface-subtle);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:32px; height:32px; border-radius:var(--radius-xs); background:var(--b2b-purple); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">
+            🔄
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin: 0;">Histórico de Pedidos • Repetir Pedido</h3>
+            <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;" id="repeat-order-modal-subtitle">Selecione qualquer pedido anterior do cliente para clonar e carregar no pedido atual</p>
+          </div>
+        </div>
+        <button class="btn-remove btn-close-modal" title="Fechar (ESC)" style="font-size: 16px; padding: 4px 8px;">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 16px 20px; overflow-y: auto; flex: 1; display:flex; flex-direction:column; gap:12px;" id="repeat-orders-list-container">
+        <!-- Preenchido dinamicamente via JS com cards dos pedidos anteriores -->
+      </div>
+
+      <div class="modal-footer" style="padding: 12px 20px; justify-content: space-between; background: var(--bg-surface-subtle); border-top: 1px solid var(--border-color);">
+        <div style="font-size: 11px; color: var(--text-dim);">
+          💡 Todos os itens, embalagens e quantidades do pedido selecionado serão importados para a mesa de faturamento.
+        </div>
+        <button class="btn-secondary btn-close-modal" style="height: 34px; padding: 0 16px;">
+          Fechar Janela
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 10: Detalhamento 360 do Orçamento (Visualizador Completo) -->
+  <div class="modal-overlay" id="modal-view-quote-detail">
+    <div class="modal-dialog modal-dialog-xl" style="max-width: 900px; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header" style="padding: 14px 20px; border-bottom: 1px solid var(--border-color); background: var(--bg-surface-subtle);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:32px; height:32px; border-radius:var(--radius-xs); background:var(--primary-navy); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">
+            📑
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin: 0;" id="quote-modal-title">Orçamento Comercial • ORC-2026-0491</h3>
+            <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;" id="quote-modal-subtitle">Cliente: Boteco Vila Madalena • Vendedor: Rodrigo Martins</p>
+          </div>
+        </div>
+        <button class="btn-remove btn-close-modal" title="Fechar (ESC)" style="font-size: 16px; padding: 4px 8px;">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 18px 20px; overflow-y: auto; flex: 1; display:flex; flex-direction:column; gap:14px;" id="quote-modal-body">
+        <!-- Renderizado dinamicamente via JS com dados do cliente, itens e totais -->
+      </div>
+
+      <div class="modal-footer" style="padding: 12px 20px; justify-content: space-between; background: var(--bg-surface-subtle); border-top: 1px solid var(--border-color);" id="quote-modal-footer">
+        <!-- Ações: Transformar em Venda B2B, Imprimir PDF, Cancelar -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 11: Detalhamento do Caixa Clicado na Abertura -->
+  <div class="modal-overlay" id="modal-register-detail">
+    <div class="modal-dialog" style="max-width: 650px; display: flex; flex-direction: column;">
+      <div class="modal-header" style="padding: 14px 20px; border-bottom: 1px solid var(--border-color); background: var(--bg-surface-subtle);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:32px; height:32px; border-radius:var(--radius-xs); background:var(--status-success); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">
+            💵
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin: 0;" id="register-modal-title">Caixa 01 - Balcão Principal</h3>
+            <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;" id="register-modal-subtitle">Operador: Lucas Toledo • Abertura: 22/09/2026 07:45</p>
+          </div>
+        </div>
+        <button class="btn-remove btn-close-modal" title="Fechar (ESC)" style="font-size: 16px; padding: 4px 8px;">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 18px 20px; overflow-y: auto; display:flex; flex-direction:column; gap:14px;" id="register-modal-body">
+        <!-- Detalhamento completo do caixa gerado via JS -->
+      </div>
+
+      <div class="modal-footer" style="padding: 12px 20px; justify-content: flex-end; background: var(--bg-surface-subtle); border-top: 1px solid var(--border-color);">
+        <button class="btn-secondary btn-close-modal" style="height: 34px; padding: 0 16px;">
+          Fechar Detalhes
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 12: Importação de Produtos por Nota Fiscal de Fornecedor -->
+  <div class="modal-overlay" id="modal-import-supplier-nf">
+    <div class="modal-dialog modal-dialog-xl" style="max-width: 960px; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header" style="padding: 14px 20px; border-bottom: 1px solid var(--border-color); background: var(--bg-surface-subtle);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:32px; height:32px; border-radius:var(--radius-xs); background:var(--primary-navy); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">
+            📄
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin: 0;">Importar Produtos por Nota Fiscal Eletrônica (Fornecedores)</h3>
+            <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;">Selecione uma nota fiscal de entrada emitida por fornecedor (Ambev, Heineken, FEMSA, etc.) para carregar e cadastrar produtos com dados fiscais completos</p>
+          </div>
+        </div>
+        <button class="btn-remove btn-close-modal" title="Fechar (ESC)" style="font-size: 16px; padding: 4px 8px;">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 18px 20px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 16px;">
+        <!-- Seletor de Nota de Fornecedor -->
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <label class="form-label" style="font-weight:700;">Selecione a Nota Fiscal Eletrônica do Fornecedor:</label>
+          <select class="form-input" id="select-supplier-invoice" style="font-size:13px; font-weight:600; height:38px;">
+            <!-- Preenchido via JS -->
+          </select>
+        </div>
+
+        <!-- Card de Resumo da Nota Selecionada -->
+        <div id="supplier-invoice-meta-card" style="background:var(--bg-surface-subtle); border:1px solid var(--border-color); border-radius:var(--radius-xs); padding:12px 16px; display:flex; flex-direction:column; gap:8px;">
+          <!-- Preenchido via JS -->
+        </div>
+
+        <!-- Tabela de Itens da Nota -->
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span style="font-weight:700; font-size:12px; color:var(--text-main);">Itens Contidos no Documento Fiscal:</span>
+          <div style="overflow-x:auto; border:1px solid var(--border-color); border-radius:var(--radius-xs);">
+            <table class="enterprise-table" style="font-size:12px;">
+              <thead>
+                <tr>
+                  <th>Item / Descrição</th>
+                  <th>SKU</th>
+                  <th>NCM</th>
+                  <th>CEST</th>
+                  <th>CST / CFOP</th>
+                  <th>Qtd Faturada</th>
+                  <th>Custo Unit. (R$)</th>
+                  <th style="text-align:right;">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="supplier-invoice-items-tbody">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="padding: 12px 20px; justify-content: space-between; background: var(--bg-surface-subtle); border-top: 1px solid var(--border-color);">
+        <div style="font-size: 11px; color: var(--text-dim);">
+          💡 Clique em <strong>"Preencher Cadastro"</strong> para preencher o formulário ou <strong>"Importar Todos"</strong> para salvar os itens no estoque.
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-secondary btn-close-modal">Cancelar</button>
+          <button class="btn-add-client" id="btn-import-all-invoice-items">📥 Importar Todos os Itens para o Estoque</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 13: Histórico de Compras do Produto pelo Cliente B2B Selecionado -->
+  <div class="modal-overlay" id="modal-b2b-product-history">
+    <div class="modal-dialog modal-dialog-lg" style="max-width: 820px; max-height: 85vh; display: flex; flex-direction: column;">
+      <div class="modal-header" style="padding: 14px 20px; border-bottom: 1px solid var(--border-color); background: var(--bg-surface-subtle);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:32px; height:32px; border-radius:var(--radius-xs); background:var(--b2b-purple); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">
+            📊
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin: 0;" id="b2b-prod-history-title">Histórico de Compras do Produto</h3>
+            <p style="font-size: 11px; color: var(--text-dim); margin: 2px 0 0 0;" id="b2b-prod-history-subtitle">Cliente: Boteco Vila Madalena • Chopp Pilsen 50L</p>
+          </div>
+        </div>
+        <button class="btn-remove btn-close-modal" title="Fechar (ESC)" style="font-size: 16px; padding: 4px 8px;">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 18px 20px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 14px;">
+        
+        <!-- Mini KPIs de Histórico deste Produto com este Cliente -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:10px;">
+          <div style="background:var(--bg-surface-subtle); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs);">
+            <div style="font-size:10px; text-transform:uppercase; color:var(--text-dim); font-weight:700;">Total Já Comprado</div>
+            <div style="font-family:var(--font-mono); font-size:16px; font-weight:700; margin-top:2px;" id="b2b-hist-total-qty">24 unidades</div>
+          </div>
+          <div style="background:var(--bg-surface-subtle); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs);">
+            <div style="font-size:10px; text-transform:uppercase; color:var(--text-dim); font-weight:700;">Valor Total Faturado</div>
+            <div style="font-family:var(--font-mono); font-size:16px; font-weight:700; margin-top:2px;" id="b2b-hist-total-val">R$ 9.460,00</div>
+          </div>
+          <div style="background:var(--bg-surface-subtle); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs);">
+            <div style="font-size:10px; text-transform:uppercase; color:var(--text-dim); font-weight:700;">Preço Médio Praticado</div>
+            <div style="font-family:var(--font-mono); font-size:16px; font-weight:700; margin-top:2px;" id="b2b-hist-avg-price">R$ 394,16 / un</div>
+          </div>
+          <div style="background:var(--bg-surface-subtle); border:1px solid var(--border-subtle); padding:10px 12px; border-radius:var(--radius-xs);">
+            <div style="font-size:10px; text-transform:uppercase; color:var(--text-dim); font-weight:700;">Último Desconto Aplicado</div>
+            <div style="font-family:var(--font-mono); font-size:16px; font-weight:700; margin-top:2px; color:var(--status-success);" id="b2b-hist-last-disc">R$ 20,00 / un (4.8%)</div>
+          </div>
+        </div>
+
+        <!-- Tabela de Pedidos Anteriores do Produto para o Cliente -->
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span style="font-weight:700; font-size:12px; color:var(--text-main);">Extrato de Pedidos Anteriores:</span>
+          <div style="overflow-x:auto; border:1px solid var(--border-color); border-radius:var(--radius-xs);">
+            <table class="enterprise-table" style="font-size:12px;">
+              <thead>
+                <tr>
+                  <th>Nº Pedido</th>
+                  <th>Data da Compra</th>
+                  <th>Qtd Faturada</th>
+                  <th>Preço Tabela (R$)</th>
+                  <th>Desconto Unit. (R$)</th>
+                  <th>Preço Líquido (R$)</th>
+                  <th>Total do Item (R$)</th>
+                  <th>NF-e Vinculada</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="b2b-prod-history-tbody">
+                <!-- Gerado via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer" style="padding: 12px 20px; justify-content: space-between; background: var(--bg-surface-subtle); border-top: 1px solid var(--border-color);">
+        <div style="font-size: 11px; color: var(--text-dim);">
+          💡 Use estas informações de histórico para negociar preços com segurança e manter a rentabilidade da distribuidora.
+        </div>
+        <button class="btn-secondary btn-close-modal" style="height: 34px; padding: 0 16px;">
+          Fechar Janela
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 14: Adicionar Relatório no Painel Multi-Cards -->
+  <div class="modal-overlay" id="modal-select-report">
+    <div class="modal-dialog" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3>➕ Abrir Relatório no Painel</h3>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body" style="gap:10px;">
+        <p style="font-size:12px; color:var(--text-dim);">Selecione o relatório corporativo que deseja adicionar lado a lado no seu painel de controle:</p>
+        
+        <div style="display:flex; flex-direction:column; gap:8px;" id="reports-catalog-picker">
+          <div class="cancel-card report-pick-option" data-report-id="vendas_categoria" style="cursor:pointer;">
+            <div style="font-weight:700; font-size:13px; color:var(--primary-navy);">📊 Relatório de Vendas por Categoria</div>
+            <div style="font-size:11px; color:var(--text-dim);">Faturamento discriminado por Barris, Cervejas, Destilados e Não Alcoólicos.</div>
+          </div>
+
+          <div class="cancel-card report-pick-option" data-report-id="compras_vs_vendas" style="cursor:pointer;">
+            <div style="font-weight:700; font-size:13px; color:var(--primary-navy);">⚖️ Comparativo de Compras vs Vendas</div>
+            <div style="font-size:11px; color:var(--text-dim);">Demonstrativo de entradas de estoque versus saídas operacionais e saldo acumulado.</div>
+          </div>
+
+          <div class="cancel-card report-pick-option" data-report-id="lucro_margens" style="cursor:pointer;">
+            <div style="font-weight:700; font-size:13px; color:var(--primary-navy);">💰 Lucro Bruto & Margens de Rentabilidade</div>
+            <div style="font-size:11px; color:var(--text-dim);">Markup, margem de contribuição e lucratividade líquida por produto.</div>
+          </div>
+
+          <div class="cancel-card report-pick-option" data-report-id="posicao_vasilhames" style="cursor:pointer;">
+            <div style="font-weight:700; font-size:13px; color:var(--primary-navy);">🔄 Posição de Vasilhames, Barris & Cascos</div>
+            <div style="font-size:11px; color:var(--text-dim);">Controle de ativos retornáveis em posse dos clientes e taxa de retorno.</div>
+          </div>
+
+          <div class="cancel-card report-pick-option" data-report-id="dre_sintetico" style="cursor:pointer;">
+            <div style="font-weight:700; font-size:13px; color:var(--primary-navy);">📑 DRE Sintético Gerencial</div>
+            <div style="font-size:11px; color:var(--text-dim);">Receita Bruta, Deduções, CMV, Lucro Operacional e Resultado Líquido.</div>
+          </div>
+
+          <div class="cancel-card report-pick-option" data-report-id="vendedores" style="cursor:pointer;">
+            <div style="font-weight:700; font-size:13px; color:var(--primary-navy);">👥 Performance de Vendedores & Operadores</div>
+            <div style="font-size:11px; color:var(--text-dim);">Produtividade, metas batidas e comissões geradas no período.</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/simulated_data_injection.js"></script>
+
+  <!-- MODAL: Novo Usuário -->
+  <div class="modal-overlay" id="modal-new-user">
+    <div class="modal-dialog" style="max-width: 500px;">
+      <div class="modal-header">
+        <div>
+          <span style="font-weight: 700; font-size: 15px;">Cadastrar Novo Usuário</span>
+        </div>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body" style="gap: 12px; display: flex; flex-direction: column;">
+        <div>
+          <label class="form-label">Nome Completo</label>
+          <input type="text" class="form-input" placeholder="Ex: João Silva">
+        </div>
+        <div>
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" placeholder="Ex: joao@empresa.com">
+        </div>
+        <div>
+          <label class="form-label">Perfil de Acesso</label>
+          <select class="form-input">
+            <option>Administrador</option>
+            <option>Vendedor (PDV)</option>
+            <option>Estoquista</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Cancelar</button>
+        <button class="btn-add-client" onclick="window.showToast('Usuário cadastrado com sucesso!', 'success'); document.getElementById('modal-new-user').classList.remove('active');">Salvar Usuário</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Novo Título -->
+  <div class="modal-overlay" id="modal-new-title">
+    <div class="modal-dialog" style="max-width: 500px;">
+      <div class="modal-header">
+        <div>
+          <span style="font-weight: 700; font-size: 15px;">Lançar Novo Título a Pagar</span>
+        </div>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body" style="gap: 12px; display: flex; flex-direction: column;">
+        <div>
+          <label class="form-label">Fornecedor / Favorecido</label>
+          <input type="text" class="form-input" placeholder="Nome do fornecedor">
+        </div>
+        <div>
+          <label class="form-label">Valor (R$)</label>
+          <input type="text" class="form-input" placeholder="0,00">
+        </div>
+        <div>
+          <label class="form-label">Data de Vencimento</label>
+          <input type="date" class="form-input">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Cancelar</button>
+        <button class="btn-add-client" onclick="window.showToast('Título lançado com sucesso!', 'success'); document.getElementById('modal-new-title').classList.remove('active');">Salvar Título</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Gerar Pedido de Compra -->
+  <div class="modal-overlay" id="modal-new-purchase">
+    <div class="modal-dialog" style="max-width: 600px;">
+      <div class="modal-header">
+        <div>
+          <span style="font-weight: 700; font-size: 15px;">Gerar Pedido de Compra</span>
+        </div>
+        <button class="btn-remove btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body" style="gap: 12px; display: flex; flex-direction: column;">
+        <div>
+          <label class="form-label">Fornecedor</label>
+          <select class="form-input">
+            <option>Ambev Distribuição</option>
+            <option>Coca-Cola FEMSA</option>
+            <option>Aurora Alimentos</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Itens do Pedido</label>
+          <textarea class="form-input" rows="3" placeholder="Ex: 50x Cerveja Skol, 30x Coca-Cola 2L"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-close-modal">Cancelar</button>
+        <button class="btn-add-client" onclick="window.showToast('Pedido de compra gerado e enviado ao fornecedor!', 'success'); document.getElementById('modal-new-purchase').classList.remove('active');">Confirmar Pedido</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
