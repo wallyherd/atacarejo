@@ -1,5 +1,307 @@
 // Base de Dados Corporativa Completa - ERP Distribuidora de Bebidas
 const initialData = {
+  // =========================================================================
+  // ENGRADADO - SISTEMA DE GESTÃO & PDV PARA DISTRIBUIDORAS DE BEBIDAS
+  // Informações completas extraídas do Plano-Mestre Oficial (Piloto Cuiabá-MT)
+  // =========================================================================
+  engradadoMasterPlan: {
+    brand: {
+      name: "Engradado",
+      tagline: "O sistema da distribuidora de bebidas que vende rápido no balcão, entrega na rota e monta o pedido do cliente sozinho — mesmo sem internet.",
+      city: "Cuiabá - MT",
+      sefaz: "SEFAZ-MT (Contingência tpEmis 9 habilitada)",
+      regime: "Simples Nacional (99,6% CST 60 / ICMS-ST Monofásico)",
+      versao: "1.0 (Plano-mestre validado)"
+    },
+    numbersKey: {
+      workspaces: "6 áreas de trabalho + Assistente Engradado (HERA: 85 telas; Protótipo anterior: 41 subtelas)",
+      vendaBalcao: "2 toques, < 5 segundos, sem esperar SEFAZ (Mediana 1 item, R$ 16,00)",
+      ticketMedio: "R$ 123,50 (com vendas atacado chegando a R$ 4.800+)",
+      custoIA: "~R$ 33/mês por cliente (Motor IA Fast + Pro determinístico; pior caso ~R$ 84)",
+      custoFiscal: "~R$ 0 marginal com motor próprio fiscal-engine Node (API terceira custaria R$ 150-340/mês)",
+      mixPagamento: { pix: 73, cartao: 14, dinheiro: 13 },
+      vendasIdentificadasMeta: "40% em 90 dias (atual medido: 41.2%)",
+      planos: [
+        { nome: "Balcão", preco: "R$ 399/mês", caixas: "Até 3", motoristas: "Quadro simples", creditosIA: "2.000 créditos/mês" },
+        { nome: "Distribuidora (Recomendado)", preco: "R$ 699/mês", caixas: "Até 6", motoristas: "Até 3 motoristas + 2 vendedores externos", creditosIA: "4.000 créditos/mês + Resumo da Manhã" },
+        { nome: "Rede", preco: "R$ 1.290/mês", caixas: "Ilimitados", motoristas: "Ilimitados + White Label", creditosIA: "4.000 créditos por loja + Resumo da Manhã" }
+      ],
+      pilotoData: "01/03/2027 (depois do Carnaval) em 1 caixa; virada total na semana de 22/03/2027",
+      breakEven: "~100 clientes pagantes (meta para 2028)"
+    },
+    diagnosticHera: [
+      {
+        dor: "3 caixas que não se conversam",
+        causaHera: "Cada PDV tem MySQL local isolado. Cargas manuais via JDBC root. Vendas sobem pelo EnviaVendas.jar a cada 5s sem canal entre caixas.",
+        solucaoEngradado: "Banco central na nuvem com SQLite local sincronizado via PowerSync por delta. Livro-caixa unificado da loja em tempo real."
+      },
+      {
+        dor: "TEF nunca funciona",
+        causaHera: "UTILIZA_TEF=0, DLL ausente, sem configuração SiTef. A cliente usa maquininha Stone avulsa digitando o valor à mão.",
+        solucaoEngradado: "PIX dinâmico com webhook instantâneo (73% do faturamento) e Smart POS integrado por API sem DLL nem PIN pad cabeado."
+      },
+      {
+        dor: "Estoque negativo (780 de 797 itens zerados)",
+        causaHera: "Saldo é campo editável. Baixa ocorre só no upload. Venda sem estoque liberada sem aviso. Entrada exige vínculo manual de fator.",
+        solucaoEngradado: "Estoque como Razão de Movimentos imutável. Baixa no ato mesmo offline. Negativos visíveis com fila de regularização e contagem guiada."
+      },
+      {
+        dor: "Pedido no site e faturamento em outro sistema",
+        causaHera: "DAV nasce na retaguarda web, PDV importa e fatura, NF-e é outra tela de 657 KB. Queda de rede trava todo o faturamento.",
+        solucaoEngradado: "Documento Único com esteira de transições (Orçamento → Pedido → Separar → Rota → Faturado). Faturar é 1 clique."
+      },
+      {
+        dor: "85 telas em 3 níveis e 340 flags de permissão",
+        causaHera: "Modelo genérico (mistura moda, oficina, restaurante com 108 itens de menu e 149 configurações escondidas).",
+        solucaoEngradado: "6 Áreas de Trabalho focadas em bebidas + Assistente Engradado global. Perfis prontos com alçadas (Dono, Gerente, Caixa, Vendedor, Motorista)."
+      },
+      {
+        dor: "Produto por produto para alterar preço",
+        causaHera: "Edição por modal individual. Fardo e unidade são produtos separados (797/797 em UN). Não há grade nem colagem.",
+        solucaoEngradado: "Grade-planilha tipo Excel com UN, FD e CX no mesmo produto. Reajuste em lote por fornecedor com prévia de margem e desfazer 30 dias."
+      },
+      {
+        dor: "Queda de internet paralisa a loja",
+        causaHera: "Offline do HERA exige servidor físico local na loja. Reenvio da contingência fiscal é manual e burocrático.",
+        solucaoEngradado: "Offline no próprio aparelho (PC do caixa e celular). Fila fiscal assíncrona com contingência NFC-e tpEmis 9 automática."
+      }
+    ],
+    sixWorkspaces: [
+      {
+        id: "vender",
+        name: "1. Vender (Balcão / PDV)",
+        tagline: "Venda rápida em 2 toques e < 5 segundos",
+        features: [
+          "Vários atendimentos em abas (Atend. 1, Atend. 2 Bar do Zé, +)",
+          "Bipar ou buscar rápido (F2)",
+          "Cliente rápido por telefone, nome ou CNPJ (F3)",
+          "Preço automático por embalagem/faixa atacado/cliente (com botão 'Por que este preço?')",
+          "Troca de casco na linha: 'Cascos: leva 1 cx · devolveu [ 1 ]'",
+          "Puxar pedido de outros caixas ou do vendedor externo",
+          "Cobrança F10: PIX dinâmico (73%), Smart POS, Dinheiro com troco, Fiado com limite",
+          "Fila fiscal assíncrona: emissão automática sem travar a venda; contingência offline tpEmis 9"
+        ]
+      },
+      {
+        id: "pedidos",
+        name: "2. Pedidos (Documento Único)",
+        tagline: "Do orçamento ao faturamento sem trocar de tela",
+        features: [
+          "Documento único: Orçamento → Pedido → Separar → Em rota → Entregue → Faturado / NF-e",
+          "Grade editável com digitação rápida ('3 cx skol', '10 fd heineken')",
+          "Botão 'Repetir último pedido' com histórico de compras e variações destacadas",
+          "Romaneio R-77 com ordem de paradas sugerida por bairro de Cuiabá",
+          "Simulador App do Motorista offline: baixa com assinatura/foto e acerto cego"
+        ]
+      },
+      {
+        id: "produtos",
+        name: "3. Produtos (Grade-Planilha & Estoque Razão)",
+        tagline: "Embalagens UN/FD/CX no mesmo produto e razão imutável",
+        features: [
+          "Grade-planilha tipo Excel com colunas UN, FD(12), CX(24), Custo, Margem, Estoque e Preço Gelada",
+          "Reajuste em lote com filtro Ambev, prévia de margem e botão 'Desfazer por 30 dias'",
+          "Estoque como Razão de Movimentos (saldo derivado, nunca editável em campo texto)",
+          "Contagem Cíclica 'Contar Hoje' (15 itens prioritários da curva A e divergentes)",
+          "Notas a Receber (DF-e) com manifesto automático e fator de fardo memorizado"
+        ]
+      },
+      {
+        id: "clientes",
+        name: "4. Clientes (Ficha 360º & Operação de Bebidas)",
+        tagline: "Crédito, vasilhames e freezers em comodato",
+        features: [
+          "Ficha 360 com histórico de compras, ticket médio e produtos favoritos",
+          "Fiado com Aging detalhado (0-30, 31-60, 61-90, >90 dias)",
+          "Régua de cobrança automática por WhatsApp com PIX dinâmico gerado",
+          "Livro de Cascos por cliente e tipo (600ml, 1L, barris 30L/50L) com alerta de atraso",
+          "Comodato de Freezers e Chopeiras com controle de patrimônio e meta mensal de compras",
+          "Recompra prevista calculada pelo giro histórico"
+        ]
+      },
+      {
+        id: "caixa-contas",
+        name: "5. Caixa & Contas",
+        tagline: "Livro-caixa unificado da loja e fechamento cego",
+        features: [
+          "Livro-caixa único da loja consolidando todos os terminais em tempo real",
+          "Fechamento cego: operador conta apenas dinheiro físico; PIX e cartão vêm conciliados",
+          "Sangria inteligente com alerta de teto em gaveta",
+          "Painel Fiscal SEFAZ-MT: fila de NFC-e/NF-e e contingência tpEmis 9",
+          "Painel Saúde dos Dispositivos: sync, notas na fila, bateria e certificado A1 (alerta 30 dias)"
+        ]
+      },
+      {
+        id: "painel",
+        name: "6. Painel (Visão do Dia & Relatórios)",
+        tagline: "Carimbo de integridade e mapa 1:1 dos 28 relatórios do HERA",
+        features: [
+          "Carimbo 'Dados consolidados até 14:02 · 1 aparelho com 3 pendências'",
+          "Números reais da distribuidora (R$ 14.820 dia, Balcão R$ 16 mediana, PIX 73%)",
+          "Alertas operacionais acionáveis (recompras de hoje, contingências, freezers ociosos)",
+          "Biblioteca dos 28 relatórios do HERA com exportação CSV, XLSX e PDF em todas as telas"
+        ]
+      }
+    ],
+    aiAssistantPlan: {
+      router: "Portão Determinístico (Validação de Acesso + Créditos) → Motor IA Fast (Intérprete/Roteador + Ferramentas Simples) → Motor IA Pro (Planejador de Análises Compostas)",
+      safetyRule: "O sistema calcula os preços e impostos de forma determinística; o motor de inteligência apenas organiza o rascunho com fontes citadas. Nenhuma escrita é definitiva sem 1 clique de confirmação humana.",
+      costReal: "~R$ 33/mês no cenário base (100 interações/dia + 10 análises aprofundadas/mês). Franquia de 4.000 créditos incluída no plano Distribuidora.",
+      safetyCap: "Teto de segurança de R$ 100/mês por loja garantido no gateway",
+      casesStars: [
+        {
+          id: "bar-do-ze-repetir",
+          title: "Orçamento Bar do Zé igual ao último + 10 fd Heineken",
+          prompt: "orçamento pro bar do zé igual o último mas 10 fardo de heineken",
+          model: "Motor IA Fast (Effort Low · ~22k tokens, 17k cache)",
+          tempo: "3.2 segundos",
+          custo: "R$ 0,010 (1 crédito)",
+          draftResult: {
+            client: "Bar do Zé (Bairro CPA IV, Cuiabá - MT)",
+            baseRef: "Pedido anterior #A-0988 (12/09/2026)",
+            itemsCount: 14,
+            total: 2418.40,
+            previousTotal: 2346.60,
+            diffSummary: "Heineken Long Neck 8 FD → 10 FD (+2 fardos adicionados)",
+            pricingRule: "Tabela 'Bares Cuiabá' vigente aplicada automaticamente",
+            stockWarning: "1 item com estoque baixo no depósito: Cerveja Original 600ml (12 cx disponíveis)",
+            sources: "Pedido #A-0988, Tabela Bares vigente, Estoque às 14:02"
+          }
+        },
+        {
+          id: "whatsapp-paste",
+          title: "Colar pedido recebido no WhatsApp",
+          prompt: "manda 5 cx brahma 600, 2 fd coca 2l e 1 saco de gelo pro Bar do Zé",
+          model: "Motor IA Fast (interpretar_pedido_texto em lote)",
+          tempo: "2.8 segundos",
+          custo: "R$ 0,015 (2 créditos)",
+          draftResult: {
+            client: "Bar do Zé",
+            matchedItems: [
+              { item: "Brahma 600ml Retornável", package: "CX(24)", qty: 5, unitPrice: 98.00, total: 490.00, cascos: "5 caixas a recolher" },
+              { item: "Refrigerante Coca-Cola 2L", package: "FD(6)", qty: 2, unitPrice: 56.00, total: 112.00, cascos: "Sem casco (descartável)" },
+              { item: "Gelo Filtrado em Cubos 10kg", package: "Pacote", qty: 1, unitPrice: 22.00, total: 22.00, cascos: "Sem casco" }
+            ],
+            total: 624.00,
+            confidence: "100% de casamento exato com catálogo de Cuiabá",
+            sources: "Catálogo ativo, Tabela Bares Cuiabá"
+          }
+        },
+        {
+          id: "top-produtos-60dias",
+          title: "Orçamento com os mais comprados nos últimos 60 dias",
+          prompt: "orçamento pro Bar do Zé com o que ele mais levou nos últimos 60 dias",
+          model: "Motor IA Fast",
+          tempo: "3.5 segundos",
+          custo: "R$ 0,010 (1 crédito)",
+          draftResult: {
+            client: "Bar do Zé",
+            criteria: "Produtos com maior frequência de compra e quantidade mediana",
+            itemsCount: 8,
+            total: 1890.50,
+            sources: "Histórico de faturamento de 60 dias, estoque atualizado"
+          }
+        },
+        {
+          id: "consulta-vendas-semana",
+          title: "Análise de vendas de lata e margem na semana",
+          prompt: "quanto vendemos de cerveja lata essa semana e qual foi a margem média?",
+          model: "Motor IA Fast + Visão Semântica de Vendas",
+          tempo: "1.9 segundos",
+          custo: "R$ 0,005 (1 crédito)",
+          answerText: "Nesta semana (segunda até hoje às 14:02), vendemos 842 fardos de cerveja lata (Skol 350ml e Puro Malte). O faturamento total foi de R$ 32.180,00 com margem média líquida de 34,2%. O produto mais lucrativo foi a Skol Lata 350ml FD(12) com margem de 36%."
+        },
+        {
+          id: "regua-cobranca-fiado",
+          title: "Régua de cobrança de bares em atraso",
+          prompt: "quais bares estão com fiado vencendo há mais de 30 dias e monte a mensagem com PIX",
+          model: "Motor IA Fast + propor_cobranca",
+          tempo: "2.4 segundos",
+          custo: "R$ 0,010 (1 crédito)",
+          answerText: "Identifiquei 2 clientes com parcelas vencidas há mais de 30 dias: Bar do Zé (R$ 400,00 - 12 dias de atraso na faixa 31-60) e Conveniência Pantanal (R$ 680,00 - 38 dias). Montei o lote de mensagens WhatsApp com chave PIX dinâmica para cobrança com 1 clique."
+        },
+        {
+          id: "resumo-manha-dono",
+          title: "Resumo da Manhã do Dono (Batch das 06:00)",
+          prompt: "resumo da manhã executivo de ontem e alertas de hoje",
+          model: "Motor IA Fast via Batch API (50% desconto · R$ 0,01/dia)",
+          tempo: "Instantâneo (pré-calculado)",
+          custo: "R$ 0,010",
+          answerText: "Bom dia! Ontem fechamos em R$ 16.420,00 (+8% acima da média de terça-feira). 74% no PIX. Alertas de hoje: 3 bares com recompra prevista no roteiro CPA (Bar do Zé, Bar do Gordo, Espetinho Cuiabano); 1 freezer Ambev no Bar do Zé com compra mensal abaixo de 80%; Cerveja Original 600ml com estoque no depósito em 12 caixas (sugerir pedido Ambev)."
+        }
+      ]
+    },
+    hardwareAgent: {
+      pattern: "Agente local no processo Electron (Node) com pareamento por código de 8 letras e painel em localhost",
+      peripherals: [
+        { name: "Impressora Térmica Não Fiscal ESC/POS", models: "Elgin i9 / Bematech MP-4200 (USB/Rede/Serial)", status: "Conectada (USB001)", speed: "180 mm/s" },
+        { name: "Gaveta de Dinheiro Automática", trigger: "Acionamento pelo pino RJ11 da impressora", status: "Pronta" },
+        { name: "Display de Cliente para QR do PIX", resolution: "Display LCD 800x480 no balcão", status: "Sincronizado" },
+        { name: "Balança de Balcão (Gelo e Granel)", protocol: "Serial Toledo / Filizola", status: "Calibrada" },
+        { name: "Leitor de Código de Barras", mode: "Emulação de Teclado (USB HID)", status: "Ativo" }
+      ]
+    },
+    deviceHealthList: [
+      { id: "DEV-01", device: "PC Caixa 01 (Balcão)", os: "Windows 11 Pro · Intel i5 8GB SSD", status: "online", lastSync: "há 20 seg", queueItems: 0, certA1: "Válido (214 dias restantes)", printer: "Bematech MP-4200 (OK)" },
+      { id: "DEV-02", device: "PC Caixa 02 (Reserva)", os: "Windows 10 · Intel i3 8GB SSD", status: "online", lastSync: "há 1 min", queueItems: 0, certA1: "Válido (214 dias restantes)", printer: "Elgin i9 (OK)" },
+      { id: "DEV-03", device: "Celular Vendedor (Ana)", os: "Android 14 · App Capacitor", status: "online", lastSync: "há 4 min", queueItems: 0, certA1: "Via Servidor", printer: "Não aplicável" },
+      { id: "DEV-04", device: "Celular Motorista (Marcos - Rota CPA)", os: "Android 13 · App Capacitor", status: "offline", lastSync: "há 38 min", queueItems: 12, queueDesc: "12 entregas e baixas salvas no SQLite nativo", certA1: "Via Servidor", printer: "Não aplicável" }
+    ],
+    contarHojePriorities: [
+      { id: "PROD-CBA-001", name: "Skol 350ml lata (UN)", curve: "Curva A", stockSystem: 312, counted: null, diff: 0, location: "Câmara Fria", status: "pendente" },
+      { id: "PROD-CBA-002", name: "Brahma 600ml retornável (UN)", curve: "Curva A / Negativo", stockSystem: -24, counted: null, diff: 0, location: "Depósito Principal", status: "critico" },
+      { id: "PROD-CBA-003", name: "Heineken Long Neck 330ml (UN)", curve: "Curva A", stockSystem: 180, counted: null, diff: 0, location: "Câmara Fria", status: "pendente" },
+      { id: "PROD-CBA-004", name: "Coca-Cola 2L Pet (UN)", curve: "Curva A", stockSystem: 140, counted: null, diff: 0, location: "Galpão R4", status: "pendente" },
+      { id: "PROD-CBA-005", name: "Cerveja Original 600ml (UN)", curve: "Divergente", stockSystem: 48, counted: null, diff: 0, location: "Depósito Principal", status: "pendente" },
+      { id: "PROD-CBA-006", name: "Gelo Filtrado em Cubos 10kg", curve: "Alto Giro", stockSystem: 180, counted: null, diff: 0, location: "Câmara Fria G1", status: "pendente" },
+      { id: "PROD-CBA-007", name: "Água Puríssima 500ml c/ gás", curve: "Curva B", stockSystem: 250, counted: null, diff: 0, location: "Galpão R5", status: "pendente" },
+      { id: "PROD-CBA-008", name: "Carvão Vegetal 3kg", curve: "Sem contagem 30d", stockSystem: 120, counted: null, diff: 0, location: "Pátio Externo", status: "pendente" }
+    ],
+    dfeIncomingNotes: [
+      {
+        chNFe: "51261002814881000192550010000841281098421098",
+        nNF: "000.084.128",
+        emitente: "Ambev S.A. - Filial Cuiabá",
+        cnpjEmitente: "02.814.881/0001-92",
+        dhEmi: "14/10/2026 09:15",
+        vNF: 14850.00,
+        statusDF: "Ciência da Emissão Efetuada",
+        itensCount: 4,
+        memorizedFactor: "CX c/ 24 e FD c/ 12 já vinculados com histórico 100% automático",
+        action: "Pronta para Manifestação e Entrada no Estoque"
+      },
+      {
+        chNFe: "51261003418290000144550010000329101847120984",
+        nNF: "000.032.910",
+        emitente: "Coca-Cola FEMSA Brasil - CD Cuiabá",
+        cnpjEmitente: "03.418.290/0001-44",
+        dhEmi: "13/10/2026 16:40",
+        vNF: 6240.00,
+        statusDF: "Confirmada a Operação",
+        itensCount: 3,
+        memorizedFactor: "Fardo c/ 6 unidades memorizado",
+        action: "Estoque e Contas a Pagar Atualizados"
+      }
+    ],
+    romaneioEntregas: {
+      id: "R-77",
+      data: "14/10/2026",
+      veiculo: "Fiorino Placa QBO-4819",
+      motorista: "Marcos Vinicius",
+      bairrosRota: "CPA I, II, III e IV · Morada do Ouro · Cuiabá",
+      totalParadas: 9,
+      concluidas: 6,
+      pendentes: 3,
+      totalValor: 9480.00,
+      paradas: [
+        { seq: 1, doc: "PED-1040", cliente: "Lanchonete Pantanal", endereco: "Av. Brasil, 45 - CPA II", valor: 1120.00, status: "Entregue", pgto: "PIX Recebido", cascosRecebidos: "4 cx 600ml" },
+        { seq: 2, doc: "PED-1041", cliente: "Espetinho Cuiabano", endereco: "Rua 14, 210 - CPA III", valor: 850.00, status: "Entregue", pgto: "Dinheiro R$ 850", cascosRecebidos: "2 cx 600ml" },
+        { seq: 3, doc: "PED-1042", cliente: "Bar do Zé", endereco: "R. das Flores, 120 - CPA IV", valor: 2418.40, status: "Em rota (Próxima parada)", pgto: "Fiado Faturado", cascosEsperados: "6 cx 600ml", comodatoChecagem: "Verificar freezer Ambev" },
+        { seq: 4, doc: "PED-1043", cliente: "Mercearia Santa Rosa", endereco: "Av. Antártica, 88 - Santa Rosa", valor: 1890.00, status: "Pendente", pgto: "A Receber no local (Smart POS)", cascosEsperados: "4 cx 600ml" }
+      ]
+    }
+  },
+
   products: [
     {
       id: 'PROD-001',
@@ -55,7 +357,13 @@ const initialData = {
     },
     {
       id: 'PROD-003',
-      name: 'Cerveja Lager 600ml Caixa c/ 24 Garrafas',
+      name: 'Cerveja Brahma 600ml Retornável (Cuiabá)',
+      packages: [
+        { unit: 'UN', factor: 1, ean: '7891149103248', price: 6.90, wholesalePrice: 6.50 },
+        { unit: 'CX(24)', factor: 24, ean: '7891149103255', price: 98.00, wholesalePrice: 92.00, atacadoFardo: 28.00 }
+      ],
+      negativeStockAlert: true,
+      cascoType: 'Caixa 24x 600ml c/ Vasilhame',
       category: 'cervejas',
       type: 'mixed',
       price: 138.00,
@@ -81,7 +389,16 @@ const initialData = {
     },
     {
       id: 'PROD-004',
-      name: 'Cerveja Puro Malte Lata 350ml Pack c/ 12',
+      name: 'Cerveja Skol 350ml Lata (Cuiabá)',
+      packages: [
+        { unit: 'UN', factor: 1, ean: '7891149200015', price: 3.29, wholesalePrice: 3.15 },
+        { unit: 'FD(12)', factor: 12, ean: '7891149200022', price: 37.90, wholesalePrice: 35.50 },
+        { unit: 'CX(24)', factor: 24, ean: '7891149200039', price: 74.90, wholesalePrice: 69.90 }
+      ],
+      cost: 2.41,
+      marginPct: 36,
+      location: 'Câmara Fria A1',
+      geladaPrice: 3.50,
       category: 'cervejas',
       type: 'b2c',
       price: 46.80,
@@ -310,6 +627,82 @@ const initialData = {
   b2bClients: [
     {
       id: 'CLI-001',
+      cnpj: '24.891.102/0001-55',
+      ie: '13.512.980-1',
+      corporateName: 'José Aparecido dos Santos & Cia Ltda',
+      tradeName: 'Bar do Zé (Cliente Estrela Cuiabá)',
+      segment: 'Bar & Choperia (B2B)',
+      status: 'ativo',
+      creditLimit: 3000.00,
+      creditUsed: 1240.00,
+      availableCredit: 1760.00,
+      paymentTerms: 'Fiado Semanal / PIX Dinâmico',
+      contactName: 'Seu Zé (José Aparecido)',
+      contactRole: 'Proprietário',
+      phone: '(65) 99234-5678',
+      email: 'bardoze.cuiaba@gmail.com',
+      address: 'Rua das Flores, 120 - Bairro CPA IV, Cuiabá - MT',
+      cep: '78058-200',
+      customerSince: '12/03/2024',
+      totalPurchases: 48920.00,
+      ordersCount: 38,
+      agingDebt: {
+        current0_30: 840.00,
+        due31_60: 400.00,
+        due61_90: 0.00,
+        dueOver90: 0.00,
+        daysOverdue: 12,
+        pixCobranzaUrl: 'https://pix.bcb.gov.br/qr/5198421098421'
+      },
+      cascosBalance: {
+        caixas600: 6,
+        caixasLitro: 0,
+        barril50: 0,
+        barril30: 0,
+        retentionDays: 14,
+        warning: '6 caixas 600ml devidas (Previsão de recolhimento na próxima entrega)'
+      },
+      comodatoAssets: [
+        {
+          id: 'PAT-FRZ-8821',
+          name: 'Freezer Dupla Ação Ambev 530L',
+          contract: 'COM-2024-089',
+          installedDate: '15/04/2024',
+          targetMonthlyCases: 30,
+          currentMonthCases: 24,
+          achievementPct: 80,
+          status: 'Ativo em Monitoramento (Meta 80%)'
+        }
+      ],
+      lastOrderSummary: {
+        id: '#A-0988',
+        date: '12/09/2026',
+        itemsCount: 14,
+        total: 2346.60,
+        heinekenQty: 8,
+        brahmaQty: 5
+      },
+      ordersHistory: [
+        {
+          id: '#A-0988',
+          nfe: '000.041.209',
+          date: '12/09/2026',
+          total: 2346.60,
+          status: 'Entregue / Faturado',
+          paymentStatus: 'Fiado (R$ 400 vencido + R$ 840 a vencer)',
+          itemsCount: 14,
+          items: [
+            { name: 'Heineken Long Neck 330ml FD(6)', qty: 8, unitPrice: 35.90, total: 287.20 },
+            { name: 'Cerveja Brahma 600ml CX c/ 24', qty: 5, unitPrice: 98.00, total: 490.00 },
+            { name: 'Cerveja Skol Lata 350ml FD(12)', qty: 10, unitPrice: 37.90, total: 379.00 },
+            { name: 'Refrigerante Coca-Cola 2L FD(6)', qty: 4, unitPrice: 56.00, total: 224.00 },
+            { name: 'Gelo Filtrado em Cubos 10kg', qty: 6, unitPrice: 22.00, total: 132.00 }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'CLI-009',
       cnpj: '18.342.981/0001-44',
       ie: '109.842.190.114',
       corporateName: 'Boteco & Gastronomia Vila Madalena Ltda',

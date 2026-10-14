@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ERP Distribuidora de Bebidas • Sistema Integrado de Gestão</title>
-  <meta name="description" content="Sistema integrado ERP e PDV corporativo com gestão completa de Clientes, Vendas, Fiscal, Caixa, Estoque, Compras, Relatórios e Financeiro.">
+  <title>Engradado • Gestão & PDV para Distribuidoras de Bebidas (Piloto Cuiabá-MT)</title>
+  <meta name="description" content="Plano-mestre e prévia operacional do Engradado: SaaS de gestão e PDV para distribuidoras de bebidas e atacarejos com 6 áreas de trabalho, offline-first e Assistente Engradado.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,183 +14,139 @@
     <!-- Sidebar Corporativa com Menu Sanfona (Accordion) -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <div class="brand-icon">AC</div>
+        <div class="brand-icon engradado-logo" style="background: linear-gradient(135deg, #d97706, #b45309); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; border-radius: 8px; box-shadow: 0 2px 6px rgba(217, 119, 6, 0.4);">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="18" rx="2"/>
+            <line x1="2" y1="9" x2="22" y2="9"/>
+            <line x1="2" y1="15" x2="22" y2="15"/>
+            <line x1="8" y1="3" x2="8" y2="21"/>
+            <line x1="16" y1="3" x2="16" y2="21"/>
+          </svg>
+        </div>
         <div class="brand-info">
-          <div class="brand-title">Atacarejo/Cba</div>
-          <div class="brand-subtitle">ERP Comercial & Fiscal</div>
+          <div class="brand-title" style="font-size: 15px; font-weight: 800; letter-spacing: -0.3px; color: #0f172a;">Engradado<span style="color:#d97706;">.</span></div>
+          <div class="brand-subtitle" style="font-size: 10px; color: #64748b; font-weight: 600;">Gestão & PDV Bebidas • Cuiabá</div>
         </div>
       </div>
 
       <nav class="sidebar-nav" id="sidebar-accordion-nav">
         
-        <!-- 0. Menu Dashboard Geral (Inicial Padrão) -->
-        <div class="nav-accordion-group open" id="group-dashboard">
-          <button class="nav-group-header active-group" data-group="group-dashboard">
+        <!-- 1. Vender (Balcão / PDV em 2 toques) -->
+        <div class="nav-accordion-group open" id="group-vender">
+          <button class="nav-group-header active-group" data-group="group-vender">
             <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              <span>Dashboard</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <span>1. Vender</span>
             </div>
             <span class="nav-group-arrow">▶</span>
           </button>
           <div class="nav-submenu">
-            <button class="nav-subitem active" data-view="view-dashboard-geral">- Visão Geral & KPIs</button>
+            <button class="nav-subitem active" data-view="view-vender-balcao">• Balcão em 2 Toques</button>
+            <button class="nav-subitem" data-view="view-vendas-varejo">• Frente de Caixa Clássico</button>
+            <button class="nav-subitem" data-view="view-vendas-atacado">• Atacado & Faturamento</button>
           </div>
         </div>
 
-        <!-- 1. Menu Cliente -->
-        <div class="nav-accordion-group" id="group-cliente">
-          <button class="nav-group-header" data-group="group-cliente">
+        <!-- 2. Pedidos (Documento Único) -->
+        <div class="nav-accordion-group" id="group-pedidos">
+          <button class="nav-group-header" data-group="group-pedidos">
             <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              <span>Cliente</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>2. Pedidos</span>
             </div>
             <span class="nav-group-arrow">▶</span>
           </button>
           <div class="nav-submenu">
-            <button class="nav-subitem" data-view="view-cliente-cadastro">- Cadastro</button>
-            <button class="nav-subitem" data-view="view-cliente-consulta">- Consulta</button>
+            <button class="nav-subitem" data-view="view-pedidos-quadro">• Documento Único (Esteira)</button>
+            <button class="nav-subitem" data-view="view-pedidos-entregas">• Entregas & Romaneio R-77</button>
+            <button class="nav-subitem" data-view="view-pedidos-motorista">• App do Motorista (Offline)</button>
           </div>
         </div>
 
-        <!-- 2. Menu Vendas -->
-        <div class="nav-accordion-group" id="group-vendas">
-          <button class="nav-group-header" data-group="group-vendas">
+        <!-- 3. Produtos (Grade-Planilha & Estoque Razão) -->
+        <div class="nav-accordion-group" id="group-produtos">
+          <button class="nav-group-header" data-group="group-produtos">
             <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              <span>Vendas</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              <span>3. Produtos</span>
             </div>
             <span class="nav-group-arrow">▶</span>
           </button>
           <div class="nav-submenu">
-            <button class="nav-subitem" data-view="view-vendas-varejo">- Varejo (PDV)</button>
-            <button class="nav-subitem" data-view="view-vendas-atacado">- Atacado (B2B)</button>
-            <button class="nav-subitem" data-view="view-vendas-orcamento">- Orçamento</button>
+            <button class="nav-subitem" data-view="view-produtos-grade">• Grade-Planilha UN/FD/CX</button>
+            <button class="nav-subitem" data-view="view-produtos-dfe">• Notas a Receber (DF-e Sefaz)</button>
+            <button class="nav-subitem" data-view="view-produtos-contar">• Contar Hoje (Cíclica 15 itens)</button>
+            <button class="nav-subitem" data-view="view-estoque-lote">• Reajuste em Lote c/ Desfazer</button>
+            <button class="nav-subitem" data-view="view-estoque-historico">• Razão de Movimentos (Kardex)</button>
           </div>
         </div>
 
-        <!-- 3. Menu Fiscal -->
-        <div class="nav-accordion-group" id="group-fiscal">
-          <button class="nav-group-header" data-group="group-fiscal">
+        <!-- 4. Clientes (Ficha 360º & Operação Bebidas) -->
+        <div class="nav-accordion-group" id="group-clientes">
+          <button class="nav-group-header" data-group="group-clientes">
             <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              <span>Fiscal</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>4. Clientes</span>
             </div>
             <span class="nav-group-arrow">▶</span>
           </button>
           <div class="nav-submenu">
-            <button class="nav-subitem" data-view="view-fiscal-geradas">- Notas geradas</button>
-            <button class="nav-subitem" data-view="view-fiscal-pendentes">- Notas pendentes</button>
-            <button class="nav-subitem" data-view="view-fiscal-conciliacao">- Conciliação de notas</button>
+            <button class="nav-subitem" data-view="view-cliente-consulta">• Ficha 360º & Bar do Zé</button>
+            <button class="nav-subitem" data-view="view-clientes-fiado">• Fiado & Régua WhatsApp (Aging)</button>
+            <button class="nav-subitem" data-view="view-clientes-cascos">• Livro de Cascos & Vasilhames</button>
+            <button class="nav-subitem" data-view="view-clientes-comodato">• Comodato de Freezers (Metas)</button>
+            <button class="nav-subitem" data-view="view-cliente-cadastro">• Novo Cadastro PJ</button>
           </div>
         </div>
 
-        <!-- 4. Menu Caixa -->
-        <div class="nav-accordion-group" id="group-caixa">
-          <button class="nav-group-header" data-group="group-caixa">
+        <!-- 5. Caixa & Contas (Livro Único & Fiscal) -->
+        <div class="nav-accordion-group" id="group-caixa-contas">
+          <button class="nav-group-header" data-group="group-caixa-contas">
             <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-              <span>Caixa</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              <span>5. Caixa & Contas</span>
             </div>
             <span class="nav-group-arrow">▶</span>
           </button>
           <div class="nav-submenu">
-            <button class="nav-subitem" data-view="view-caixa-abertura">- Abertura</button>
-            <button class="nav-subitem" data-view="view-caixa-fechamento">- Fechamento</button>
-            <button class="nav-subitem" data-view="view-caixa-movimentacao">- Sangria / Entrada / Saída</button>
-            <button class="nav-subitem" data-view="view-caixa-todos">- Todos os Caixas</button>
+            <button class="nav-subitem" data-view="view-caixa-livro">• Livro-Caixa Único da Loja</button>
+            <button class="nav-subitem" data-view="view-caixa-fechamento">• Turnos & Fechamento Cego</button>
+            <button class="nav-subitem" data-view="view-caixa-movimentacao">• Sangria c/ Teto & Suprimento</button>
+            <button class="nav-subitem" data-view="view-fiscal-painel">• Painel Fiscal SEFAZ-MT (Fila)</button>
+            <button class="nav-subitem" data-view="view-dispositivos-saude">• Saúde dos Dispositivos & A1</button>
           </div>
         </div>
 
-        <!-- 5. Menu Estoque -->
-        <div class="nav-accordion-group" id="group-estoque">
-          <button class="nav-group-header" data-group="group-estoque">
+        <!-- 6. Painel (Visão Geral & Relatórios) -->
+        <div class="nav-accordion-group" id="group-painel">
+          <button class="nav-group-header" data-group="group-painel">
             <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-              <span>Estoque</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span>6. Painel</span>
             </div>
             <span class="nav-group-arrow">▶</span>
           </button>
           <div class="nav-submenu">
-            <button class="nav-subitem" data-view="view-estoque-avulsa">- Entrada / Saída avulsa</button>
-            <button class="nav-subitem" data-view="view-estoque-cadastro">- Cadastro</button>
-            <button class="nav-subitem" data-view="view-estoque-historico">- Histórico</button>
-            <button class="nav-subitem" data-view="view-estoque-todos">- Todos os itens</button>
-            <button class="nav-subitem" data-view="view-estoque-lote">- Alteração em lote</button>
-            <button class="nav-subitem" data-view="view-estoque-minmax">- Estoque mínimo / máximo</button>
-            <button class="nav-subitem" data-view="view-estoque-movimentacao">- Movimentação entre estoques</button>
+            <button class="nav-subitem" data-view="view-dashboard-geral">• Visão do Dia & Alertas</button>
+            <button class="nav-subitem" data-view="view-rel-dashboard">• Biblioteca 28 Relatórios HERA</button>
+            <button class="nav-subitem" data-view="view-rel-dre">• DRE & Margem por Canal</button>
           </div>
         </div>
 
-        <!-- 6. Menu Compras -->
-        <div class="nav-accordion-group" id="group-compras">
-          <button class="nav-group-header" data-group="group-compras">
-            <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              <span>Compras</span>
-            </div>
-            <span class="nav-group-arrow">▶</span>
-          </button>
-          <div class="nav-submenu">
-            <button class="nav-subitem" data-view="view-compras-sugestao">- Sugestão de compra</button>
-            <button class="nav-subitem" data-view="view-compras-saida">- Análise de saída por período</button>
-            <button class="nav-subitem" data-view="view-compras-teto">- Teto de compra por fornecedor</button>
-            <button class="nav-subitem" data-view="view-compras-precos">- Análise de preços</button>
-          </div>
-        </div>
+        <div class="sidebar-divider" style="margin: 10px 12px; border-top: 1px solid var(--border-color); opacity: 0.5;"></div>
 
-        <!-- 7. Menu Relatórios -->
-        <div class="nav-accordion-group" id="group-relatorios">
-          <button class="nav-group-header" data-group="group-relatorios">
+        <!-- INTELIGÊNCIA & ESTRATÉGIA -->
+        <div class="nav-accordion-group" id="group-assistente-plano">
+          <button class="nav-group-header" data-group="group-assistente-plano" style="background: rgba(217, 119, 6, 0.08); border-left: 3px solid #d97706;">
             <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              <span>Relatórios</span>
+              <span style="font-size:15px;">🤖</span>
+              <span style="font-weight:700; color:#b45309;">Assistente Engradado</span>
             </div>
             <span class="nav-group-arrow">▶</span>
           </button>
           <div class="nav-submenu">
-            <button class="nav-subitem" data-view="view-rel-dashboard">- Painel Multi-Relatórios</button>
-            <button class="nav-subitem" data-view="view-rel-movimento">- Movimento estoque</button>
-            <button class="nav-subitem" data-view="view-rel-auditoria">- Auditoria</button>
-            <button class="nav-subitem" data-view="view-rel-vendas">- Vendas</button>
-            <button class="nav-subitem" data-view="view-rel-compras">- Compras</button>
-            <button class="nav-subitem" data-view="view-rel-variacao">- Variação custo</button>
-            <button class="nav-subitem" data-view="view-rel-lucro">- Lucro</button>
-            <button class="nav-subitem" data-view="view-rel-dre">- DRE</button>
-            <button class="nav-subitem" data-view="view-rel-funcionarios">- Funcionários</button>
-          </div>
-        </div>
-
-        <!-- 8. Menu Financeiro -->
-        <div class="nav-accordion-group" id="group-financeiro">
-          <button class="nav-group-header" data-group="group-financeiro">
-            <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              <span>Financeiro</span>
-            </div>
-            <span class="nav-group-arrow">▶</span>
-          </button>
-          <div class="nav-submenu">
-            <button class="nav-subitem" data-view="view-fin-vendas">- Analytics de Vendas</button>
-            <button class="nav-subitem" data-view="view-fin-pagar">- Contas a pagar</button>
-            <button class="nav-subitem" data-view="view-fin-receber">- Contas a receber</button>
-            <button class="nav-subitem" data-view="view-fin-boletos">- Boletos</button>
-            <button class="nav-subitem" data-view="view-fin-previsao">- Previsão financeira</button>
-          </div>
-        </div>
-
-        <!-- 9. Menu Admin -->
-        <div class="nav-accordion-group" id="group-admin">
-          <button class="nav-group-header" data-group="group-admin">
-            <div class="nav-group-header-left">
-              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-              <span>Admin</span>
-            </div>
-            <span class="nav-group-arrow">▶</span>
-          </button>
-          <div class="nav-submenu">
-            <button class="nav-subitem" data-view="view-admin-exportar">- Exportar Relatório</button>
-            <button class="nav-subitem" data-view="view-admin-usuarios">- Criar usuário</button>
-            <button class="nav-subitem" data-view="view-admin-permissoes">- Permissões</button>
+            <button class="nav-subitem" data-view="view-assistente-ia" style="color:#b45309; font-weight:600;">• Chat IA & Rascunhos (Ctrl+K)</button>
+            <button class="nav-subitem" data-view="view-plano-mestre" style="font-weight:600;">• Plano-Mestre do Engradado</button>
           </div>
         </div>
 
@@ -198,13 +154,13 @@
 
       <div class="sidebar-footer">
         <div class="system-status-row">
-          <span>Servidor Local</span>
+          <span>Sincronização</span>
           <div class="status-indicator">
             <div class="status-dot"></div>
-            <span>Conectado</span>
+            <span id="sidebar-sync-status">PowerSync OK</span>
           </div>
         </div>
-        <div style="font-size: 10px; color: #475569;">Sefaz SP: Normal (12ms) • TEF v4.2</div>
+        <div style="font-size: 10px; color: #475569;">SEFAZ-MT: Fila Ativa (tpEmis 9) • A1 Válido</div>
       </div>
     </aside>
 
@@ -224,24 +180,46 @@
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </button>
-          <h1 class="topbar-title" id="header-view-title">
-            Cliente • Consulta & Ficha 360º
-          </h1>
-          <span class="tag-badge tag-b2b" id="header-view-tag">Módulo Comercial</span>
+          <div>
+            <h1 class="topbar-title" id="header-view-title" style="margin-bottom: 2px;">
+              Engradado • Gestão & PDV para Distribuidoras de Bebidas
+            </h1>
+            <div style="font-size: 11px; color: var(--text-dim);" id="header-view-subtitle">Piloto Cuiabá-MT • SEFAZ-MT • Offline-First</div>
+          </div>
+          <span class="tag-badge tag-b2b" id="header-view-tag" style="margin-left: 6px;">Operação Ativa</span>
+        </div>
+
+        <div class="topbar-center">
+          <div class="topbar-search-trigger" id="topbar-search-ai" title="Clique ou pressione Ctrl+K para abrir o Assistente Engradado">
+            <span class="ai-sparkle">✨</span>
+            <span class="search-text"><strong>Assistente Engradado</strong>: "Orçamento Bar do Zé", colar WhatsApp...</span>
+            <kbd class="kbd-shortcut">Ctrl+K</kbd>
+          </div>
         </div>
 
         <div class="topbar-right">
+          <!-- Network Switcher -->
+          <button class="network-badge online" id="btn-toggle-network" title="Alternar modo Online / Offline (Teste a contingência e o offline-first na prática)">
+            <span class="net-dot"></span>
+            <span id="lbl-network-mode">● Online (Sync OK)</span>
+          </button>
+
+          <!-- AI Credits Pill -->
+          <div class="ai-credits-pill" id="ai-credits-status" title="Franquia de IA: 4.000 créditos/mês (Plano Distribuidora)">
+            <span class="ai-icon">⚡</span>
+            <span><strong id="lbl-ai-credits-remaining">3.840</strong> / 4.000 cr</span>
+          </div>
+
           <div class="terminal-meta-group">
-            <span>Caixa: <strong>02</strong></span>
-            <span>Turno: <strong>Manhã</strong></span>
-            <span>Série Fiscal: <strong>1</strong></span>
+            <span>Caixa: <strong>01 (Balcão)</strong></span>
+            <span>Série: <strong>1 (NFC-e)</strong></span>
           </div>
 
           <div class="operator-badge">
-            <div class="operator-avatar">JS</div>
+            <div class="operator-avatar" style="background: linear-gradient(135deg, #d97706, #b45309); color: white; font-weight: 700;">JS</div>
             <div>
-              <div style="font-weight: 600; font-size: 12px;">Juliana Silva</div>
-              <div style="font-size: 10px; color: var(--text-dim);">Operadora de Caixa Sênior</div>
+              <div style="font-weight: 600; font-size: 12px;">João Silva</div>
+              <div style="font-size: 10px; color: var(--text-dim);">Operador Principal (98% vendas)</div>
             </div>
           </div>
         </div>
@@ -253,20 +231,101 @@
       <section class="view-container active" id="view-dashboard-geral">
         <div class="module-view-layout" style="gap:16px;">
           
-          <!-- Linha de KPIs Superiores do Dia -->
+          <!-- Carimbo de Integridade dos Dados (Plano-Mestre Engradado) -->
+          <div class="data-integrity-stamp">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="pulse-dot"></span>
+              <span><strong>Dados consolidados até 14:02</strong> · 1 aparelho com 3 pendências na fila local (Celular Motorista)</span>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <span class="status-pill ativo">SEFAZ-MT: Fila Ativa (tpEmis 9 Pronta)</span>
+              <button class="btn-sm btn-secondary" onclick="window.renderDashboardGeralView(); window.showToast('Dados reconciliados com sucesso!', 'success')">🔄 Reconciliar Agora</button>
+            </div>
+          </div>
+
+          <!-- Linha de KPIs Superiores do Dia (Números Reais de Cuiabá-MT) -->
           <div class="dash-kpi-grid">
             
-            <div class="dash-kpi-card highlight-main">
+            <div class="dash-kpi-card highlight-main" style="border-top: 3px solid #d97706;">
               <div class="dash-kpi-header">
                 <span class="dash-kpi-title">TOTAL FATURADO HOJE</span>
-                <span class="kpi-pill-badge green">+14.8% vs média</span>
+                <span class="kpi-pill-badge green">+14.8% vs média Cuiabá</span>
               </div>
-              <div class="dash-kpi-value" id="dash-total-vendas-hoje">R$ 53.210,00</div>
+              <div class="dash-kpi-value" id="dash-total-vendas-hoje" style="color: #b45309;">R$ 14.820,00</div>
               <div class="dash-kpi-sub">
-                <span>160 operações concluídas</span>
-                <span>Ticket Médio: <strong>R$ 332,56</strong></span>
+                <span>94 vendas concluídas</span>
+                <span>Ticket Médio Real: <strong>R$ 123,50</strong></span>
               </div>
             </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">VENDA BALCÃO TÍPICA</span>
+                <span class="kpi-pill-badge blue">Mediana 1 item</span>
+              </div>
+              <div class="dash-kpi-value" style="color:var(--b2c-blue);">R$ 16,00</div>
+              <div class="dash-kpi-sub">
+                <span>Tempo médio: <strong>&lt; 5 segundos</strong></span>
+                <span>2 toques sem esperar SEFAZ</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">MIX DE PAGAMENTO</span>
+                <span class="kpi-pill-badge green" style="background:#fef3c7; color:#b45309;">PIX Dinâmico 73%</span>
+              </div>
+              <div class="dash-kpi-value" style="font-size:18px; margin: 4px 0;">PIX: R$ 10.818 · Cartão: R$ 2.075</div>
+              <div class="dash-kpi-sub">
+                <span>Dinheiro: R$ 1.927 (13%)</span>
+                <span>Conciliação automática via webhook</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-header">
+                <span class="dash-kpi-title">VENDAS IDENTIFICADAS</span>
+                <span class="kpi-pill-badge green">Meta 40% batida!</span>
+              </div>
+              <div class="dash-kpi-value" style="color:var(--status-success);">41,2%</div>
+              <div class="dash-kpi-sub">
+                <span>Display "Informe seu Telefone"</span>
+                <span>Alimenta recompra e fidelização</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alertas Acionáveis da Distribuidora (Plano-Mestre Seção 3.1) -->
+          <div class="b2b-panel-card" style="border-left: 4px solid #d97706; background: #fffdfa;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div style="font-weight:700; font-size:14px; color:#b45309; display:flex; align-items:center; gap:6px;">
+                <span>⚠️</span> Alertas Operacionais Acionáveis do Dia
+              </div>
+              <span style="font-size:11px; color:#64748b;">Ações sugeridas pelo Assistente</span>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:10px;">
+              <div class="alert-action-box" style="padding:10px; border:1px solid #fed7aa; border-radius:6px; background:#fff;">
+                <div style="font-weight:600; font-size:12px; color:#0f172a; margin-bottom:4px;">🎯 3 Clientes com Recompra Prevista Hoje</div>
+                <div style="font-size:11px; color:#64748b; margin-bottom:8px;">Bar do Zé, Bar do Gordo e Espetinho Cuiabano atingiram o ciclo médio de 7 dias.</div>
+                <button class="btn-sm btn-primary" onclick="window.triggerAIPreset('bar-do-ze-repetir')">Gerar Orçamentos Prontos</button>
+              </div>
+              <div class="alert-action-box" style="padding:10px; border:1px solid #fed7aa; border-radius:6px; background:#fff;">
+                <div style="font-weight:600; font-size:12px; color:#0f172a; margin-bottom:4px;">⚡ 2 Notas em Contingência (tpEmis 9)</div>
+                <div style="font-size:11px; color:#64748b; margin-bottom:8px;">Emitidas offline no Caixa 01. Prazo de transmissão: 22h restantes.</div>
+                <button class="btn-sm btn-secondary" onclick="window.handleSubmenuNavigation('view-fiscal-painel', 'Painel Fiscal')">Ver Fila Fiscal</button>
+              </div>
+              <div class="alert-action-box" style="padding:10px; border:1px solid #fed7aa; border-radius:6px; background:#fff;">
+                <div style="font-weight:600; font-size:12px; color:#0f172a; margin-bottom:4px;">❄️ 1 Freezer Ambev em Alerta (Meta 80%)</div>
+                <div style="font-size:11px; color:#64748b; margin-bottom:8px;">Bar do Zé: 24 de 30 caixas compradas no mês. Risco de ativo ocioso.</div>
+                <button class="btn-sm btn-secondary" onclick="window.handleSubmenuNavigation('view-clientes-comodato', 'Comodato')">Acompanhar Ativo</button>
+              </div>
+              <div class="alert-action-box" style="padding:10px; border:1px solid #fed7aa; border-radius:6px; background:#fff;">
+                <div style="font-weight:600; font-size:12px; color:#0f172a; margin-bottom:4px;">📦 1 Produto Negativo a Regularizar</div>
+                <div style="font-size:11px; color:#64748b; margin-bottom:8px;">Brahma 600ml (-24 cx no depósito). Entrada Ambev pendente no DF-e.</div>
+                <button class="btn-sm btn-primary" onclick="window.handleSubmenuNavigation('view-produtos-dfe', 'DF-e')">Dar Entrada DF-e</button>
+              </div>
+            </div>
+          </div>
 
             <div class="dash-kpi-card">
               <div class="dash-kpi-header">
@@ -2596,6 +2655,1549 @@
         </div>
       </section>
 
+    
+      <!-- ====================================================================
+           1. VENDER (BALCÃO / PDV EM 2 TOQUES) - WORKSPACE 1
+           ==================================================================== -->
+      <section class="view-container" id="view-vender-balcao">
+        <div class="module-view-layout" style="gap:14px;">
+          
+          <!-- Topo do PDV com Abas de Atendimento e Atalhos -->
+          <div class="pdv-header-banner" style="background: #1e293b; color: #fff; padding: 12px 16px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-weight: 800; color: #f59e0b; font-size: 15px;">Engradado · Vender</span>
+              <div class="pdv-tabs-group" style="display: flex; gap: 4px; margin-left: 12px;">
+                <button class="pdv-tab-btn active" id="tab-atend-1" onclick="window.switchPDVTab(1)">[Atend. 1 · Balcão]</button>
+                <button class="pdv-tab-btn" id="tab-atend-2" onclick="window.switchPDVTab(2)">[Atend. 2 · Bar do Zé]</button>
+                <button class="pdv-tab-btn new" onclick="window.addPDVTab()">[+] Novo</button>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <button class="btn-sm btn-secondary" onclick="window.showPuxarPedidoModal()" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+                📥 Puxar Pedido de Outro Caixa
+              </button>
+              <div class="pdv-status-indicator" style="display:flex; align-items:center; gap:6px; font-size:11px; background: rgba(16, 185, 129, 0.2); padding: 4px 8px; border-radius: 4px; border: 1px solid #10b981;">
+                <span class="status-dot"></span>
+                <span>Caixa 01 · Online</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Barra de Ações Rápidas F2, F3, F4, F6, F10 -->
+          <div class="pdv-shortcuts-bar" style="background:#fff; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+              <div style="position:relative; width: 320px;">
+                <input type="text" class="form-input" id="pdv-fast-search" placeholder="🔎 Bipar EAN ou buscar... (F2)" style="font-weight:600; padding-left: 28px;">
+                <span style="position:absolute; left:8px; top:8px; color:#94a3b8;">🔍</span>
+              </div>
+              <button class="btn-secondary" onclick="window.trocarClientePDV()" id="btn-pdv-client-name" style="font-size:12px;">
+                👤 Cliente: <strong id="pdv-current-client">Consumidor Padrão</strong> <kbd style="font-size:10px; background:#e2e8f0; padding:2px 4px; border-radius:3px;">F3</kbd>
+              </button>
+              <button class="btn-secondary" onclick="window.aplicarDescontoPDV()" style="font-size:12px;">
+                🏷️ Desconto <kbd style="font-size:10px; background:#e2e8f0; padding:2px 4px; border-radius:3px;">F4</kbd>
+              </button>
+              <button class="btn-secondary" onclick="window.pausarAtendimentoPDV()" style="font-size:12px;">
+                ⏸️ Pausar <kbd style="font-size:10px; background:#e2e8f0; padding:2px 4px; border-radius:3px;">F6</kbd>
+              </button>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <button class="btn-secondary" onclick="window.openAIAssistant('orçamento pro Bar do Zé')" style="background:#fffbeb; color:#b45309; border-color:#fde68a; font-weight:600;">
+                ✨ Assistente Engradado <kbd style="font-size:10px; background:#fef3c7; padding:2px 4px; border-radius:3px;">Ctrl+K</kbd>
+              </button>
+            </div>
+          </div>
+
+          <!-- Área Principal: Carrinho + Painel de Cobrança -->
+          <div class="pdv-grid-layout" style="display: grid; grid-template-columns: 1fr 340px; gap: 16px;">
+            
+            <!-- Carrinho com Embalagens e Cascos -->
+            <div class="b2b-panel-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+              <div style="padding: 12px 16px; border-bottom: 1px solid var(--border-color); background: var(--bg-surface-subtle); display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-weight:700; font-size:13px;">Itens da Venda (<span id="pdv-items-count">3</span> produtos)</span>
+                <span style="font-size:11px; color:var(--text-dim);">▲ = Preço Automático Aplicado</span>
+              </div>
+              <div style="overflow-x: auto; flex: 1;">
+                <table class="enterprise-table" id="pdv-cart-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 40px;">#</th>
+                      <th>Produto</th>
+                      <th style="width: 110px;">Embalagem</th>
+                      <th style="width: 80px;">Qtd</th>
+                      <th style="width: 100px;">Preço Un.</th>
+                      <th style="width: 110px;">Regra Preço</th>
+                      <th style="width: 100px;">Subtotal</th>
+                      <th style="width: 50px;">Ação</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pdv-cart-tbody">
+                    <!-- Linha 1: Skol Lata 350ml -->
+                    <tr>
+                      <td>1</td>
+                      <td>
+                        <strong>Cerveja Skol 350ml Lata</strong>
+                        <div style="font-size:11px; color:#64748b;">NCM 2203.00.00 · CST 60 (ICMS-ST)</div>
+                      </td>
+                      <td>
+                        <select class="form-input form-input-sm" onchange="window.recalcPDVItem(0, this.value)">
+                          <option value="UN">UN (R$ 3,29)</option>
+                          <option value="FD" selected>FD(12) (R$ 37,90)</option>
+                          <option value="CX">CX(24) (R$ 74,90)</option>
+                        </select>
+                      </td>
+                      <td><input type="number" class="form-input form-input-sm" value="2" min="1" style="width:60px;" onchange="window.updatePDVQtd(0, this.value)"></td>
+                      <td>R$ 37,90</td>
+                      <td><span class="price-rule-tag" title="Preço automático pela faixa de fardo">▲ Fardo (12 un)</span></td>
+                      <td><strong>R$ 75,80</strong></td>
+                      <td><button class="btn-remove btn-sm" onclick="window.removePDVItem(0)">✕</button></td>
+                    </tr>
+                    <!-- Linha 2: Brahma 600ml Retornável c/ Cascos -->
+                    <tr style="background: #fffdf5;">
+                      <td>2</td>
+                      <td>
+                        <strong>Cerveja Brahma 600ml Retornável</strong>
+                        <div class="casco-exchange-row" style="margin-top:4px; padding:3px 6px; background:#fef3c7; border-radius:4px; font-size:11px; color:#b45309; display:inline-block;">
+                          🍾 <strong>Cascos:</strong> leva 1 cx · devolveu <input type="number" value="1" min="0" max="5" style="width:40px; padding:2px; font-size:11px;" onchange="window.updateCascoDevolucao(this.value)"> cx
+                        </div>
+                      </td>
+                      <td>
+                        <select class="form-input form-input-sm">
+                          <option value="UN">UN (R$ 6,90)</option>
+                          <option value="CX" selected>CX(24) (R$ 98,00)</option>
+                        </select>
+                      </td>
+                      <td><input type="number" class="form-input form-input-sm" value="1" min="1" style="width:60px;"></td>
+                      <td>R$ 98,00</td>
+                      <td><span class="price-rule-tag" title="Tabela padrão varejo">▲ Varejo Caixa</span></td>
+                      <td><strong>R$ 98,00</strong></td>
+                      <td><button class="btn-remove btn-sm" onclick="window.removePDVItem(1)">✕</button></td>
+                    </tr>
+                    <!-- Linha 3: Coca-Cola 2L -->
+                    <tr>
+                      <td>3</td>
+                      <td>
+                        <strong>Refrigerante Coca-Cola 2L Pet</strong>
+                        <div style="font-size:11px; color:#64748b;">NCM 2202.10.00 · Descartável</div>
+                      </td>
+                      <td>
+                        <select class="form-input form-input-sm">
+                          <option value="UN" selected>UN (R$ 9,90)</option>
+                          <option value="FD">FD(6) (R$ 56,00)</option>
+                        </select>
+                      </td>
+                      <td><input type="number" class="form-input form-input-sm" value="2" min="1" style="width:60px;"></td>
+                      <td>R$ 9,90</td>
+                      <td><span class="price-rule-tag">▲ Varejo Un.</span></td>
+                      <td><strong>R$ 19,80</strong></td>
+                      <td><button class="btn-remove btn-sm" onclick="window.removePDVItem(2)">✕</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="padding: 10px 16px; background: #f8fafc; border-top: 1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; color:#64748b;">Subtotal Itens: R$ 193,60 · Cascos Devolvidos: 1 cx (R$ 0,00)</span>
+                <button class="btn-sm btn-secondary" onclick="window.limparCarrinhoPDV()">🗑️ Limpar Venda</button>
+              </div>
+            </div>
+
+            <!-- Coluna Lateral de Cobrança e Total -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              
+              <div class="b2b-panel-card highlight-main" style="border: 2px solid #d97706; text-align: center; padding: 20px 16px;">
+                <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; font-weight: 700;">TOTAL A PAGAR</div>
+                <div style="font-size: 38px; font-weight: 800; color: #0f172a; margin: 4px 0;" id="pdv-total-display">R$ 193,60</div>
+                <div style="font-size: 12px; color: #15803d; font-weight: 600;">3 itens no carrinho · Sem acréscimos</div>
+
+                <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 8px;">
+                  <button class="btn-add-client" style="background: linear-gradient(135deg, #d97706, #b45309); font-size: 16px; padding: 14px; font-weight: 800; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);" onclick="window.openCobrancaF10Modal('pix')">
+                    ⚡ F10 COBRAR (PIX 73%)
+                  </button>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                    <button class="btn-secondary" style="font-weight:600; padding: 10px;" onclick="window.openCobrancaF10Modal('dinheiro')">💵 Dinheiro</button>
+                    <button class="btn-secondary" style="font-weight:600; padding: 10px;" onclick="window.openCobrancaF10Modal('cartao')">💳 Smart POS</button>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                    <button class="btn-secondary" style="font-weight:600; padding: 8px;" onclick="window.openCobrancaF10Modal('fiado')">📝 Fiado Bar</button>
+                    <button class="btn-secondary" style="font-weight:600; padding: 8px;" onclick="window.openCobrancaF10Modal('dividir')">➗ Dividir</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Status Fiscal em Tempo Real (Offline-First) -->
+              <div class="b2b-panel-card" style="font-size: 12px; padding: 12px;">
+                <div style="font-weight:700; margin-bottom: 6px; display:flex; justify-content:space-between;">
+                  <span>Fila Fiscal Automática</span>
+                  <span class="status-pill ativo">SEFAZ-MT OK</span>
+                </div>
+                <div style="color: #64748b; font-size: 11px; margin-bottom: 8px;">
+                  A NFC-e é emitida de forma assíncrona. A venda nunca trava no caixa.
+                </div>
+                <div style="background: #f1f5f9; padding: 6px 8px; border-radius: 4px; font-family: monospace; font-size: 11px;" id="pdv-fiscal-queue-status">
+                  🧾 Próximo Cupom: Série 01 · Nº 004128 · tpEmis 1
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           2. PEDIDOS (DOCUMENTO ÚNICO) - WORKSPACE 2
+           ==================================================================== -->
+      <section class="view-container" id="view-pedidos-quadro">
+        <div class="module-view-layout" style="gap:14px;">
+          
+          <!-- Stepper Visual do Documento Único -->
+          <div class="document-stepper-card" style="background:#fff; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <span style="font-weight: 800; font-size: 16px; color: #0f172a;">Pedido #A-1042 · Bar do Zé</span>
+                <span class="status-pill ativo" style="margin-left: 8px;">Vendedor: Ana Paula</span>
+              </div>
+              <div style="font-size: 12px; color: #64748b;">
+                Limite: <strong>R$ 3.000,00</strong> · Usado: <strong style="color:#b45309;">R$ 1.240,00</strong> · Cascos Devidos: <strong style="color:#b91c1c;">6 cx 600ml</strong>
+              </div>
+            </div>
+
+            <!-- Transições de Estados (Plano-Mestre Seção 0 e 3.4) -->
+            <div class="stepper-pipeline">
+              <div class="step-node completed">1. Orçamento</div>
+              <div class="step-arrow">➔</div>
+              <div class="step-node active">2. Pedido Aprovado</div>
+              <div class="step-arrow">➔</div>
+              <div class="step-node">3. Separação</div>
+              <div class="step-arrow">➔</div>
+              <div class="step-node">4. Em Rota (Romaneio R-77)</div>
+              <div class="step-arrow">➔</div>
+              <div class="step-node">5. Entregue</div>
+              <div class="step-arrow">➔</div>
+              <div class="step-node">6. Faturado (NF-e)</div>
+            </div>
+          </div>
+
+          <!-- Grade Editável do Pedido -->
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <div style="padding: 12px 16px; background: var(--bg-surface-subtle); border-bottom: 1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-weight:700;">Itens do Documento</span>
+              <div style="display:flex; gap:8px;">
+                <button class="btn-sm btn-secondary" onclick="window.repetirUltimoPedidoBarDoZe()">🔄 Repetir Último Pedido</button>
+                <button class="btn-sm btn-secondary" onclick="window.openAIAssistant('orçamento pro Bar do Zé igual o último mas 10 fardo de heineken')" style="color:#b45309; font-weight:600;">✨ Assistente Engradado</button>
+              </div>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="enterprise-table">
+                <thead>
+                  <tr>
+                    <th>Produto</th>
+                    <th>Embalagem</th>
+                    <th>Qtd</th>
+                    <th>Preço Un.</th>
+                    <th>Desc %</th>
+                    <th>Total</th>
+                    <th>Último Pedido (#A-0988)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Heineken Long Neck 330ml</strong></td>
+                    <td>FD(6)</td>
+                    <td><strong>10</strong></td>
+                    <td>R$ 35,90</td>
+                    <td>0%</td>
+                    <td>R$ 359,00</td>
+                    <td><span style="color:#15803d; font-weight:600;">8 FD (↑ 2 adicionados)</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cerveja Brahma 600ml Retornável</strong></td>
+                    <td>CX(24)</td>
+                    <td><strong>5</strong></td>
+                    <td>R$ 98,00</td>
+                    <td>2%</td>
+                    <td>R$ 480,20</td>
+                    <td>5 CX (= mantido)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cerveja Skol 350ml Lata</strong></td>
+                    <td>FD(12)</td>
+                    <td><strong>15</strong></td>
+                    <td>R$ 37,90</td>
+                    <td>0%</td>
+                    <td>R$ 568,50</td>
+                    <td>10 FD (↑ 5)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Refrigerante Coca-Cola 2L Pet</strong></td>
+                    <td>FD(6)</td>
+                    <td><strong>6</strong></td>
+                    <td>R$ 56,00</td>
+                    <td>0%</td>
+                    <td>R$ 336,00</td>
+                    <td>4 FD (↑ 2)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Gelo Filtrado em Cubos 10kg</strong></td>
+                    <td>Pacote</td>
+                    <td><strong>10</strong></td>
+                    <td>R$ 22,00</td>
+                    <td>0%</td>
+                    <td>R$ 220,00</td>
+                    <td>6 pct (↑ 4)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Linha Rápida de Digitação -->
+            <div style="padding: 10px 16px; background: #fff; border-top: 1px solid var(--border-color); display:flex; gap:10px; align-items:center;">
+              <span style="font-size:12px; color:#64748b; font-weight:600;">+ Linha Rápida:</span>
+              <input type="text" class="form-input form-input-sm" id="input-quick-doc-line" placeholder="Ex: digite '3 cx skol' ou '5 fd heineken' e pressione Enter..." style="flex:1;">
+              <button class="btn-sm btn-secondary" onclick="window.addQuickDocLine()">Adicionar</button>
+            </div>
+            <!-- Rodapé de Ações do Documento -->
+            <div style="padding: 14px 18px; background: #f8fafc; border-top: 1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div>
+                <span style="font-size:12px; color:#64748b;">Total do Documento:</span>
+                <span style="font-size:22px; font-weight:800; color:#0f172a; margin-left:6px;">R$ 2.418,40</span>
+                <span style="font-size:11px; color:#15803d; margin-left:8px;">(Último pedido: R$ 2.346,60)</span>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button class="btn-secondary" onclick="window.enviarWhatsAppPedido('#A-1042')">📱 Enviar WhatsApp</button>
+                <button class="btn-secondary" onclick="window.imprimirPedidoPDF('#A-1042')">🖨️ Imprimir Pedido</button>
+                <button class="btn-add-client" onclick="window.faturarDocumentoUnico('#A-1042')">🚀 Aprovar → Faturar (1 Toque)</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           2.1 PEDIDOS: ENTREGAS & ROMANEIO R-77
+           ==================================================================== -->
+      <section class="view-container" id="view-pedidos-entregas">
+        <div class="module-view-layout" style="gap:14px;">
+          <div class="b2b-panel-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700; margin-bottom:2px;">Quadro de Entregas & Romaneio R-77 · Cuiabá</h2>
+              <div style="font-size:12px; color:#64748b;">Veículo: Fiorino 01 (Placa QBO-4819) · Motorista: Marcos Vinicius · Rota CPA I a IV</div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <span class="status-pill ativo">6 Concluídas</span>
+              <span class="status-pill analise">3 Pendentes</span>
+              <button class="btn-sm btn-primary" onclick="window.imprimirRomaneioPDF()">🖨️ Imprimir Romaneio</button>
+            </div>
+          </div>
+
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Seq</th>
+                  <th>Documento</th>
+                  <th>Cliente</th>
+                  <th>Bairro / Endereço</th>
+                  <th>Valor</th>
+                  <th>Forma Pgto</th>
+                  <th>Cascos a Recolher</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="opacity:0.7;">
+                  <td>1</td>
+                  <td>PED-1040</td>
+                  <td>Lanchonete Pantanal</td>
+                  <td>Av. Brasil, 45 - CPA II</td>
+                  <td>R$ 1.120,00</td>
+                  <td>PIX Recebido</td>
+                  <td>4 cx 600ml recolhidas</td>
+                  <td><span class="status-pill ativo">Entregue</span></td>
+                </tr>
+                <tr style="opacity:0.7;">
+                  <td>2</td>
+                  <td>PED-1041</td>
+                  <td>Espetinho Cuiabano</td>
+                  <td>Rua 14, 210 - CPA III</td>
+                  <td>R$ 850,00</td>
+                  <td>Dinheiro R$ 850</td>
+                  <td>2 cx recolhidas</td>
+                  <td><span class="status-pill ativo">Entregue</span></td>
+                </tr>
+                <tr style="background:#fffbeb; font-weight:600;">
+                  <td>3</td>
+                  <td>PED-1042</td>
+                  <td>Bar do Zé (Próxima)</td>
+                  <td>R. das Flores, 120 - CPA IV</td>
+                  <td>R$ 2.418,40</td>
+                  <td>Fiado Faturado</td>
+                  <td><strong style="color:#b91c1c;">6 cx 600ml devidas</strong></td>
+                  <td><span class="status-pill pendente">Em Rota</span></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>PED-1043</td>
+                  <td>Mercearia Santa Rosa</td>
+                  <td>Av. Antártica, 88 - Santa Rosa</td>
+                  <td>R$ 1.890,00</td>
+                  <td>Smart POS no local</td>
+                  <td>4 cx esperadas</td>
+                  <td><span class="status-pill pendente">Pendente</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           2.2 PEDIDOS: SIMULADOR APP DO MOTORISTA (OFFLINE-FIRST)
+           ==================================================================== -->
+      <section class="view-container" id="view-pedidos-motorista">
+        <div class="module-view-layout" style="gap:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700;">Simulador do App do Motorista (Capacitor · SQLite Nativo Offline)</h2>
+              <div style="font-size:12px; color:#64748b;">Demonstração da tela que o entregador usa no smartphone sem depender de internet</div>
+            </div>
+            <span class="status-pill pendente">⚡ Modo Offline Ativo no Celular (12 baixas locais)</span>
+          </div>
+
+          <!-- Smartphone Shell Simulation -->
+          <div style="max-width: 420px; margin: 0 auto; border: 8px solid #1e293b; border-radius: 28px; background: #fff; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+            <!-- Status Bar Mobile -->
+            <div style="background: #0f172a; color: #fff; padding: 6px 14px; font-size: 11px; display: flex; justify-content: space-between;">
+              <span>14:02 · Engradado Mobile</span>
+              <span>⚡ Offline (SQLite) · 98% 🔋</span>
+            </div>
+            <!-- Header Mobile -->
+            <div style="background: #1e3a8a; color: #fff; padding: 12px 16px;">
+              <div style="font-size: 11px; text-transform: uppercase; opacity: 0.8;">Minha Rota · Romaneio R-77</div>
+              <div style="font-size: 16px; font-weight: 700;">Parada 3 de 9 · Bar do Zé</div>
+              <div style="font-size: 11px; margin-top: 2px;">Rua das Flores, 120 - CPA IV, Cuiabá</div>
+            </div>
+            <!-- Body Mobile -->
+            <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                  <span>Valor a Cobrar:</span>
+                  <span style="color: #b45309; font-size: 16px;">R$ 2.418,40</span>
+                </div>
+                <div style="font-size: 11px; color: #64748b; margin-top: 4px;">Forma: Fiado Cadastrado (Assinatura Obrigatória)</div>
+              </div>
+
+              <div style="background: #fffdf5; border: 1px solid #fde68a; border-radius: 8px; padding: 12px;">
+                <div style="font-weight: 700; font-size: 12px; color: #b45309;">🍾 Conferência de Cascos:</div>
+                <div style="font-size: 12px; margin-top: 4px;">Entregar: <strong>5 cx Brahma 600ml</strong></div>
+                <div style="font-size: 12px;">Recolher do cliente: <input type="number" value="6" style="width: 50px; padding: 2px 4px; font-weight: 700;"> caixas vazias</div>
+              </div>
+
+              <!-- Assinatura / Foto -->
+              <div style="border: 2px dashed #cbd5e1; border-radius: 8px; padding: 20px; text-align: center; background: #fafafa;">
+                <span style="font-size: 12px; color: #64748b;">✍️ Toque para colher assinatura do Seu Zé</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button class="btn-add-client" style="width: 100%; padding: 12px; font-size: 14px;" onclick="window.showToast('Entrega confirmada no celular! Sincronizará assim que houver rede.', 'success')">
+                  ✓ Confirmar Entrega Realizada
+                </button>
+                <button class="btn-secondary" style="width: 100%; font-size: 12px;" onclick="window.showToast('Devolução parcial registrada!', 'warning')">
+                  ↩️ Registrar Devolução Parcial
+                </button>
+              </div>
+            </div>
+            <!-- Footer Mobile -->
+            <div style="background: #f1f5f9; padding: 8px; text-align: center; font-size: 11px; color: #64748b; border-top: 1px solid var(--border-color);">
+              Acerto cego do motorista disponível ao término do romaneio
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           3. PRODUTOS (GRADE-PLANILHA UN/FD/CX) - WORKSPACE 3
+           ==================================================================== -->
+      <section class="view-container" id="view-produtos-grade">
+        <div class="module-view-layout" style="gap:14px;">
+          
+          <!-- Filtros da Grade-Planilha (Plano-Mestre Seção 3.4) -->
+          <div class="b2b-panel-card" style="padding: 12px 16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <select class="form-input form-input-sm" style="width:160px;" id="grade-filter-fornecedor">
+                <option value="all">Fornecedor: Todos</option>
+                <option value="ambev" selected>Fornecedor: Ambev</option>
+                <option value="coca">Fornecedor: Coca-Cola</option>
+                <option value="minalba">Fornecedor: Minalba</option>
+              </select>
+              <button class="btn-sm btn-secondary" onclick="window.filtrarSoNegativos()">Só Negativos (1)</button>
+              <button class="btn-sm btn-secondary" onclick="window.filtrarSemCusto()">Sem Custo (0)</button>
+              <span style="font-size:12px; color:#64748b;">Selecionados: <strong>38 itens</strong></span>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-sm btn-primary" onclick="window.openReajusteLoteModal()">⚡ Reajustar Coluna (+5%)</button>
+              <button class="btn-sm btn-secondary" onclick="window.colarPlanilhaModal()">📋 Colar do Excel</button>
+              <button class="btn-sm btn-secondary" style="color:#b91c1c;" onclick="window.desfazerReajusteLote()">↩️ Desfazer (30 dias)</button>
+              <button class="btn-sm btn-secondary" onclick="window.exportarGradeProdutos()">📥 Exportar CSV/XLSX</button>
+            </div>
+          </div>
+
+          <!-- Grade-Planilha com múltiplas embalagens UN/FD/CX -->
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <div style="overflow-x:auto;">
+              <table class="enterprise-table grade-planilha-table">
+                <thead>
+                  <tr>
+                    <th>Produto</th>
+                    <th style="background:#f1f5f9;">UN (Varejo)</th>
+                    <th style="background:#f1f5f9;">FD (Fardo)</th>
+                    <th style="background:#f1f5f9;">CX (Caixa)</th>
+                    <th>Custo Un.</th>
+                    <th>Margem %</th>
+                    <th>Estoque Total</th>
+                    <th>Mínimo</th>
+                    <th>Local</th>
+                    <th>Gelada</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Cerveja Skol 350ml Lata</strong></td>
+                    <td style="font-weight:700;">R$ 3,29</td>
+                    <td style="font-weight:700; color:#15803d;">R$ 37,90 (12)</td>
+                    <td style="font-weight:700; color:#1e40af;">R$ 74,90 (24)</td>
+                    <td>R$ 2,41</td>
+                    <td><span class="status-pill ativo">36%</span></td>
+                    <td><strong style="color:#15803d;">312 un</strong></td>
+                    <td>120 un</td>
+                    <td>Câmara Fria</td>
+                    <td>R$ 3,50</td>
+                  </tr>
+                  <tr style="background:#fef2f2;">
+                    <td>
+                      <strong>Cerveja Brahma 600ml Retornável</strong>
+                      <span class="status-pill perigo" style="margin-left:6px; font-size:10px;">Estoque Negativo</span>
+                    </td>
+                    <td style="font-weight:700;">R$ 6,90</td>
+                    <td style="color:#64748b;">—</td>
+                    <td style="font-weight:700; color:#1e40af;">R$ 98,00 (24)</td>
+                    <td>R$ 3,85</td>
+                    <td><span class="status-pill ativo">27%</span></td>
+                    <td><strong style="color:#b91c1c; font-size:13px;">−24 un ⚠</strong></td>
+                    <td>48 un</td>
+                    <td>Depósito Principal</td>
+                    <td>R$ 7,50</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Heineken Long Neck 330ml</strong></td>
+                    <td style="font-weight:700;">R$ 6,50</td>
+                    <td style="font-weight:700; color:#15803d;">R$ 35,90 (6)</td>
+                    <td style="font-weight:700; color:#1e40af;">R$ 139,00 (24)</td>
+                    <td>R$ 4,80</td>
+                    <td><span class="status-pill ativo">26%</span></td>
+                    <td>180 un</td>
+                    <td>60 un</td>
+                    <td>Câmara Fria</td>
+                    <td>R$ 7,00</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Refrigerante Coca-Cola 2L Pet</strong></td>
+                    <td style="font-weight:700;">R$ 9,90</td>
+                    <td style="font-weight:700; color:#15803d;">R$ 56,00 (6)</td>
+                    <td style="color:#64748b;">—</td>
+                    <td>R$ 7,10</td>
+                    <td><span class="status-pill ativo">28%</span></td>
+                    <td>140 un</td>
+                    <td>50 un</td>
+                    <td>Galpão R4</td>
+                    <td>R$ 10,50</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cerveja Original 600ml Retornável</strong></td>
+                    <td style="font-weight:700;">R$ 7,90</td>
+                    <td style="color:#64748b;">—</td>
+                    <td style="font-weight:700; color:#1e40af;">R$ 114,00 (24)</td>
+                    <td>R$ 4,95</td>
+                    <td><span class="status-pill ativo">37%</span></td>
+                    <td>48 un</td>
+                    <td>24 un</td>
+                    <td>Depósito Principal</td>
+                    <td>R$ 8,50</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Água Mineral Puríssima 500ml c/ Gás</strong></td>
+                    <td style="font-weight:700;">R$ 2,50</td>
+                    <td style="font-weight:700; color:#15803d;">R$ 24,00 (12)</td>
+                    <td style="color:#64748b;">—</td>
+                    <td>R$ 1,10</td>
+                    <td><span class="status-pill ativo">56%</span></td>
+                    <td>250 un</td>
+                    <td>100 un</td>
+                    <td>Galpão R5</td>
+                    <td>R$ 2,80</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="padding: 10px 16px; background: #f8fafc; border-top: 1px solid var(--border-color); font-size:12px; color:#64748b;">
+              💡 <strong>Estoque como Razão:</strong> O saldo é derivado da soma dos movimentos imutáveis. Fardo e unidade são o mesmo produto com fatores de conversão automáticos.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           3.1 PRODUTOS: NOTAS A RECEBER (DF-e SEFAZ)
+           ==================================================================== -->
+      <section class="view-container" id="view-produtos-dfe">
+        <div class="module-view-layout" style="gap:14px;">
+          <div class="b2b-panel-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700;">DF-e · Notas a Receber da SEFAZ-MT</h2>
+              <div style="font-size:12px; color:#64748b;">Consulta automática de 65 em 65 min com ciência de emissão e vínculo memorizado de fardos</div>
+            </div>
+            <button class="btn-sm btn-primary" onclick="window.consultarDFeAgora()">🔄 Consultar DF-e Agora</button>
+          </div>
+
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Chave / NF</th>
+                  <th>Fornecedor</th>
+                  <th>Emissão</th>
+                  <th>Valor Total</th>
+                  <th>Status DF-e</th>
+                  <th>Vínculo / Fator</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background:#f0fdf4;">
+                  <td>
+                    <strong>NF 000.084.128</strong>
+                    <div style="font-size:10px; font-family:monospace; color:#64748b;">51261002814881000192550010000841281098421098</div>
+                  </td>
+                  <td><strong>Ambev S.A. - CD Cuiabá</strong></td>
+                  <td>14/10/2026 09:15</td>
+                  <td><strong>R$ 14.850,00</strong></td>
+                  <td><span class="status-pill ativo">Ciência Efetuada</span></td>
+                  <td><span style="color:#15803d; font-size:11px;">✓ Fator de fardo memorizado</span></td>
+                  <td>
+                    <button class="btn-sm btn-add-client" onclick="window.confirmarEntradaDFe('000.084.128')">Confirmar Entrada</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>NF 000.032.910</strong>
+                    <div style="font-size:10px; font-family:monospace; color:#64748b;">51261003418290000144550010000329101847120984</div>
+                  </td>
+                  <td><strong>Coca-Cola FEMSA Brasil - Cuiabá</strong></td>
+                  <td>13/10/2026 16:40</td>
+                  <td><strong>R$ 6.240,00</strong></td>
+                  <td><span class="status-pill ativo">Confirmada a Operação</span></td>
+                  <td><span style="color:#15803d; font-size:11px;">✓ Estoque + Contas a Pagar OK</span></td>
+                  <td>
+                    <button class="btn-sm btn-secondary" onclick="window.showToast('Nota já lançada no estoque.', 'info')">Ver Lançamento</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           3.2 PRODUTOS: CONTAR HOJE (CONTAGEM CÍCLICA 15 ITENS)
+           ==================================================================== -->
+      <section class="view-container" id="view-produtos-contar">
+        <div class="module-view-layout" style="gap:14px;">
+          <div class="b2b-panel-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700;">Rotina "Contar Hoje" (Contagem Cíclica Guiada)</h2>
+              <div style="font-size:12px; color:#64748b;">15 itens do dia: Curva A, negativos e divergências. Em 60 dias, 100% da curva A é auditada.</div>
+            </div>
+            <button class="btn-sm btn-add-client" onclick="window.concluirContagemHoje()">✓ Concluir Contagem & Ajustar</button>
+          </div>
+
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Critério</th>
+                  <th>Local</th>
+                  <th>Saldo Sistema</th>
+                  <th>Qtd Contada</th>
+                  <th>Diferença</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Skol 350ml lata (UN)</strong></td>
+                  <td><span class="status-pill ativo">Curva A</span></td>
+                  <td>Câmara Fria</td>
+                  <td>312 un</td>
+                  <td><input type="number" class="form-input form-input-sm" value="312" style="width:70px;"></td>
+                  <td><span style="color:#15803d; font-weight:600;">0 (Bateu)</span></td>
+                  <td><span class="status-pill ativo">Auditado</span></td>
+                </tr>
+                <tr style="background:#fff7ed;">
+                  <td><strong>Brahma 600ml retornável (UN)</strong></td>
+                  <td><span class="status-pill perigo">Negativo a regularizar</span></td>
+                  <td>Depósito Principal</td>
+                  <td>-24 un</td>
+                  <td><input type="number" class="form-input form-input-sm" placeholder="Contar..." style="width:70px; border-color:#f97316;"></td>
+                  <td><span style="color:#b91c1c;">Pendente</span></td>
+                  <td><span class="status-pill pendente">Aguardando contagem</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Heineken Long Neck 330ml (UN)</strong></td>
+                  <td><span class="status-pill ativo">Curva A</span></td>
+                  <td>Câmara Fria</td>
+                  <td>180 un</td>
+                  <td><input type="number" class="form-input form-input-sm" value="180" style="width:70px;"></td>
+                  <td><span style="color:#15803d; font-weight:600;">0 (Bateu)</span></td>
+                  <td><span class="status-pill ativo">Auditado</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Cerveja Original 600ml (UN)</strong></td>
+                  <td><span class="status-pill analise">Divergente</span></td>
+                  <td>Depósito Principal</td>
+                  <td>48 un</td>
+                  <td><input type="number" class="form-input form-input-sm" value="46" style="width:70px;"></td>
+                  <td><span style="color:#b91c1c; font-weight:600;">−2 un (Ajustar)</span></td>
+                  <td><span class="status-pill analise">Diferença</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           4. CLIENTES: FIADO & AGING DE COBRANÇA - WORKSPACE 4
+           ==================================================================== -->
+      <section class="view-container" id="view-clientes-fiado">
+        <div class="module-view-layout" style="gap:14px;">
+          <div class="b2b-panel-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700;">Fiado & Régua de Cobrança por WhatsApp (Aging)</h2>
+              <div style="font-size:12px; color:#64748b;">Faixas de vencimento de bares e restaurantes com envio de chave PIX automática</div>
+            </div>
+            <button class="btn-sm btn-add-client" onclick="window.dispararReguaCobrancaWhatsApp()">📱 Cobrar Todos em Atraso (WhatsApp)</button>
+          </div>
+
+          <!-- Régua de Faixas Aging -->
+          <div class="aging-summary-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+            <div class="b2b-panel-card" style="border-left: 4px solid #15803d;">
+              <div style="font-size:11px; color:#64748b; font-weight:700;">0 A 30 DIAS (A VENCER)</div>
+              <div style="font-size:22px; font-weight:800; color:#15803d; margin:4px 0;">R$ 8.420,00</div>
+              <div style="font-size:11px; color:#64748b;">12 clientes dentro do prazo</div>
+            </div>
+            <div class="b2b-panel-card" style="border-left: 4px solid #f59e0b;">
+              <div style="font-size:11px; color:#64748b; font-weight:700;">31 A 60 DIAS (ATRASO LEVE)</div>
+              <div style="font-size:22px; font-weight:800; color:#d97706; margin:4px 0;">R$ 1.840,00</div>
+              <div style="font-size:11px; color:#64748b;">Bar do Zé (R$ 400) + 2 clientes</div>
+            </div>
+            <div class="b2b-panel-card" style="border-left: 4px solid #ef4444;">
+              <div style="font-size:11px; color:#64748b; font-weight:700;">61 A 90 DIAS (ATENÇÃO)</div>
+              <div style="font-size:22px; font-weight:800; color:#b91c1c; margin:4px 0;">R$ 450,00</div>
+              <div style="font-size:11px; color:#64748b;">1 cliente em cobrança</div>
+            </div>
+            <div class="b2b-panel-card" style="border-left: 4px solid #64748b;">
+              <div style="font-size:11px; color:#64748b; font-weight:700;">&gt; 90 DIAS (CRÍTICO)</div>
+              <div style="font-size:22px; font-weight:800; color:#475569; margin:4px 0;">R$ 0,00</div>
+              <div style="font-size:11px; color:#15803d;">Zero inadimplência profunda</div>
+            </div>
+          </div>
+
+          <!-- Tabela de Cobrança -->
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Telefone / Contato</th>
+                  <th>Valor em Atraso</th>
+                  <th>Dias Vencidos</th>
+                  <th>Faixa Aging</th>
+                  <th>Ação Sugerida</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bar do Zé (CPA IV)</strong></td>
+                  <td>(65) 99234-5678 · Seu Zé</td>
+                  <td><strong style="color:#d97706;">R$ 400,00</strong></td>
+                  <td>12 dias</td>
+                  <td><span class="status-pill pendente">31-60 dias</span></td>
+                  <td>
+                    <button class="btn-sm btn-secondary" onclick="window.enviarCobrancaWhatsAppCliente('Bar do Zé', 400)">📱 Enviar WhatsApp c/ PIX</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Conveniência Pantanal</strong></td>
+                  <td>(65) 98112-4433 · Marcos</td>
+                  <td><strong style="color:#d97706;">R$ 680,00</strong></td>
+                  <td>18 dias</td>
+                  <td><span class="status-pill pendente">31-60 dias</span></td>
+                  <td>
+                    <button class="btn-sm btn-secondary" onclick="window.enviarCobrancaWhatsAppCliente('Conveniência Pantanal', 680)">📱 Enviar WhatsApp c/ PIX</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           4.1 CLIENTES: LIVRO DE CASCOS & VASILHAMES
+           ==================================================================== -->
+      <section class="view-container" id="view-clientes-cascos">
+        <div class="module-view-layout" style="gap:14px;">
+          <div class="b2b-panel-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700;">Livro de Cascos & Vasilhames por Cliente</h2>
+              <div style="font-size:12px; color:#64748b;">Controle de garrafas, caixas de 600ml, engradados de litro e barris com alerta de cobrança</div>
+            </div>
+            <button class="btn-sm btn-primary" onclick="window.registrarDevolucaoCascosModal()">📥 Registrar Devolução de Cascos</button>
+          </div>
+
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Cx 600ml Devidas</th>
+                  <th>Cx Litro Devidas</th>
+                  <th>Barris 50L</th>
+                  <th>Tempo Médio Retenção</th>
+                  <th>Situação</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background:#fffbeb;">
+                  <td><strong>Bar do Zé (CPA IV)</strong></td>
+                  <td><strong style="color:#b91c1c; font-size:14px;">6 cx</strong></td>
+                  <td>0 cx</td>
+                  <td>0</td>
+                  <td>14 dias</td>
+                  <td><span class="status-pill pendente">Recolher na próxima entrega</span></td>
+                  <td><button class="btn-sm btn-secondary" onclick="window.baixarCascoCliente('Bar do Zé', 6)">Devolver 6 cx</button></td>
+                </tr>
+                <tr>
+                  <td><strong>Restaurante Popular Cuiabano</strong></td>
+                  <td><strong style="color:#b91c1c; font-size:14px;">12 cx</strong></td>
+                  <td>4 cx</td>
+                  <td>0</td>
+                  <td>8 dias</td>
+                  <td><span class="status-pill ativo">Em rota regular</span></td>
+                  <td><button class="btn-sm btn-secondary" onclick="window.baixarCascoCliente('Restaurante Popular', 12)">Devolver</button></td>
+                </tr>
+                <tr>
+                  <td><strong>Distribuidora Amigos do Chopp</strong></td>
+                  <td>0 cx</td>
+                  <td>0 cx</td>
+                  <td><strong style="color:#1e40af; font-size:14px;">6 barris</strong></td>
+                  <td>5 dias</td>
+                  <td><span class="status-pill ativo">Regular</span></td>
+                  <td><button class="btn-sm btn-secondary">Devolver Barris</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           4.2 CLIENTES: COMODATO DE FREEZERS & CHOPEIRAS
+           ==================================================================== -->
+      <section class="view-container" id="view-clientes-comodato">
+        <div class="module-view-layout" style="gap:14px;">
+          <div class="b2b-panel-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700;">Gestão de Comodato de Ativos (Freezers & Chopeiras)</h2>
+              <div style="font-size:12px; color:#64748b;">Controle de patrimônio, contratos, datas e acompanhamento de meta mensal de compra</div>
+            </div>
+            <button class="btn-sm btn-primary" onclick="window.novoComodatoModal()">+ Novo Ativo em Comodato</button>
+          </div>
+
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Patrimônio / Equipamento</th>
+                  <th>Cliente Alocado</th>
+                  <th>Contrato</th>
+                  <th>Instalação</th>
+                  <th>Meta Mensal</th>
+                  <th>Compras no Mês</th>
+                  <th>Atingimento</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background:#fffdf5;">
+                  <td>
+                    <strong>#PAT-FRZ-8821</strong>
+                    <div style="font-size:11px; color:#64748b;">Freezer Dupla Ação Ambev 530L</div>
+                  </td>
+                  <td><strong>Bar do Zé (CPA IV)</strong></td>
+                  <td>COM-2024-089</td>
+                  <td>15/04/2024</td>
+                  <td>30 cx/mês</td>
+                  <td>24 cx</td>
+                  <td>
+                    <div style="width:120px; background:#e2e8f0; border-radius:10px; height:12px; overflow:hidden;">
+                      <div style="width:80%; background:#f59e0b; height:100%;"></div>
+                    </div>
+                    <span style="font-size:11px; font-weight:600; color:#d97706;">80% (Alerta Ocioso)</span>
+                  </td>
+                  <td><span class="status-pill analise">Monitorar</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>#PAT-VC-4012</strong>
+                    <div style="font-size:11px; color:#64748b;">Visa-Cooler 450L Vidro Curvo</div>
+                  </td>
+                  <td><strong>Restaurante Popular Cuiabano</strong></td>
+                  <td>COM-2023-142</td>
+                  <td>10/11/2023</td>
+                  <td>40 cx/mês</td>
+                  <td>42 cx</td>
+                  <td>
+                    <div style="width:120px; background:#e2e8f0; border-radius:10px; height:12px; overflow:hidden;">
+                      <div style="width:100%; background:#15803d; height:100%;"></div>
+                    </div>
+                    <span style="font-size:11px; font-weight:600; color:#15803d;">105% (Meta Batida)</span>
+                  </td>
+                  <td><span class="status-pill ativo">Ativo Saudável</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           5. CAIXA & CONTAS: LIVRO-CAIXA ÚNICO DA LOJA - WORKSPACE 5
+           ==================================================================== -->
+      <section class="view-container" id="view-caixa-livro">
+        <div class="module-view-layout" style="gap:14px;">
+          <div class="b2b-panel-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700;">Livro-Caixa Único da Loja (Consolidação em Tempo Real)</h2>
+              <div style="font-size:12px; color:#64748b;">Acaba com os "3 caixas isolados do HERA". Todos os turnos e pagamentos conciliados.</div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <span class="status-pill ativo">Saldo Loja: R$ 14.820,00</span>
+              <button class="btn-sm btn-secondary" onclick="window.imprimirFechamentoLoja()">🖨️ Fechamento da Loja</button>
+            </div>
+          </div>
+
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Hora</th>
+                  <th>Terminal / Origem</th>
+                  <th>Tipo Operação</th>
+                  <th>Forma</th>
+                  <th>Valor</th>
+                  <th>Operador</th>
+                  <th>Status Conciliação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>14:00</td>
+                  <td>Caixa 01 (Balcão)</td>
+                  <td>Venda Balcão NFC-e 4128</td>
+                  <td><span class="status-pill ativo">PIX Dinâmico</span></td>
+                  <td>R$ 47,80</td>
+                  <td>João Silva</td>
+                  <td><span style="color:#15803d;">✓ Webhook Confirmado</span></td>
+                </tr>
+                <tr>
+                  <td>13:45</td>
+                  <td>Caixa 01 (Balcão)</td>
+                  <td>Sangria p/ Cofre (Teto)</td>
+                  <td>Dinheiro</td>
+                  <td>-R$ 500,00</td>
+                  <td>João Silva</td>
+                  <td><span style="color:#15803d;">✓ Transferido Cofre</span></td>
+                </tr>
+                <tr>
+                  <td>13:10</td>
+                  <td>Motorista Marcos</td>
+                  <td>Baixa Romaneio PED-1040</td>
+                  <td>PIX Dinâmico</td>
+                  <td>R$ 1.120,00</td>
+                  <td>Marcos V.</td>
+                  <td><span style="color:#15803d;">✓ Baixa Automática</span></td>
+                </tr>
+                <tr>
+                  <td>12:30</td>
+                  <td>Caixa 02 (Reserva)</td>
+                  <td>Venda Balcão NFC-e 4127</td>
+                  <td>Smart POS (Cartão)</td>
+                  <td>R$ 138,00</td>
+                  <td>Maria Souza</td>
+                  <td><span style="color:#15803d;">✓ Conciliado Adquirente</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           5.1 CAIXA & CONTAS: PAINEL FISCAL SEFAZ-MT
+           ==================================================================== -->
+      <section class="view-container" id="view-fiscal-painel">
+        <div class="module-view-layout" style="gap:14px;">
+          <div class="b2b-panel-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700;">Painel Fiscal SEFAZ-MT · Motor Próprio (Node.js)</h2>
+              <div style="font-size:12px; color:#64748b;">Emissão assíncrona, fila de contingência offline tpEmis 9 e tradução de rejeições</div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <span class="status-pill ativo">Certificado A1 Válido (214d)</span>
+              <button class="btn-sm btn-primary" onclick="window.retransmitirFilaFiscal()">🚀 Transmitir Fila Fiscal</button>
+            </div>
+          </div>
+
+          <!-- Cards Fila Fiscal -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px;">
+            <div class="b2b-panel-card">
+              <div style="font-size:11px; color:#64748b; font-weight:700;">AUTORIZADAS HOJE</div>
+              <div style="font-size:24px; font-weight:800; color:#15803d; margin:4px 0;">92 notas</div>
+              <div style="font-size:11px; color:#64748b;">100% transmitidas sem travar balcão</div>
+            </div>
+            <div class="b2b-panel-card">
+              <div style="font-size:11px; color:#64748b; font-weight:700;">NA FILA ASSÍNCRONA</div>
+              <div style="font-size:24px; font-weight:800; color:#2563eb; margin:4px 0;">0 notas</div>
+              <div style="font-size:11px; color:#64748b;">Fila limpa em tempo real</div>
+            </div>
+            <div class="b2b-panel-card" style="border-left:4px solid #f59e0b;">
+              <div style="font-size:11px; color:#64748b; font-weight:700;">EM CONTINGÊNCIA (tpEmis 9)</div>
+              <div style="font-size:24px; font-weight:800; color:#d97706; margin:4px 0;">2 notas</div>
+              <div style="font-size:11px; color:#64748b;">Emitidas offline · Transmissão em &lt; 2h</div>
+            </div>
+            <div class="b2b-panel-card">
+              <div style="font-size:11px; color:#64748b; font-weight:700;">REJEIÇÕES DA SEFAZ</div>
+              <div style="font-size:24px; font-weight:800; color:#b91c1c; margin:4px 0;">0 ativas</div>
+              <div style="font-size:11px; color:#15803d;">Todas corrigidas pelo motor</div>
+            </div>
+          </div>
+
+          <!-- Tabela de Documentos Fiscais -->
+          <div class="b2b-panel-card" style="padding:0; overflow:hidden;">
+            <table class="enterprise-table">
+              <thead>
+                <tr>
+                  <th>Modelo</th>
+                  <th>Série / Nº</th>
+                  <th>Chave de Acesso</th>
+                  <th>Emissão</th>
+                  <th>tpEmis</th>
+                  <th>Destinatário</th>
+                  <th>Valor</th>
+                  <th>Situação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>NFC-e (65)</td>
+                  <td>Série 01 · 004128</td>
+                  <td><span style="font-family:monospace; font-size:10px;">51261024891102000155650010000041281098421098</span></td>
+                  <td>14/10 14:00</td>
+                  <td>tpEmis 1 (Normal)</td>
+                  <td>Consumidor Final</td>
+                  <td>R$ 47,80</td>
+                  <td><span class="status-pill ativo">✔ Autorizada SEFAZ-MT</span></td>
+                </tr>
+                <tr style="background:#fffbeb;">
+                  <td>NFC-e (65)</td>
+                  <td>Série 01 · 004126</td>
+                  <td><span style="font-family:monospace; font-size:10px;">51261024891102000155650010000041269098421092</span></td>
+                  <td>14/10 11:32</td>
+                  <td>tpEmis 9 (Contingência)</td>
+                  <td>Consumidor Final</td>
+                  <td>R$ 38,00</td>
+                  <td><span class="status-pill pendente">⚡ Salva no Caixa (Aguardando Fila)</span></td>
+                </tr>
+                <tr>
+                  <td>NF-e (55)</td>
+                  <td>Série 01 · 000842</td>
+                  <td><span style="font-family:monospace; font-size:10px;">51261024891102000155550010000008421098421090</span></td>
+                  <td>14/10 10:15</td>
+                  <td>tpEmis 1 (Normal)</td>
+                  <td>Bar do Zé (PJ)</td>
+                  <td>R$ 2.418,40</td>
+                  <td><span class="status-pill ativo">✔ Autorizada SEFAZ-MT</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           5.2 CAIXA & CONTAS: PAINEL SAÚDE DOS DISPOSITIVOS & A1
+           ==================================================================== -->
+      <section class="view-container" id="view-dispositivos-saude">
+        <div class="module-view-layout" style="gap:14px;">
+          <div class="b2b-panel-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 style="font-size:16px; font-weight:700;">Painel de Saúde dos Dispositivos & Hardware (Observabilidade)</h2>
+              <div style="font-size:12px; color:#64748b;">Monitoramento de sincronização, filas locais, impressoras térmicas e validade do certificado A1</div>
+            </div>
+            <span class="status-pill ativo">4 Aparelhos Pareados</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px;">
+            <!-- PC Caixa 01 -->
+            <div class="b2b-panel-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <strong style="font-size:13px;">🖥️ PC Caixa 01 (Balcão)</strong>
+                <span class="status-pill ativo">Online</span>
+              </div>
+              <div style="font-size:11px; color:#64748b; line-height:1.6;">
+                <div>OS: Windows 11 Pro · Intel i5 8GB SSD</div>
+                <div>Último Sync: há 20 seg · Itens na fila: <strong>0</strong></div>
+                <div>Certificado A1: <span style="color:#15803d; font-weight:600;">Válido (214 dias restantes)</span></div>
+                <div>Impressora: Bematech MP-4200 (ESC/POS USB001 OK)</div>
+                <div>Display de Cliente: Pareado (QR PIX ativo)</div>
+              </div>
+            </div>
+
+            <!-- PC Caixa 02 -->
+            <div class="b2b-panel-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <strong style="font-size:13px;">🖥️ PC Caixa 02 (Reserva)</strong>
+                <span class="status-pill ativo">Online</span>
+              </div>
+              <div style="font-size:11px; color:#64748b; line-height:1.6;">
+                <div>OS: Windows 10 · Intel i3 8GB SSD</div>
+                <div>Último Sync: há 1 min · Itens na fila: <strong>0</strong></div>
+                <div>Certificado A1: <span style="color:#15803d; font-weight:600;">Válido (214 dias restantes)</span></div>
+                <div>Impressora: Elgin i9 (USB002 OK)</div>
+              </div>
+            </div>
+
+            <!-- Celular Vendedor -->
+            <div class="b2b-panel-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <strong style="font-size:13px;">📱 Celular Vendedor (Ana)</strong>
+                <span class="status-pill ativo">Online</span>
+              </div>
+              <div style="font-size:11px; color:#64748b; line-height:1.6;">
+                <div>App: Capacitor · Android 14</div>
+                <div>Último Sync: há 4 min · Fila: <strong>0</strong></div>
+                <div>Acesso: Pedidos, Clientes da Carteira e Assistente</div>
+              </div>
+            </div>
+
+            <!-- Celular Motorista -->
+            <div class="b2b-panel-card" style="border: 1px solid #f97316; background:#fffdf5;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <strong style="font-size:13px;">🚚 Celular Motorista (Marcos)</strong>
+                <span class="status-pill pendente">⚡ Offline (38 min)</span>
+              </div>
+              <div style="font-size:11px; color:#64748b; line-height:1.6;">
+                <div>App: Capacitor · SQLite Nativo</div>
+                <div>Fila local: <strong style="color:#b45309;">12 entregas salvas no aparelho</strong></div>
+                <div>Situação: Na Rota CPA IV (Aguardando sinal 4G para subir)</div>
+                <div style="margin-top:6px;"><button class="btn-sm btn-secondary" onclick="window.simularSyncMotorista()">Simular Reconexão 4G</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           INTELIGÊNCIA: Assistente Engradado (CHAT IA & RASCUNHOS)
+           ==================================================================== -->
+      <section class="view-container" id="view-assistente-ia">
+        <div class="module-view-layout" style="gap:14px;">
+          
+          <div class="b2b-panel-card" style="background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff; padding: 18px 22px; border-radius: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:24px;">🤖</span>
+                  <h2 style="font-size:18px; font-weight:800; color:#f59e0b; margin:0;">Assistente Engradado · Inteligência Determinística para Bebidas</h2>
+                </div>
+                <div style="font-size:12px; color:#cbd5e1; margin-top:4px;">
+                  Roteador Motor IA Fast (Rápido) + Motor IA Pro (Composto) · Portão Determinístico · O sistema calcula, a IA organiza rascunhos.
+                </div>
+              </div>
+              <div style="background: rgba(255,255,255,0.1); padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); text-align:right;">
+                <div style="font-size:11px; color:#fef3c7;">Franquia Mensal: <strong>4.000 créditos</strong></div>
+                <div style="font-size:13px; font-weight:700; color:#fff;">Gasto no mês: <strong>160 cr (~R$ 1,28)</strong></div>
+                <div style="font-size:10px; color:#cbd5e1;">Teto de proteção da loja: <strong>R$ 100/mês garantido</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Casos de Uso Estrela (Plano-Mestre Seção 9.3) -->
+          <div class="b2b-panel-card" style="padding:14px;">
+            <div style="font-weight:700; font-size:13px; margin-bottom:10px; color:#0f172a;">⚡ Prompts Rápidos & Casos Estrela de Cuiabá (Clique para testar):</div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <button class="ai-prompt-chip" onclick="window.triggerAIPreset('bar-do-ze-repetir')">
+                🍺 Orçamento Bar do Zé igual ao último + 10 fd Heineken
+              </button>
+              <button class="ai-prompt-chip" onclick="window.triggerAIPreset('whatsapp-paste')">
+                📱 Colar pedido do WhatsApp (5 cx brahma, 2 fd coca, 1 gelo)
+              </button>
+              <button class="ai-prompt-chip" onclick="window.triggerAIPreset('top-produtos-60dias')">
+                📊 Orçamento com mais comprados nos últimos 60 dias
+              </button>
+              <button class="ai-prompt-chip" onclick="window.triggerAIPreset('consulta-vendas-semana')">
+                📈 Vendas de cerveja lata na semana e margem %
+              </button>
+              <button class="ai-prompt-chip" onclick="window.triggerAIPreset('regua-cobranca-fiado')">
+                💰 Cobrar bares em atraso via WhatsApp com PIX
+              </button>
+              <button class="ai-prompt-chip" onclick="window.triggerAIPreset('resumo-manha-dono')">
+                🌅 Resumo da Manhã do Dono (Executivo)
+              </button>
+            </div>
+          </div>
+
+          <!-- Stream do Chat e Cartão de Rascunho -->
+          <div class="b2b-panel-card" style="display:flex; flex-direction:column; min-height:360px; padding:0; overflow:hidden;">
+            <div class="ai-chat-messages" id="ai-chat-messages-container" style="flex:1; padding:18px; overflow-y:auto; display:flex; flex-direction:column; gap:14px; background:#fafafa;">
+              <!-- Mensagem de Boas-vindas -->
+              <div class="ai-message assistant">
+                <div class="ai-msg-avatar">🤖</div>
+                <div class="ai-msg-content">
+                  Olá, João! Sou o Assistente Engradado do <strong>Engradado</strong>. Posso montar orçamentos a partir do último pedido, interpretar mensagens do WhatsApp, consultar vendas, estoque e calcular a régua de cobrança.<br>
+                  <span style="font-size:11px; color:#64748b;">🔒 <strong>Garantia de Segurança:</strong> Todos os preços e estoques são calculados pelas regras determinísticas do sistema. Nenhuma alteração é gravada sem seu 1 clique de confirmação.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input Bar do Assistente -->
+            <div style="padding:12px 16px; background:#fff; border-top:1px solid var(--border-color); display:flex; gap:10px;">
+              <input type="text" class="form-input" id="ai-chat-input" placeholder="Digite uma solicitação, cole um pedido do WhatsApp ou faça uma pergunta..." style="flex:1;" onkeydown="if(event.key==='Enter') window.sendCustomAIMessage()">
+              <button class="btn-add-client" onclick="window.sendCustomAIMessage()" style="background:#b45309;">Enviar ➔</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           ESTRATÉGIA: PLANO-MESTRE DO ENGRADADO (DOCUMENTO COMPLETO)
+           ==================================================================== -->
+      <section class="view-container" id="view-plano-mestre">
+        <div class="module-view-layout" style="gap:16px;">
+          
+          <!-- Banner Superior da Proposta -->
+          <div class="b2b-panel-card" style="background: linear-gradient(135deg, #1e3a8a, #0f172a); color: #fff; padding: 22px 26px; border-radius: 10px;">
+            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #f59e0b; font-weight: 700;">PROPOSTA V1 · 10/10/2026 · VALIDAÇÃO CLIENTE & CONTADOR</div>
+            <h1 style="font-size: 26px; font-weight: 800; margin: 6px 0; color: #fff;">Plano-Mestre do Engradado.</h1>
+            <p style="font-size: 13px; color: #cbd5e1; max-width: 900px; line-height: 1.6; margin: 0;">
+              Plano completo do sistema de gestão e PDV para distribuidoras de bebidas e atacarejos: o que descobrimos no HERA, como a cliente vai trabalhar, arquitetura offline-first, fiscal sem travar a venda, IA com custos e o caminho até o piloto.
+            </p>
+          </div>
+
+          <!-- Abas de Navegação do Plano-Mestre -->
+          <div class="plano-tabs-header" style="display: flex; gap: 8px; border-bottom: 2px solid var(--border-color); padding-bottom: 6px; overflow-x: auto;">
+            <button class="plano-tab-btn active" onclick="window.switchPlanoTab('tab-resumo')">0. Resumo Executivo</button>
+            <button class="plano-tab-btn" onclick="window.switchPlanoTab('tab-diagnostico')">1. Diagnóstico do HERA</button>
+            <button class="plano-tab-btn" onclick="window.switchPlanoTab('tab-areas')">3. As 6 Áreas</button>
+            <button class="plano-tab-btn" onclick="window.switchPlanoTab('tab-arquitetura')">5. Arquitetura</button>
+            <button class="plano-tab-btn" onclick="window.switchPlanoTab('tab-fiscal')">6. Fiscal & Contingência</button>
+            <button class="plano-tab-btn" onclick="window.switchPlanoTab('tab-ia')">9. Custos de IA</button>
+            <button class="plano-tab-btn" onclick="window.switchPlanoTab('tab-planos')">10. Planos & Preços</button>
+            <button class="plano-tab-btn" onclick="window.switchPlanoTab('tab-roadmap')">11. Roadmap do Piloto</button>
+          </div>
+
+          <!-- Conteúdo 0: Resumo Executivo & Tabela de Números -->
+          <div class="plano-tab-content active" id="tab-resumo">
+            <div class="b2b-panel-card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 10px; color: #0f172a;">Números-Chave do Projeto</h3>
+              <table class="enterprise-table">
+                <thead>
+                  <tr>
+                    <th>Item do Sistema</th>
+                    <th>Valor do Engradado vs Legado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Áreas de Trabalho</strong></td>
+                    <td><strong>6 + Assistente Engradado</strong> (HERA: 85 telas; Protótipo anterior: 41 subtelas)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Venda de Balcão Típica</strong></td>
+                    <td><strong>2 toques, &lt; 5 segundos, sem esperar a SEFAZ</strong> (Mediana de 1 item, R$ 16,00)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Custo de IA por Cliente</strong></td>
+                    <td><strong>~R$ 33/mês</strong> (pior caso ~R$ 84) com Motor IA Fast determinístico; excedente vendido em créditos</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Custo por Nota Fiscal</strong></td>
+                    <td><strong>~R$ 0 marginal</strong> com motor fiscal próprio Node (API terceira custaria R$ 150-340/mês por cliente)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Planos Comerciais</strong></td>
+                    <td><strong>Balcão R$ 399 · Distribuidora R$ 699 · Rede R$ 1.290 por mês</strong> com créditos de IA incluídos</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cronograma do Piloto</strong></td>
+                    <td><strong>1 caixa em 01/03/2027</strong> (depois do Carnaval); virada de todos os caixas na semana de 22/03/2027</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Meta de Break-even</strong></td>
+                    <td><strong>~100 clientes pagantes</strong> (meta para 2028)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Conteúdo 1: Diagnóstico HERA -->
+          <div class="plano-tab-content" id="tab-diagnostico" style="display:none;">
+            <div class="b2b-panel-card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">O HERA por dentro: Causa-raiz comprovada e como resolvemos</h3>
+              <table class="enterprise-table">
+                <thead>
+                  <tr>
+                    <th>Dor da Cliente</th>
+                    <th>Causa-Raiz Técnica no HERA</th>
+                    <th>Como o Engradado Resolve</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>3 caixas não se conversam</strong></td>
+                    <td>Cada PDV tem MySQL próprio. Vendas sobem pelo EnviaVendas.jar a cada 5s sem canal entre caixas.</td>
+                    <td>Banco central único na nuvem com SQLite local via PowerSync por delta. Livro-caixa único da loja.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>TEF não funciona</strong></td>
+                    <td>UTILIZA_TEF=0, DLL ausente. A cliente digita o valor na maquininha Stone avulsa.</td>
+                    <td>PIX dinâmico com webhook e Smart POS integrado por API sem DLL nem PIN pad cabeado.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Estoque negativo</strong></td>
+                    <td>Saldo é campo editável. Baixa ocorre só no upload. 780 de 797 produtos estão zerados.</td>
+                    <td>Razão de movimentos imutável. Baixa no ato mesmo offline. Contagem cíclica e negativos visíveis.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Pedido num sistema e fatura noutro</strong></td>
+                    <td>DAV nasce na retaguarda web, PDV importa e fatura, NF-e é tela separada de 657 KB.</td>
+                    <td>Documento único com estados. Faturar é uma transição direta em 1 clique.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Muitas abas (85 telas)</strong></td>
+                    <td>108 itens de menu, 340 flags de permissão. Modelo genérico misturando moda, oficina e restaurante.</td>
+                    <td>6 áreas de trabalho focadas em bebidas + Assistente Engradado global. Perfis prontos com alçadas.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Conteúdo 3: As 6 Áreas -->
+          <div class="plano-tab-content" id="tab-areas" style="display:none;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px;">
+              <div class="b2b-panel-card">
+                <strong style="color:#d97706; font-size:14px;">1. Vender</strong>
+                <p style="font-size:12px; color:#64748b; margin-top:4px;">Balcão/PDV com vários atendimentos em abas, bipar ou buscar, preço automático, cobrar (PIX 73%, maquininha, fiado), troca de casco e puxar pedido.</p>
+              </div>
+              <div class="b2b-panel-card">
+                <strong style="color:#2563eb; font-size:14px;">2. Pedidos</strong>
+                <p style="font-size:12px; color:#64748b; margin-top:4px;">Documento único: Orçamento → Pedido → Separar → Em rota → Entregue → Faturado. Romaneio de entregas e app do motorista offline com acerto cego.</p>
+              </div>
+              <div class="b2b-panel-card">
+                <strong style="color:#15803d; font-size:14px;">3. Produtos</strong>
+                <p style="font-size:12px; color:#64748b; margin-top:4px;">Grade-planilha tipo Excel com UN, FD e CX no mesmo produto. Notas a receber DF-e, contagem cíclica "Contar Hoje" e reajuste em lote com desfazer 30 dias.</p>
+              </div>
+              <div class="b2b-panel-card">
+                <strong style="color:#7c3aed; font-size:14px;">4. Clientes</strong>
+                <p style="font-size:12px; color:#64748b; margin-top:4px;">Ficha 360, fiado com aging de cobrança, régua WhatsApp com chave PIX, livro de cascos devidos e comodato de freezers com meta mensal de compra.</p>
+              </div>
+              <div class="b2b-panel-card">
+                <strong style="color:#0f766e; font-size:14px;">5. Caixa & Contas</strong>
+                <p style="font-size:12px; color:#64748b; margin-top:4px;">Livro-caixa unificado da loja, turnos com fechamento cego de dinheiro, sangria inteligente com teto, fila fiscal SEFAZ-MT e saúde dos dispositivos.</p>
+              </div>
+              <div class="b2b-panel-card">
+                <strong style="color:#b45309; font-size:14px;">6. Painel</strong>
+                <p style="font-size:12px; color:#64748b; margin-top:4px;">Carimbo de integridade dos dados, números reais de Cuiabá, alertas acionáveis e biblioteca com exportação CSV/XLSX/PDF de todos os 28 relatórios do HERA.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conteúdo 5: Arquitetura -->
+          <div class="plano-tab-content" id="tab-arquitetura" style="display:none;">
+            <div class="b2b-panel-card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Arquitetura Offline-First & Stack Tecnológica</h3>
+              <pre style="background:#0f172a; color:#f8fafc; padding:16px; border-radius:8px; font-size:11px; overflow-x:auto;">
+ PC do caixa (Windows)            Celular (Android/iOS)            Navegador (dono/financeiro)
+ App desktop (Electron)           App (Capacitor)                  PWA (online, com cache)
+  ├─ UI única (React + TS)         ├─ UI única (React + TS)         └─ UI única
+  ├─ SQLite local cifrado          └─ SQLite nativo
+  ├─ Agente local: ESC/POS, display
+  └─ Assinador NFC-e contingência (A1 + CSC)
+          │  fila de upload idempotente (UUID v7)       ▲ download por delta
+          ▼                                            │
+ ┌──────────────── PowerSync (serviço de sync em tempo real) ───┐
+ └──────────────────────────────┬───────────────────────────────┘
+                                ▼
+ ┌──────────── Postgres (Supabase, São Paulo) · RLS por tenant ───────────┐
+ │ cadastros · documentos · razão de estoque · caixa · títulos · fiscal   │
+ └────────────────────────────────────────────────────────────────────────┘</pre>
+            </div>
+          </div>
+
+          <!-- Conteúdo 6: Fiscal -->
+          <div class="plano-tab-content" id="tab-fiscal" style="display:none;">
+            <div class="b2b-panel-card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Fiscal nos Bastidores: Contingência NFC-e tpEmis 9</h3>
+              <p style="font-size:12px; color:#475569; line-height:1.6;">
+                Sem resposta da SEFAZ em 8 segundos, o caixa entra automaticamente em contingência offline (tpEmis 9), assina o XML localmente com o certificado A1 no PC e imprime o DANFCE com "EMITIDA EM CONTINGÊNCIA". A venda nunca trava. Ao restabelecer a rede, as notas sobem sozinhas pela fila assíncrona.
+              </p>
+            </div>
+          </div>
+
+          <!-- Conteúdo 9: Custos de IA -->
+          <div class="plano-tab-content" id="tab-ia" style="display:none;">
+            <div class="b2b-panel-card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Economia Real com Motor IA Fast e Pro</h3>
+              <table class="enterprise-table">
+                <thead>
+                  <tr>
+                    <th>Tipo de Ação</th>
+                    <th>Modelo Utilizado</th>
+                    <th>Tokens / Cache</th>
+                    <th>Custo por Ação</th>
+                    <th>Créditos Cobrados</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Orçamento "Igual ao último" (A1)</td>
+                    <td>Motor IA Fast</td>
+                    <td>~22k entrada (~17k em cache), ~800 saída</td>
+                    <td><strong>R$ 0,010</strong></td>
+                    <td>1 crédito</td>
+                  </tr>
+                  <tr>
+                    <td>Colar pedido WhatsApp (A2)</td>
+                    <td>Motor IA Fast</td>
+                    <td>~30k entrada, ~1.2k saída</td>
+                    <td><strong>R$ 0,015</strong></td>
+                    <td>2 créditos</td>
+                  </tr>
+                  <tr>
+                    <td>Pergunta simples de vendas (B)</td>
+                    <td>Motor IA Fast</td>
+                    <td>~9k entrada (~8k em cache), ~400 saída</td>
+                    <td><strong>R$ 0,005</strong></td>
+                    <td>1 crédito</td>
+                  </tr>
+                  <tr>
+                    <td>Análise aprofundada composta (C)</td>
+                    <td>Motor IA Pro + Fast</td>
+                    <td>Planejador Pro + 4 passos Fast</td>
+                    <td><strong>R$ 0,55</strong></td>
+                    <td>50 créditos</td>
+                  </tr>
+                  <tr>
+                    <td>Resumo da Manhã Executivo</td>
+                    <td>Motor IA Fast (Batch API)</td>
+                    <td>~20k entrada em lote (50% desc.)</td>
+                    <td><strong>R$ 0,01/dia</strong></td>
+                    <td>Incluso no plano</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="margin-top:10px; font-size:12px; color:#15803d; font-weight:600;">
+                ✓ Cenário Base (100 orçamentos/dia + 10 análises/mês): R$ 33/mês. Teto de proteção de R$ 100/mês garantido por loja!
+              </div>
+            </div>
+          </div>
+
+          <!-- Conteúdo 10: Planos Comerciais -->
+          <div class="plano-tab-content" id="tab-planos" style="display:none;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px;">
+              <div class="b2b-panel-card" style="text-align:center; padding:20px;">
+                <div style="font-size:12px; font-weight:700; color:#64748b;">PLANO BALCÃO</div>
+                <div style="font-size:28px; font-weight:800; color:#0f172a; margin:8px 0;">R$ 399<span style="font-size:13px; font-weight:500;">/mês</span></div>
+                <div style="font-size:11px; color:#64748b; line-height:1.6; margin-bottom:14px;">
+                  1 Loja · Até 3 caixas<br>
+                  NFC-e e NF-e ilimitadas<br>
+                  PIX e maquininha integrados<br>
+                  2.000 créditos de IA/mês
+                </div>
+                <button class="btn-secondary" style="width:100%;">Selecionar Balcão</button>
+              </div>
+
+              <div class="b2b-panel-card highlight-main" style="text-align:center; padding:20px; border:2px solid #d97706; background:#fffdfa;">
+                <span class="kpi-pill-badge green" style="background:#fef3c7; color:#b45309; margin-bottom:4px;">RECOMENDADO</span>
+                <div style="font-size:12px; font-weight:700; color:#b45309;">PLANO DISTRIBUIDORA</div>
+                <div style="font-size:28px; font-weight:800; color:#b45309; margin:8px 0;">R$ 699<span style="font-size:13px; font-weight:500;">/mês</span></div>
+                <div style="font-size:11px; color:#64748b; line-height:1.6; margin-bottom:14px;">
+                  1 Loja · Até 6 caixas<br>
+                  Até 3 motoristas + 2 vendedores<br>
+                  Vasilhame, comodato e entregas<br>
+                  <strong>4.000 créditos IA + Resumo da Manhã</strong>
+                </div>
+                <button class="btn-add-client" style="width:100%;">Escolher Distribuidora</button>
+              </div>
+
+              <div class="b2b-panel-card" style="text-align:center; padding:20px;">
+                <div style="font-size:12px; font-weight:700; color:#64748b;">PLANO REDE</div>
+                <div style="font-size:28px; font-weight:800; color:#0f172a; margin:8px 0;">R$ 1.290<span style="font-size:13px; font-weight:500;">/mês</span></div>
+                <div style="font-size:11px; color:#64748b; line-height:1.6; margin-bottom:14px;">
+                  Várias Lojas e CNPJs<br>
+                  Aparelhos e motoristas ilimitados<br>
+                  White-label e suporte prioritário<br>
+                  4.000 créditos IA por loja
+                </div>
+                <button class="btn-secondary" style="width:100%;">Falar com Consultor</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conteúdo 11: Roadmap Piloto -->
+          <div class="plano-tab-content" id="tab-roadmap" style="display:none;">
+            <div class="b2b-panel-card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">Roadmap até o Piloto Real (Início em 13/10/2026)</h3>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="padding:10px 14px; border-left:4px solid #3b82f6; background:#f8fafc; border-radius:4px;">
+                  <strong style="color:#1e40af;">Fase Descoberta (13/10 → 24/10/2026):</strong> Visita à cliente de Cuiabá, reunião com o contador, inventário dos PCs e validação das 98 vendas sem chave.
+                </div>
+                <div style="padding:10px 14px; border-left:4px solid #6366f1; background:#f8fafc; border-radius:4px;">
+                  <strong style="color:#4338ca;">Fase 0 · Fundação (13/10 → 11/12/2026):</strong> Monorepo TS, PowerSync com testes de vazamento entre tenants, NFC-e em homologação SEFAZ-MT e agente local de hardware.
+                </div>
+                <div style="padding:10px 14px; border-left:4px solid #10b981; background:#f8fafc; border-radius:4px;">
+                  <strong style="color:#065f46;">Fase 1 · Balcão Vendável (14/12/2026 → 26/02/2027):</strong> Vender em abas, PIX dinâmico imediato, NFC-e em produção com contingência, importador do HERA e roteador 4G.
+                </div>
+                <div style="padding:12px 14px; border-left:4px solid #f59e0b; background:#fffdf5; border-radius:4px; font-weight:600;">
+                  <strong style="color:#b45309;">🚀 PILOTO EM 1 CAIXA (01/03 → 19/03/2027):</strong> Caixa do operador principal (98% das vendas) opera 100% no Engradado após o Carnaval!
+                </div>
+                <div style="padding:12px 14px; border-left:4px solid #15803d; background:#f0fdf4; border-radius:4px; font-weight:600;">
+                  <strong style="color:#15803d;">🏆 VIRADA COMPLETA (Semana de 22/03/2027):</strong> Todos os caixas no Engradado antes da Páscoa (28/03/2027). HERA desligado.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </main>
 
   </div>
@@ -3379,6 +4981,159 @@
       <div class="modal-footer">
         <button class="btn-secondary btn-close-modal">Cancelar</button>
         <button class="btn-add-client" onclick="window.showToast('Pedido de compra gerado e enviado ao fornecedor!', 'success'); document.getElementById('modal-new-purchase').classList.remove('active');">Confirmar Pedido</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       MODAL GLOBAL: Assistente Engradado (CTRL+K)
+       ======================================================================== -->
+  <div class="modal-overlay" id="modal-assistente-ia">
+    <div class="modal-dialog" style="max-width: 720px; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+      <div class="modal-header" style="background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff; padding: 14px 18px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:20px;">🤖</span>
+          <div>
+            <div style="font-weight:700; font-size:15px; color:#f59e0b;">Assistente Engradado · Engradado</div>
+            <div style="font-size:11px; color:#cbd5e1;">Motor IA Fast + Pro · Portão Determinístico Ativo</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:11px; background:rgba(255,255,255,0.1); padding:4px 8px; border-radius:4px;" id="modal-ai-credits-badge">⚡ 3.840 créditos (~R$ 33/mês)</span>
+          <button class="btn-remove btn-close-modal" onclick="window.closeAIAssistantModal()" style="color:#fff;">✕</button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding: 16px; background: #fafafa; display: flex; flex-direction: column; gap: 12px; max-height: 480px; overflow-y: auto;" id="modal-ai-messages-body">
+        
+        <!-- Sugestões de 1 clique -->
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span style="font-size:11px; font-weight:700; color:#64748b;">CASOS DE USO REAIS DA DISTRIBUIDORA DE CUIABÁ:</span>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <button class="ai-prompt-chip" onclick="window.triggerAIPreset('bar-do-ze-repetir', true)">🍺 Bar do Zé: igual ao último + 10 fd Heineken</button>
+            <button class="ai-prompt-chip" onclick="window.triggerAIPreset('whatsapp-paste', true)">📱 Colar pedido do WhatsApp</button>
+            <button class="ai-prompt-chip" onclick="window.triggerAIPreset('top-produtos-60dias', true)">📊 Mais comprados em 60 dias</button>
+            <button class="ai-prompt-chip" onclick="window.triggerAIPreset('resumo-manha-dono', true)">🌅 Resumo da Manhã</button>
+          </div>
+        </div>
+
+        <div id="modal-ai-chat-thread" style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+          <div class="ai-message assistant">
+            <div class="ai-msg-avatar">🤖</div>
+            <div class="ai-msg-content" style="font-size:12px;">
+              Posso calcular orçamentos, casar pedidos de WhatsApp, conferir fiado e consultar vendas. Digite abaixo ou selecione um caso acima:
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer" style="padding: 12px 16px; background: #fff; border-top: 1px solid var(--border-color); display:flex; gap:8px;">
+        <input type="text" class="form-input" id="modal-ai-input" placeholder="Pergunte ao Assistente ou cole uma mensagem..." style="flex:1;" onkeydown="if(event.key==='Enter') window.sendModalAIMessage()">
+        <button class="btn-add-client" onclick="window.sendModalAIMessage()" style="background:#b45309;">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: F10 Cobrança com PIX Dinâmico e Smart POS -->
+  <div class="modal-overlay" id="modal-cobranca-f10">
+    <div class="modal-dialog" style="max-width: 580px; border-radius: 12px; overflow:hidden;">
+      <div class="modal-header" style="background:#1e293b; color:#fff;">
+        <div>
+          <span style="font-weight:700; font-size:16px;">Cobrança de Venda Balcão · <span id="modal-f10-total-title">R$ 193,60</span></span>
+        </div>
+        <button class="btn-remove btn-close-modal" onclick="document.getElementById('modal-cobranca-f10').classList.remove('active')">✕</button>
+      </div>
+      <div class="modal-body" style="padding:18px; display:flex; flex-direction:column; gap:14px;">
+        
+        <!-- Tabs de Formas de Pagamento -->
+        <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:6px;">
+          <button class="btn-secondary active" id="f10-tab-pix" onclick="window.switchF10Tab('pix')" style="border-color:#d97706; background:#fffdf5; font-weight:700;">⚡ PIX (73%)</button>
+          <button class="btn-secondary" id="f10-tab-cartao" onclick="window.switchF10Tab('cartao')">💳 Smart POS</button>
+          <button class="btn-secondary" id="f10-tab-dinheiro" onclick="window.switchF10Tab('dinheiro')">💵 Dinheiro</button>
+          <button class="btn-secondary" id="f10-tab-fiado" onclick="window.switchF10Tab('fiado')">📝 Fiado Bar</button>
+        </div>
+
+        <!-- Conteúdo PIX Dinâmico -->
+        <div id="f10-content-pix" style="text-align:center; padding:10px 0;">
+          <div style="font-weight:700; font-size:14px; color:#0f172a; margin-bottom:4px;">QR Code PIX Dinâmico (Banco Sicredi/BB API)</div>
+          <div style="font-size:11px; color:#64748b; margin-bottom:12px;">Exibido também no display LCD do balcão para o cliente escanear</div>
+          
+          <div style="display:inline-block; padding:12px; background:#fff; border:2px solid #d97706; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08);">
+            <!-- Simulated QR Code SVG -->
+            <svg width="180" height="180" viewBox="0 0 180 180">
+              <rect width="180" height="180" fill="#fff"/>
+              <rect x="15" y="15" width="45" height="45" fill="#0f172a"/>
+              <rect x="25" y="25" width="25" height="25" fill="#fff"/>
+              <rect x="30" y="30" width="15" height="15" fill="#d97706"/>
+              
+              <rect x="120" y="15" width="45" height="45" fill="#0f172a"/>
+              <rect x="130" y="25" width="25" height="25" fill="#fff"/>
+              <rect x="135" y="30" width="15" height="15" fill="#d97706"/>
+
+              <rect x="15" y="120" width="45" height="45" fill="#0f172a"/>
+              <rect x="25" y="130" width="25" height="25" fill="#fff"/>
+              <rect x="30" y="135" width="15" height="15" fill="#d97706"/>
+
+              <!-- Dots -->
+              <rect x="75" y="25" width="12" height="12" fill="#0f172a"/>
+              <rect x="95" y="35" width="12" height="12" fill="#0f172a"/>
+              <rect x="70" y="70" width="40" height="40" fill="#d97706"/>
+              <rect x="80" y="80" width="20" height="20" fill="#fff"/>
+              <rect x="35" y="80" width="14" height="14" fill="#0f172a"/>
+              <rect x="130" y="80" width="16" height="16" fill="#0f172a"/>
+              <rect x="75" y="130" width="15" height="15" fill="#0f172a"/>
+              <rect x="100" y="140" width="20" height="15" fill="#0f172a"/>
+              <rect x="130" y="125" width="25" height="25" fill="#0f172a"/>
+            </svg>
+          </div>
+
+          <div style="margin-top:12px; font-size:12px; font-weight:600; color:#15803d; display:flex; align-items:center; justify-content:center; gap:6px;">
+            <span class="status-dot"></span> Aguardando confirmação do webhook bancário (tempo real)...
+          </div>
+
+          <div style="margin-top:14px;">
+            <button class="btn-add-client" onclick="window.simularConfirmacaoPIX()" style="background:#15803d; width:100%; padding:12px; font-size:14px; font-weight:700;">
+              ✓ Simular Pagamento PIX Confirmado pelo Cliente
+            </button>
+          </div>
+        </div>
+
+        <!-- Conteúdo Dinheiro -->
+        <div id="f10-content-dinheiro" style="display:none; flex-direction:column; gap:10px;">
+          <div>
+            <label class="form-label">Valor Recebido do Cliente (R$)</label>
+            <input type="number" class="form-input" id="f10-input-dinheiro-recebido" value="200.00" oninput="window.calcTrocoDinheiro(this.value)" style="font-size:18px; font-weight:700;">
+          </div>
+          <div style="background:#f8fafc; padding:12px; border-radius:6px; text-align:center;">
+            <span style="font-size:12px; color:#64748b;">TROCO A DEVOLVER:</span>
+            <div style="font-size:26px; font-weight:800; color:#15803d;" id="f10-troco-display">R$ 6,40</div>
+          </div>
+          <button class="btn-add-client" onclick="window.finalizarVendaDinheiro()" style="width:100%; padding:12px; font-weight:700;">
+            ✓ Confirmar Recebimento em Dinheiro & Abrir Gaveta
+          </button>
+        </div>
+
+        <!-- Conteúdo Cartão -->
+        <div id="f10-content-cartao" style="display:none; text-align:center; padding:10px 0;">
+          <div style="font-size:13px; font-weight:600;">Enviando valor R$ 193,60 para a Maquininha Stone Smart POS...</div>
+          <div style="margin:14px 0;"><span class="pulse-dot"></span> Aguardando cliente aproximar ou inserir cartão...</div>
+          <button class="btn-add-client" onclick="window.simularConfirmacaoCartao()" style="width:100%; padding:12px;">
+            ✓ Simular Transação Aprovada na Maquininha
+          </button>
+        </div>
+
+        <!-- Conteúdo Fiado -->
+        <div id="f10-content-fiado" style="display:none; flex-direction:column; gap:10px;">
+          <div style="background:#fffdf5; border:1px solid #fed7aa; padding:10px; border-radius:6px; font-size:12px;">
+            <div>Cliente: <strong>Bar do Zé</strong></div>
+            <div>Limite Total: R$ 3.000,00 · Disponível: <strong style="color:#15803d;">R$ 1.760,00</strong></div>
+            <div style="color:#15803d; font-weight:600; margin-top:4px;">✓ Limite suficiente para esta compra (R$ 193,60)</div>
+          </div>
+          <button class="btn-add-client" onclick="window.finalizarVendaFiado()" style="width:100%; padding:12px;">
+            ✓ Confirmar Venda a Prazo / Faturar Fiado
+          </button>
+        </div>
+
       </div>
     </div>
   </div>

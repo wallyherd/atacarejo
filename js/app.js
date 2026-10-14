@@ -4568,3 +4568,581 @@ window.abrirNovoOrcamento = () => {
   state.b2bOrderCart = [];
   renderB2BItemsTable();
 };
+
+
+// ==========================================================================
+// ENGRADADO OPERATIONAL CORE EXTENSION
+// Módulos das 6 Áreas de Trabalho, Assistente Engradado e Offline-First
+// ==========================================================================
+
+(function() {
+  // Estado local do Engradado
+  const engradadoState = {
+    isOnline: true,
+    aiCredits: 3840,
+    currentPDVTab: 1,
+    activeDocStep: 2, // 1: Orçamento, 2: Pedido, 3: Separar, 4: Rota, 5: Entregue, 6: Faturado
+    selectedF10Method: 'pix',
+    pdvItems: [
+      { id: 'PROD-CBA-001', name: 'Cerveja Skol 350ml Lata', pkg: 'FD(12)', factor: 12, price: 37.90, qty: 2, total: 75.80, rule: '▲ Fardo (12 un)' },
+      { id: 'PROD-CBA-002', name: 'Cerveja Brahma 600ml Retornável', pkg: 'CX(24)', factor: 24, price: 98.00, qty: 1, total: 98.00, rule: '▲ Varejo Caixa', cascoDevolvido: 1 },
+      { id: 'PROD-CBA-004', name: 'Refrigerante Coca-Cola 2L Pet', pkg: 'UN', factor: 1, price: 9.90, qty: 2, total: 19.80, rule: '▲ Varejo Un.' }
+    ]
+  };
+
+  // 1. Network Toggle (Online / Offline)
+  window.toggleNetworkMode = function() {
+    engradadoState.isOnline = !engradadoState.isOnline;
+    const btn = document.getElementById('btn-toggle-network');
+    const lbl = document.getElementById('lbl-network-mode');
+    const queueStatus = document.getElementById('pdv-fiscal-queue-status');
+    const sidebarSync = document.getElementById('sidebar-sync-status');
+
+    if (engradadoState.isOnline) {
+      if (btn) {
+        btn.className = 'network-badge online';
+      }
+      if (lbl) lbl.textContent = '● Online (Sync OK)';
+      if (sidebarSync) sidebarSync.textContent = 'PowerSync OK';
+      if (queueStatus) queueStatus.innerHTML = '🧾 Próximo Cupom: Série 01 · Nº 004128 · tpEmis 1 (Normal)';
+      if (window.showToast) window.showToast('● Conexão restabelecida! Sincronização em tempo real e contingências transmitidas.', 'success');
+    } else {
+      if (btn) {
+        btn.className = 'network-badge offline';
+      }
+      if (lbl) lbl.textContent = '⚡ Offline (12 na fila local)';
+      if (sidebarSync) sidebarSync.textContent = '⚡ Offline (SQLite Nativo)';
+      if (queueStatus) queueStatus.innerHTML = '⚡ <strong>Contingência tpEmis 9 Ativa:</strong> Cupom sai assinado no disco do PDV';
+      if (window.showToast) window.showToast('⚡ Modo Offline ativado! Vendas continuam normalmente gravando no SQLite local sem travar o caixa.', 'warning');
+    }
+  };
+
+  const btnNet = document.getElementById('btn-toggle-network');
+  if (btnNet) {
+    btnNet.addEventListener('click', window.toggleNetworkMode);
+  }
+
+  // 2. Global AI Search Bar Trigger
+  const topbarSearchAI = document.getElementById('topbar-search-ai');
+  if (topbarSearchAI) {
+    topbarSearchAI.addEventListener('click', () => {
+      window.openAIAssistantModal();
+    });
+  }
+
+  // 3. Assistente Engradado Modal Handlers
+  window.openAIAssistantModal = function(initialPrompt = '') {
+    const modal = document.getElementById('modal-assistente-ia');
+    if (modal) {
+      modal.classList.add('active');
+      const input = document.getElementById('modal-ai-input');
+      if (input) {
+        if (initialPrompt) input.value = initialPrompt;
+        setTimeout(() => input.focus(), 100);
+      }
+    }
+  };
+
+  window.closeAIAssistantModal = function() {
+    const modal = document.getElementById('modal-assistente-ia');
+    if (modal) modal.classList.remove('active');
+  };
+
+  window.openAIAssistant = function(promptText) {
+    window.openAIAssistantModal(promptText);
+  };
+
+  // 4. Trigger Engradado IA Presets (Casos Estrela do Documento)
+  window.triggerAIPreset = function(presetKey, isModal = false) {
+    const presets = {
+      'bar-do-ze-repetir': {
+        prompt: "orçamento pro bar do zé igual o último mas 10 fardo de heineken",
+        costCredits: 1,
+        tokensInfo: "Motor IA Fast · 22k tokens entrada (~17k cache), 790 saída · R$ 0,010",
+        answerHtml: `
+          <div style="font-size:12px; margin-bottom:6px;">
+            Identifiquei a intenção de <strong>Orçamento a partir do Último Pedido</strong>.<br>
+            Cliente: <strong>Bar do Zé (Bairro CPA IV, Cuiabá)</strong> · Base: Pedido <strong>#A-0988</strong>.<br>
+            Alteração solicitada: Heineken Long Neck de 8 FD para <strong>10 FD (+2 fardos)</strong>.
+          </div>
+          <!-- Cartão de Rascunho Determinístico -->
+          <div class="draft-card-ai">
+            <div class="draft-card-header">
+              <strong style="color:#b45309; font-size:13px;">📋 Rascunho de Orçamento · Bar do Zé (14 itens)</strong>
+              <span class="status-pill ativo">Total: R$ 2.418,40 (último: R$ 2.346,60)</span>
+            </div>
+            <div style="font-size:11px; color:#475569; line-height:1.5;">
+              <div>• Preços aplicados: <strong>Tabela 'Bares Cuiabá' vigente</strong></div>
+              <div>• Limite de crédito: R$ 3.000,00 (Disponível R$ 1.760,00 · <span style="color:#15803d; font-weight:600;">Limite Aprovado</span>)</div>
+              <div>• Cascos devidos: <strong>6 cx 600ml</strong> a recolher na entrega</div>
+              <div style="color:#b45309; margin-top:2px;">⚠️ Alerta de estoque: Original 600ml com 12 cx disponíveis no depósito.</div>
+              <div style="font-size:10px; color:#94a3b8; margin-top:4px;">Fontes determinísticas: Pedido #A-0988, Tabela Bares Cuiabá, Estoque 14:02.</div>
+            </div>
+            <div class="draft-card-actions">
+              <button class="btn-sm btn-primary" onclick="window.abrirOrcamentoNaGrade()">Abrir e Editar na Grade</button>
+              <button class="btn-sm btn-add-client" onclick="window.aprovarVirarPedidoIA()">✓ Aprovar → Virar Pedido (1 Toque)</button>
+              <button class="btn-sm btn-secondary" onclick="window.enviarWhatsAppPedido('#A-1042')">📱 Enviar no WhatsApp</button>
+            </div>
+          </div>
+        `
+      },
+      'whatsapp-paste': {
+        prompt: "manda 5 cx brahma 600, 2 fd coca 2l e 1 saco de gelo pro Bar do Zé",
+        costCredits: 2,
+        tokensInfo: "Motor IA Fast · interpretar_pedido_texto em lote · R$ 0,015",
+        answerHtml: `
+          <div style="font-size:12px; margin-bottom:6px;">
+            Texto do WhatsApp interpretado e casado com o catálogo de Cuiabá:
+          </div>
+          <div class="draft-card-ai">
+            <div class="draft-card-header">
+              <strong style="color:#b45309; font-size:13px;">📱 Pedido Casado do WhatsApp · Bar do Zé</strong>
+              <span class="status-pill ativo">Total: R$ 624,00</span>
+            </div>
+            <div style="font-size:11px; color:#475569;">
+              <div>1. <strong>Brahma 600ml Retornável:</strong> 5 CX(24) × R$ 98,00 = R$ 490,00 (Recolher 5 caixas)</div>
+              <div>2. <strong>Coca-Cola 2L Pet:</strong> 2 FD(6) × R$ 56,00 = R$ 112,00 (Descartável)</div>
+              <div>3. <strong>Gelo Filtrado em Cubos 10kg:</strong> 1 Pct × R$ 22,00 = R$ 22,00</div>
+            </div>
+            <div class="draft-card-actions">
+              <button class="btn-sm btn-add-client" onclick="window.aprovarVirarPedidoIA()">✓ Confirmar Pedido de WhatsApp</button>
+              <button class="btn-sm btn-secondary" onclick="window.abrirOrcamentoNaGrade()">Ver na Grade</button>
+            </div>
+          </div>
+        `
+      },
+      'top-produtos-60dias': {
+        prompt: "orçamento pro Bar do Zé com o que ele mais levou nos últimos 60 dias",
+        costCredits: 1,
+        tokensInfo: "Motor IA Fast · Consulta de Giro 60d · R$ 0,010",
+        answerHtml: `
+          <div style="font-size:12px;">
+            Analisei o histórico de faturamento dos últimos 60 dias do Bar do Zé (8 pedidos). Os itens de maior saída com quantidades medianas calculadas:<br>
+            • Heineken LN 330ml: 8 fardos (R$ 287,20)<br>
+            • Brahma 600ml: 5 caixas (R$ 490,00)<br>
+            • Skol Lata 350ml: 10 fardos (R$ 379,00)<br>
+            • Coca-Cola 2L: 4 fardos (R$ 224,00)<br>
+            <strong>Total sugerido: R$ 1.380,20</strong> com preços da tabela vigente de hoje.
+            <div style="margin-top:8px;">
+              <button class="btn-sm btn-add-client" onclick="window.aprovarVirarPedidoIA()">Gerar Pedido Sugerido</button>
+            </div>
+          </div>
+        `
+      },
+      'consulta-vendas-semana': {
+        prompt: "quanto vendemos de cerveja lata essa semana e qual foi a margem média?",
+        costCredits: 1,
+        tokensInfo: "Motor IA Fast + Visão Semântica de Vendas · R$ 0,005",
+        answerHtml: `
+          <div style="font-size:12px;">
+            Nesta semana (segunda-feira até hoje às 14:02), vendemos <strong>842 fardos de cerveja lata</strong> (Skol 350ml e Puro Malte).<br>
+            • Faturamento acumulado: <strong>R$ 32.180,00</strong><br>
+            • Margem média ponderada: <strong>34,2%</strong><br>
+            • Produto mais rentável: Skol Lata 350ml FD(12) com margem de 36% (custo R$ 2,41 / venda R$ 3,29 un).
+          </div>
+        `
+      },
+      'regua-cobranca-fiado': {
+        prompt: "quais bares estão com fiado vencendo há mais de 30 dias e monte a mensagem com PIX",
+        costCredits: 1,
+        tokensInfo: "Motor IA Fast + propor_cobranca · R$ 0,010",
+        answerHtml: `
+          <div style="font-size:12px;">
+            Identifiquei 2 clientes com parcelas vencidas na faixa de 31 a 60 dias:<br>
+            1. <strong>Bar do Zé:</strong> R$ 400,00 (12 dias de atraso)<br>
+            2. <strong>Conveniência Pantanal:</strong> R$ 680,00 (18 dias de atraso)<br>
+            <div style="margin-top:8px; background:#fff; border:1px solid #e2e8f0; padding:10px; border-radius:6px; font-family:monospace; font-size:11px;">
+              Olá Seu Zé! Passando para lembrar da parcela de R$ 400,00 vencida em 02/10. Segue a chave PIX Copia-e-Cola para quitação facilitada: 51261024891102000155. Obrigado!
+            </div>
+            <div style="margin-top:8px;">
+              <button class="btn-sm btn-primary" onclick="window.dispararReguaCobrancaWhatsApp()">Disparar Lote de Cobrança WhatsApp</button>
+            </div>
+          </div>
+        `
+      },
+      'resumo-manha-dono': {
+        prompt: "resumo da manhã executivo de ontem e alertas de hoje",
+        costCredits: 1,
+        tokensInfo: "Motor IA Fast Batch API · R$ 0,010",
+        answerHtml: `
+          <div style="font-size:12px;">
+            <strong>🌅 Resumo Executivo da Manhã (Batch 06:00):</strong><br>
+            • Faturamento de ontem: <strong>R$ 16.420,00</strong> (+8% vs média da terça-feira)<br>
+            • Meios: 74% no PIX, 15% Cartão, 11% Dinheiro<br>
+            • Recompras hoje: 3 bares no roteiro CPA (Bar do Zé, Bar do Gordo, Espetinho)<br>
+            • Alerta de comodato: Freezer Ambev no Bar do Zé com compra em 80% (meta: 30 cx)<br>
+            • Estoque: Original 600ml com 12 cx no depósito (sugerir pedido Ambev no DF-e).
+          </div>
+        `
+      }
+    };
+
+    const target = presets[presetKey];
+    if (!target) return;
+
+    // Deduct credits
+    engradadoState.aiCredits = Math.max(0, engradadoState.aiCredits - target.costCredits);
+    const crRemaining = document.getElementById('lbl-ai-credits-remaining');
+    if (crRemaining) crRemaining.textContent = engradadoState.aiCredits.toLocaleString('pt-BR');
+    const modalCr = document.getElementById('modal-ai-credits-badge');
+    if (modalCr) modalCr.textContent = `⚡ ${engradadoState.aiCredits.toLocaleString('pt-BR')} créditos (~R$ 33/mês)`;
+
+    const chatContainer = isModal 
+      ? document.getElementById('modal-ai-chat-thread')
+      : document.getElementById('ai-chat-messages-container');
+
+    if (!chatContainer) return;
+
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'ai-message user';
+    userMsg.innerHTML = `
+      <div class="ai-msg-avatar">JS</div>
+      <div class="ai-msg-content">${target.prompt}</div>
+    `;
+    chatContainer.appendChild(userMsg);
+
+    // Add assistant response with simulated latency
+    const assistantMsg = document.createElement('div');
+    assistantMsg.className = 'ai-message assistant';
+    assistantMsg.innerHTML = `
+      <div class="ai-msg-avatar">🤖</div>
+      <div class="ai-msg-content">
+        <div style="font-size:10px; color:#d97706; margin-bottom:4px; font-weight:600;">
+          ⚡ ${target.tokensInfo} · 1 crédito consumido
+        </div>
+        ${target.answerHtml}
+      </div>
+    `;
+    chatContainer.appendChild(assistantMsg);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    if (window.showToast) {
+      window.showToast('Resposta gerada pelo Assistente Engradado com fontes citadas!', 'success');
+    }
+  };
+
+  // 5. Custom Messages in AI Chat
+  window.sendCustomAIMessage = function() {
+    const input = document.getElementById('ai-chat-input');
+    if (!input || !input.value.trim()) return;
+    const text = input.value.trim();
+    input.value = '';
+
+    if (text.toLowerCase().includes('bar do zé') || text.toLowerCase().includes('heineken')) {
+      window.triggerAIPreset('bar-do-ze-repetir', false);
+    } else if (text.toLowerCase().includes('whatsapp') || text.toLowerCase().includes('manda')) {
+      window.triggerAIPreset('whatsapp-paste', false);
+    } else if (text.toLowerCase().includes('semana') || text.toLowerCase().includes('vendeu')) {
+      window.triggerAIPreset('consulta-vendas-semana', false);
+    } else {
+      window.triggerAIPreset('bar-do-ze-repetir', false);
+    }
+  };
+
+  window.sendModalAIMessage = function() {
+    const input = document.getElementById('modal-ai-input');
+    if (!input || !input.value.trim()) return;
+    const text = input.value.trim();
+    input.value = '';
+
+    if (text.toLowerCase().includes('bar do zé') || text.toLowerCase().includes('heineken')) {
+      window.triggerAIPreset('bar-do-ze-repetir', true);
+    } else if (text.toLowerCase().includes('whatsapp') || text.toLowerCase().includes('manda')) {
+      window.triggerAIPreset('whatsapp-paste', true);
+    } else {
+      window.triggerAIPreset('consulta-vendas-semana', true);
+    }
+  };
+
+  // 6. Direct Actions from AI Quote Draft
+  window.abrirOrcamentoNaGrade = function() {
+    window.closeAIAssistantModal();
+    window.handleSubmenuNavigation('view-pedidos-quadro', 'Pedidos • Documento Único');
+    if (window.showToast) window.showToast('Orçamento carregado na grade editável de Pedidos!', 'info');
+  };
+
+  window.aprovarVirarPedidoIA = function() {
+    window.closeAIAssistantModal();
+    window.handleSubmenuNavigation('view-pedidos-quadro', 'Pedidos • Documento Único');
+    if (window.showToast) {
+      window.showToast('Pedido #A-1042 aprovado com sucesso! Reserva de estoque efetuada.', 'success');
+    }
+  };
+
+  window.repetirUltimoPedidoBarDoZe = function() {
+    if (window.showToast) {
+      window.showToast('Itens do pedido anterior #A-0988 replicados com preços vigentes de hoje!', 'success');
+    }
+  };
+
+  window.enviarWhatsAppPedido = function(docNum) {
+    const text = encodeURIComponent(`Olá Seu Zé! Segue o espelho do Pedido ${docNum} no Engradado: Total R$ 2.418,40. Entregador Marcos já escalado no romaneio.`);
+    window.open('https://api.whatsapp.com/send?phone=5565992345678&text=' + text, '_blank');
+    if (window.showToast) window.showToast('Mensagem de WhatsApp preparada para o Bar do Zé!', 'success');
+  };
+
+  window.imprimirPedidoPDF = function(docNum) {
+    if (window.showToast) window.showToast(`Enviando DANFE / Pedido ${docNum} para a impressora ESC/POS do caixa...`, 'info');
+  };
+
+  window.faturarDocumentoUnico = function(docNum) {
+    if (window.showToast) {
+      window.showToast(`Pedido ${docNum} faturado! NF-e modelo 55 transmitida à SEFAZ-MT com sucesso.`, 'success');
+    }
+  };
+
+  // 7. PDV Balcão Actions & Tabs
+  window.switchPDVTab = function(tabNum) {
+    engradadoState.currentPDVTab = tabNum;
+    document.querySelectorAll('.pdv-tab-btn').forEach((b, i) => {
+      b.classList.toggle('active', i + 1 === tabNum);
+    });
+    const clientName = document.getElementById('pdv-current-client');
+    if (clientName) {
+      clientName.textContent = tabNum === 1 ? 'Consumidor Padrão' : 'Bar do Zé (CPA IV)';
+    }
+    if (window.showToast) window.showToast(`Alternado para Atendimento ${tabNum}`, 'info');
+  };
+
+  window.addPDVTab = function() {
+    const newNum = document.querySelectorAll('.pdv-tab-btn').length;
+    window.switchPDVTab(newNum);
+    if (window.showToast) window.showToast(`Novo Atendimento ${newNum} aberto em aba!`, 'success');
+  };
+
+  window.showPuxarPedidoModal = function() {
+    if (window.showToast) {
+      window.showToast('Buscando pedidos abertos em outros caixas ou pelo vendedor externo...', 'info');
+    }
+  };
+
+  window.trocarClientePDV = function() {
+    const current = document.getElementById('pdv-current-client');
+    if (current) {
+      if (current.textContent.includes('Consumidor')) {
+        current.textContent = 'Bar do Zé (B2B Cuiabá)';
+        if (window.showToast) window.showToast('Cliente alterado para Bar do Zé. Tabela Bares aplicada automaticamente!', 'success');
+      } else {
+        current.textContent = 'Consumidor Padrão';
+        if (window.showToast) window.showToast('Cliente alterado para Consumidor Padrão.', 'info');
+      }
+    }
+  };
+
+  window.aplicarDescontoPDV = function() {
+    if (window.showToast) window.showToast('Operador João Silva tem alçada de até 15% de desconto.', 'info');
+  };
+
+  window.pausarAtendimentoPDV = function() {
+    if (window.showToast) window.showToast('Atendimento pausado e salvo na fila local do caixa.', 'warning');
+  };
+
+  // 8. F10 Cobrança Modal
+  window.openCobrancaF10Modal = function(method = 'pix') {
+    engradadoState.selectedF10Method = method;
+    const modal = document.getElementById('modal-cobranca-f10');
+    if (modal) {
+      modal.classList.add('active');
+      window.switchF10Tab(method);
+    }
+  };
+
+  window.switchF10Tab = function(method) {
+    const tabs = ['pix', 'cartao', 'dinheiro', 'fiado'];
+    tabs.forEach(m => {
+      const tabBtn = document.getElementById('f10-tab-' + m);
+      const content = document.getElementById('f10-content-' + m);
+      if (tabBtn) tabBtn.classList.toggle('active', m === method);
+      if (content) content.style.display = m === method ? 'block' : 'none';
+    });
+  };
+
+  window.simularConfirmacaoPIX = function() {
+    const modal = document.getElementById('modal-cobranca-f10');
+    if (modal) modal.classList.remove('active');
+    
+    const fiscalText = engradadoState.isOnline 
+      ? '✔ NFC-e Autorizada pela SEFAZ-MT (Chave 5126... Protocolo 151260004128)' 
+      : '⚡ NFC-e emitida em contingência offline (tpEmis 9) · Salva no aparelho para envio posterior';
+
+    if (window.showToast) {
+      window.showToast('⚡ Webhook PIX Confirmado! R$ 193,60 recebido no Sicredi. Cupom impresso na Bematech.', 'success');
+      setTimeout(() => window.showToast(fiscalText, 'info'), 800);
+    }
+  };
+
+  window.calcTrocoDinheiro = function(valRecebido) {
+    const total = 193.60;
+    const troco = Math.max(0, parseFloat(valRecebido || 0) - total);
+    const display = document.getElementById('f10-troco-display');
+    if (display) {
+      display.textContent = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(troco);
+    }
+  };
+
+  window.finalizarVendaDinheiro = function() {
+    const modal = document.getElementById('modal-cobranca-f10');
+    if (modal) modal.classList.remove('active');
+    if (window.showToast) {
+      window.showToast('Venda em dinheiro finalizada! Gaveta acionada e cupom emitido.', 'success');
+    }
+  };
+
+  window.simularConfirmacaoCartao = function() {
+    const modal = document.getElementById('modal-cobranca-f10');
+    if (modal) modal.classList.remove('active');
+    if (window.showToast) {
+      window.showToast('Transação Smart POS Stone Aprovada via API! Autorização #884129.', 'success');
+    }
+  };
+
+  window.finalizarVendaFiado = function() {
+    const modal = document.getElementById('modal-cobranca-f10');
+    if (modal) modal.classList.remove('active');
+    if (window.showToast) {
+      window.showToast('Venda a prazo lançada no limite do Bar do Zé! Vencimento em 7 dias.', 'success');
+    }
+  };
+
+  // 9. Cascos e Vasilhames Handlers
+  window.updateCascoDevolucao = function(val) {
+    if (window.showToast) {
+      window.showToast(`Conferência de cascos atualizada: ${val} caixas devolvidas.`, 'info');
+    }
+  };
+
+  window.baixarCascoCliente = function(cliente, qty) {
+    if (window.showToast) {
+      window.showToast(`Baixa de ${qty} caixas de vasilhame realizada para ${cliente}!`, 'success');
+    }
+  };
+
+  window.dispararReguaCobrancaWhatsApp = function() {
+    if (window.showToast) {
+      window.showToast('📱 Régua de cobrança disparada para 2 clientes com chave PIX dinâmica!', 'success');
+    }
+  };
+
+  window.enviarCobrancaWhatsAppCliente = function(cliente, valor) {
+    if (window.showToast) {
+      window.showToast(`Mensagem de cobrança WhatsApp com PIX de R$ ${valor},00 gerada para ${cliente}!`, 'success');
+    }
+  };
+
+  // 10. Produtos Grade & DF-e
+  window.filtrarSoNegativos = function() {
+    if (window.showToast) window.showToast('Filtrado: Exibindo produtos com estoque negativo ou zerado (Brahma 600ml: -24 cx)', 'warning');
+  };
+
+  window.filtrarSemCusto = function() {
+    if (window.showToast) window.showToast('Filtrado: 100% dos produtos do catálogo possuem custo unitário cadastrado.', 'info');
+  };
+
+  window.openReajusteLoteModal = function() {
+    if (window.showToast) window.showToast('Reajuste de +5% aplicado em lote nos fardos Ambev. Prévia de margem recalculada.', 'success');
+  };
+
+  window.desfazerReajusteLote = function() {
+    if (window.showToast) window.showToast('↩️ Reajuste anterior desfeito com sucesso! Tabela restaurada para o estado de ontem.', 'info');
+  };
+
+  window.exportarGradeProdutos = function() {
+    if (window.showToast) window.showToast('Exportando catálogo de produtos completo em formato XLSX/CSV...', 'info');
+  };
+
+  window.consultarDFeAgora = function() {
+    if (window.showToast) window.showToast('Consultando SEFAZ-MT via mTLS certificado A1... 2 notas recentes localizadas.', 'success');
+  };
+
+  window.confirmarEntradaDFe = function(numNota) {
+    if (window.showToast) {
+      window.showToast(`NF ${numNota} (Ambev) confirmada! Fator de fardo aplicado, 480 unidades lançadas no estoque e títulos a pagar gerados.`, 'success');
+    }
+  };
+
+  window.concluirContagemHoje = function() {
+    if (window.showToast) {
+      window.showToast('✓ Contagem cíclica de hoje concluída! Divergência de -2 un ajustada automaticamente no razão.', 'success');
+    }
+  };
+
+  // 11. Plano-Mestre Tabs
+  window.switchPlanoTab = function(tabId) {
+    document.querySelectorAll('.plano-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('onclick').includes(tabId));
+    });
+    document.querySelectorAll('.plano-tab-content').forEach(c => {
+      c.style.display = c.id === tabId ? 'block' : 'none';
+    });
+  };
+
+  // 12. Global Keyboard Shortcuts: Ctrl+K, F2, F10
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      window.openAIAssistantModal();
+    }
+  });
+
+  // Reconciliação do handleSubmenuNavigation para as novas views
+  const originalHandleSubmenu = window.handleSubmenuNavigation;
+  window.handleSubmenuNavigation = function(viewTarget, label) {
+    const headerTitle = document.getElementById('header-view-title');
+    const headerSubtitle = document.getElementById('header-view-subtitle');
+    const headerTag = document.getElementById('header-view-tag');
+
+    // Mapeamento das 6 Áreas de Trabalho
+    const areaTitles = {
+      'view-vender-balcao': { title: 'Engradado • Vender (Balcão em 2 Toques)', sub: 'Frente de Caixa Rápido · 73% PIX Dinâmico · Sem Travar SEFAZ', tag: 'Workspace 1' },
+      'view-pedidos-quadro': { title: 'Engradado • Pedidos (Documento Único)', sub: 'Orçamento ➔ Pedido ➔ Separação ➔ Entrega ➔ Faturado', tag: 'Workspace 2' },
+      'view-pedidos-entregas': { title: 'Engradado • Entregas & Romaneio R-77', sub: 'Rotas de Cuiabá (CPA, Centro, Morada do Ouro) · Acerto de Motorista', tag: 'Logística' },
+      'view-pedidos-motorista': { title: 'Engradado • App do Motorista (Offline-First)', sub: 'Simulador Mobile Capacitor com SQLite Nativo', tag: 'Mobile App' },
+      'view-produtos-grade': { title: 'Engradado • Produtos (Grade-Planilha)', sub: 'Embalagens UN / FD / CX no mesmo produto · Estoque Razão', tag: 'Workspace 3' },
+      'view-produtos-dfe': { title: 'Engradado • Notas a Receber (DF-e Sefaz)', sub: 'Download Automático com Ciência e Fator Memorizado', tag: 'Fiscal & Compras' },
+      'view-produtos-contar': { title: 'Engradado • Contar Hoje (Cíclica 15 itens)', sub: 'Rotina Diária para Smartphone · 100% Curva A Auditada em 60d', tag: 'Inventário' },
+      'view-clientes-fiado': { title: 'Engradado • Fiado & Régua WhatsApp (Aging)', sub: 'Faixas 0-30, 31-60, 61-90 e >90 dias com Chave PIX Dinâmica', tag: 'Workspace 4' },
+      'view-clientes-cascos': { title: 'Engradado • Livro de Cascos & Vasilhames', sub: 'Saldo de Garrafas 600ml, Litro e Barris por Cliente', tag: 'Retornáveis' },
+      'view-clientes-comodato': { title: 'Engradado • Comodato de Freezers & Chopeiras', sub: 'Patrimônio, Contratos e Metas Mensais de Venda de Engradados', tag: 'Gestão de Ativos' },
+      'view-caixa-livro': { title: 'Engradado • Livro-Caixa Único da Loja', sub: 'Consolidação em Tempo Real de Todos os Caixas e Terminais', tag: 'Workspace 5' },
+      'view-fiscal-painel': { title: 'Engradado • Painel Fiscal SEFAZ-MT', sub: 'Fila de Emissão Assíncrona · Contingência tpEmis 9', tag: 'Motor Fiscal Node' },
+      'view-dispositivos-saude': { title: 'Engradado • Saúde dos Dispositivos (Observabilidade)', sub: 'Status de Sync, Filas Locais, Impressoras e Certificado A1', tag: 'Hardware' },
+      'view-assistente-ia': { title: 'Engradado • Assistente Engradado (Inteligência B2B)', sub: 'Motor IA Fast + Pro · Orçamentos Determinísticos', tag: 'IA Determinística' },
+      'view-plano-mestre': { title: 'Engradado • Plano-Mestre do Sistema', sub: 'Diagnóstico HERA vs Engradado, Arquitetura, Custos de IA e Roadmap', tag: 'Proposta Oficial v1.0' }
+    };
+
+    if (areaTitles[viewTarget]) {
+      const info = areaTitles[viewTarget];
+      if (headerTitle) headerTitle.textContent = info.title;
+      if (headerSubtitle) headerSubtitle.textContent = info.sub;
+      if (headerTag) {
+        headerTag.className = 'tag-badge tag-b2b';
+        headerTag.textContent = info.tag;
+      }
+    }
+
+    // Toggle view containers
+    document.querySelectorAll('.view-container').forEach(v => {
+      v.classList.toggle('active', v.id === viewTarget);
+    });
+
+    // Submenu item active class
+    document.querySelectorAll('.nav-subitem').forEach(sub => {
+      if (sub.getAttribute('data-view') === viewTarget) {
+        document.querySelectorAll('.nav-subitem').forEach(s => s.classList.remove('active'));
+        sub.classList.add('active');
+      }
+    });
+
+    // Call original handler if view exists there
+    if (typeof originalHandleSubmenu === 'function') {
+      try {
+        originalHandleSubmenu(viewTarget, label);
+      } catch (e) {
+        // Safe fallback
+      }
+    }
+  };
+
+  console.log('Engradado Operational Core successfully initialized!');
+})();
