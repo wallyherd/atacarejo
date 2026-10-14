@@ -174,25 +174,25 @@
       <header class="topbar">
         <div class="topbar-left">
           <button class="btn-mobile-toggle" id="btn-mobile-menu" aria-label="Abrir Menu">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </button>
-          <div>
-            <h1 class="topbar-title" id="header-view-title" style="margin-bottom: 2px;">
-              Engradado • Gestão & PDV para Distribuidoras de Bebidas
-            </h1>
-            <div style="font-size: 11px; color: var(--text-dim);" id="header-view-subtitle">Piloto Cuiabá-MT • SEFAZ-MT • Offline-First</div>
+          <div class="topbar-text-group">
+            <div class="topbar-title-wrap">
+              <h1 class="topbar-title" id="header-view-title">Engradado • Dashboard &amp; Visão Geral</h1>
+              <span class="tag-badge tag-b2b" id="header-view-tag">Operação Ativa</span>
+            </div>
+            <div class="topbar-subtitle" id="header-view-subtitle">Piloto Cuiabá-MT • SEFAZ-MT • Offline-First</div>
           </div>
-          <span class="tag-badge tag-b2b" id="header-view-tag" style="margin-left: 6px;">Operação Ativa</span>
         </div>
 
         <div class="topbar-center">
           <div class="topbar-search-trigger" id="topbar-search-ai" title="Clique ou pressione Ctrl+K para abrir o Assistente Engradado">
             <span class="ai-sparkle">✨</span>
-            <span class="search-text"><strong>Assistente Engradado</strong>: "Orçamento Bar do Zé", colar WhatsApp...</span>
+            <span class="search-text"><strong>Assistente Engradado</strong>: "Orçamento Bar do Zé", WhatsApp...</span>
             <kbd class="kbd-shortcut">Ctrl+K</kbd>
           </div>
         </div>
@@ -211,15 +211,15 @@
           </div>
 
           <div class="terminal-meta-group">
-            <span>Caixa: <strong>01 (Balcão)</strong></span>
-            <span>Série: <strong>1 (NFC-e)</strong></span>
+            <span>Caixa: <strong>01</strong></span>
+            <span>Série: <strong>1</strong></span>
           </div>
 
           <div class="operator-badge">
             <div class="operator-avatar" style="background: linear-gradient(135deg, #d97706, #b45309); color: white; font-weight: 700;">JS</div>
-            <div>
-              <div style="font-weight: 600; font-size: 12px;">João Silva</div>
-              <div style="font-size: 10px; color: var(--text-dim);">Operador Principal (98% vendas)</div>
+            <div class="operator-info">
+              <div class="operator-name" style="font-weight: 600; font-size: 11.5px; line-height: 1.2;">João Silva</div>
+              <div class="operator-role" style="font-size: 10px; color: var(--text-dim); line-height: 1.1;">Operador Principal</div>
             </div>
           </div>
         </div>
@@ -327,6 +327,8 @@
             </div>
           </div>
 
+          <!-- Grade de Indicadores PDV vs B2B -->
+          <div class="dash-kpi-grid">
             <div class="dash-kpi-card">
               <div class="dash-kpi-header">
                 <span class="dash-kpi-title">PDV • BALCÃO & VAREJO</span>

@@ -197,330 +197,265 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  const areaTitles = {
+    // 0. DASHBOARD
+    'view-dashboard-geral': { title: 'Engradado • Dashboard & Visão Geral', sub: 'Piloto Cuiabá-MT • SEFAZ-MT • Offline-First', tag: 'Visão Geral', cls: 'tag-badge tag-b2b' },
+    
+    // 1. VENDER (Workspace 1)
+    'view-vender-balcao': { title: 'Engradado • Vender (Balcão em 2 Toques)', sub: 'Frente de Caixa Rápido · 73% PIX Dinâmico · Sem Travar SEFAZ', tag: 'Workspace 1 • Balcão', cls: 'tag-badge tag-b2c' },
+    'view-vendas-varejo': { title: 'Engradado • Frente de Caixa Clássico (PDV)', sub: 'Leitor de Código de Barras · Impressão Térmica Direta', tag: 'PDV Varejo', cls: 'tag-badge tag-b2c' },
+    'view-vendas-atacado': { title: 'Engradado • Atacado & Faturamento B2B', sub: 'Pedidos Faturados, Limites de Crédito e Vendas em Grade', tag: 'Atacado B2B', cls: 'tag-badge tag-b2b' },
+    'view-vendas-orcamento': { title: 'Engradado • Orçamentos & Propostas Comerciais', sub: 'Histórico de Cotações e Conversão em Pedidos', tag: 'Orçamentos', cls: 'tag-badge tag-b2b' },
+    
+    // 2. PEDIDOS (Workspace 2)
+    'view-pedidos-quadro': { title: 'Engradado • Pedidos (Documento Único)', sub: 'Orçamento ➔ Pedido ➔ Separação ➔ Entrega ➔ Faturado', tag: 'Workspace 2 • Pedidos', cls: 'tag-badge tag-b2b' },
+    'view-pedidos-entregas': { title: 'Engradado • Entregas & Romaneio R-77', sub: 'Rotas de Cuiabá (CPA, Centro, Morada do Ouro) · Acerto de Motorista', tag: 'Logística', cls: 'tag-badge tag-b2b' },
+    'view-pedidos-motorista': { title: 'Engradado • App do Motorista (Offline-First)', sub: 'Simulador Mobile Capacitor com SQLite Nativo', tag: 'Mobile App', cls: 'tag-badge tag-b2b' },
+
+    // 3. PRODUTOS & ESTOQUE (Workspace 3)
+    'view-produtos-grade': { title: 'Engradado • Produtos (Grade-Planilha)', sub: 'Embalagens UN / FD / CX no mesmo produto · Estoque Razão', tag: 'Workspace 3 • Produtos', cls: 'tag-badge tag-b2b' },
+    'view-produtos-dfe': { title: 'Engradado • Notas a Receber (DF-e Sefaz)', sub: 'Download Automático com Ciência e Fator Memorizado', tag: 'Fiscal & Compras', cls: 'tag-badge tag-b2b' },
+    'view-produtos-contar': { title: 'Engradado • Contar Hoje (Cíclica 15 itens)', sub: 'Rotina Diária para Smartphone · 100% Curva A Auditada em 60d', tag: 'Inventário', cls: 'tag-badge tag-b2b' },
+    'view-estoque-lote': { title: 'Engradado • Alterações em Lote & Preços', sub: 'Reajustes Coletivos de Margem e Preço por Categoria', tag: 'Estoque & Preço', cls: 'tag-badge tag-b2b' },
+    'view-estoque-historico': { title: 'Engradado • Extrato Analítico Kardex', sub: 'Rastreabilidade Completa de Entradas, Saídas e Avarias', tag: 'Auditoria Kardex', cls: 'tag-badge tag-b2b' },
+    'view-estoque-todos': { title: 'Engradado • Gestão de Itens & Níveis de Segurança', sub: 'Controle Físico e Localização no Almoxarifado', tag: 'Estoque Físico', cls: 'tag-badge tag-b2b' },
+    'view-estoque-avulsa': { title: 'Engradado • Entrada & Saída Avulsa', sub: 'Ajustes Manuais, Avarias, Brindes e Bonificações', tag: 'Ajuste Manual', cls: 'tag-badge tag-b2b' },
+    'view-estoque-cadastro': { title: 'Engradado • Cadastro de Novo Produto', sub: 'Almoxarifado, Tributação e Fatores de Conversão', tag: 'Catálogo', cls: 'tag-badge tag-b2b' },
+    'view-estoque-minmax': { title: 'Engradado • Níveis Mínimo e Máximo & Ponto de Pedido', sub: 'Prevenção de Ruptura de Estoque', tag: 'Curva de Segurança', cls: 'tag-badge tag-b2b' },
+    'view-estoque-movimentacao': { title: 'Engradado • Movimentação Entre Locais & Câmaras', sub: 'Transferência Interna e Câmaras Frias', tag: 'Transferência', cls: 'tag-badge tag-b2b' },
+
+    // 4. CLIENTES (Workspace 4)
+    'view-cliente-consulta': { title: 'Engradado • Carteira de Clientes B2B', sub: 'Consulta, Histórico de Compras e Limite de Crédito', tag: 'Clientes PJ', cls: 'tag-badge tag-b2b' },
+    'view-clientes-fiado': { title: 'Engradado • Fiado & Régua WhatsApp (Aging)', sub: 'Faixas 0-30, 31-60, 61-90 e >90 dias com Chave PIX Dinâmica', tag: 'Workspace 4 • Cobrança', cls: 'tag-badge tag-b2b' },
+    'view-clientes-cascos': { title: 'Engradado • Livro de Cascos & Vasilhames', sub: 'Saldo de Garrafas 600ml, Litro e Barris por Cliente', tag: 'Retornáveis', cls: 'tag-badge tag-b2b' },
+    'view-clientes-comodato': { title: 'Engradado • Comodato de Freezers & Chopeiras', sub: 'Patrimônio, Contratos e Metas Mensais de Venda de Engradados', tag: 'Gestão de Ativos', cls: 'tag-badge tag-b2b' },
+    'view-cliente-cadastro': { title: 'Engradado • Cadastro de Nova Empresa (PJ)', sub: 'Consulta CNPJ Receita Federal, Inscrição Estadual e Crédito', tag: 'Módulo Cadastral', cls: 'tag-badge tag-b2b' },
+
+    // 5. CAIXA & CONTAS (Workspace 5)
+    'view-caixa-livro': { title: 'Engradado • Livro-Caixa Único da Loja', sub: 'Consolidação em Tempo Real de Todos os Caixas e Terminais', tag: 'Workspace 5 • Caixa', cls: 'tag-badge tag-b2b' },
+    'view-caixa-fechamento': { title: 'Engradado • Conferência Cega & Fechamento', sub: 'Fechamento de Turno sem Indução de Erro do Operador', tag: 'Fechamento Cego', cls: 'tag-badge tag-b2b' },
+    'view-caixa-movimentacao': { title: 'Engradado • Sangrias & Suprimentos', sub: 'Entradas e Saídas Avulsas com Justificativa e Assinatura', tag: 'Movimentação Caixa', cls: 'tag-badge tag-b2b' },
+    'view-caixa-abertura': { title: 'Engradado • Abertura de Caixa & Suprimento Inicial', sub: 'Fundo de Troco e Conferência Inicial', tag: 'Abertura de Turno', cls: 'tag-badge tag-b2b' },
+    'view-caixa-todos': { title: 'Engradado • Histórico Consolidado de Todos os Caixas', sub: 'Auditoria de Sessões e Turnos Anteriores', tag: 'Auditoria Caixas', cls: 'tag-badge tag-b2b' },
+
+    // 6. FISCAL, HARDWARE & PAINEL (Workspace 6)
+    'view-fiscal-painel': { title: 'Engradado • Painel Fiscal SEFAZ-MT', sub: 'Fila de Emissão Assíncrona · Contingência tpEmis 9', tag: 'Motor Fiscal Node', cls: 'tag-badge tag-b2b' },
+    'view-fiscal-geradas': { title: 'Engradado • Notas Fiscais Emitidas & Protocolos', sub: 'NFC-e e NF-e Autorizadas pela SEFAZ-MT', tag: 'SEFAZ-MT', cls: 'tag-badge tag-b2b' },
+    'view-fiscal-pendentes': { title: 'Engradado • Fila Fiscal em Contingência (tpEmis 9)', sub: 'Notas Emitidas Offline Aguardando Transmissão', tag: 'Contingência Offline', cls: 'tag-badge tag-b2b' },
+    'view-fiscal-conciliacao': { title: 'Engradado • Conciliação Fiscal vs Cartão / PIX', sub: 'Conformidade Fiscal e Cruzamento de Recebíveis', tag: 'Compliance Fiscal', cls: 'tag-badge tag-b2b' },
+    'view-dispositivos-saude': { title: 'Engradado • Saúde dos Dispositivos (Observabilidade)', sub: 'Status de Sync, Filas Locais, Impressoras e Certificado A1', tag: 'Hardware & Redes', cls: 'tag-badge tag-b2b' },
+    'view-rel-dashboard': { title: 'Engradado • Central de Relatórios', sub: 'Painel Dinâmico Multi-Relatórios Lado a Lado', tag: 'Relatórios & BI', cls: 'tag-badge tag-b2b' },
+    'view-rel-dre': { title: 'Engradado • DRE Gerencial Consolidado', sub: 'Demonstrativo de Resultado do Exercício e Margens Reais', tag: 'Controladoria', cls: 'tag-badge tag-b2b' },
+    'view-rel-movimento': { title: 'Engradado • Movimentação Geral Diária', sub: 'Fluxo Físico e Financeiro Consolidado', tag: 'Movimento Diário', cls: 'tag-badge tag-b2b' },
+    'view-rel-auditoria': { title: 'Engradado • Auditoria Fiscal & Cancelamentos', sub: 'Compliance SEFAZ e Rastreabilidade de Operações', tag: 'Auditoria', cls: 'tag-badge tag-b2b' },
+    'view-rel-vendas': { title: 'Engradado • Demonstrativo Geral de Vendas', sub: 'Controladoria Comercial e Métricas de Venda', tag: 'Vendas Analytics', cls: 'tag-badge tag-b2b' },
+    'view-rel-compras': { title: 'Engradado • Histórico Analítico de Compras', sub: 'Entradas por Fornecedor e Custos de Fábrica', tag: 'Compras', cls: 'tag-badge tag-b2b' },
+    'view-rel-variacao': { title: 'Engradado • Variação de Preço & Custos de Reposição', sub: 'Inflação de Insumos e Variação de Custos', tag: 'Custos', cls: 'tag-badge tag-b2b' },
+    'view-rel-lucro': { title: 'Engradado • Rentabilidade & Lucro por Produto', sub: 'Margem de Contribuição Real', tag: 'Margem Real', cls: 'tag-badge tag-b2b' },
+    'view-rel-funcionarios': { title: 'Engradado • Desempenho & Comissões de Vendedores', sub: 'Metas e Produtividade Comercial', tag: 'Comissões', cls: 'tag-badge tag-b2b' },
+    'view-compras-sugestao': { title: 'Engradado • Sugestão Automática de Reposição', sub: 'Suprimentos, Giro de Estoque e Ponto de Pedido', tag: 'Giro & Compras', cls: 'tag-badge tag-b2b' },
+    'view-compras-saida': { title: 'Engradado • Análise de Saída por Período & Curva ABC', sub: 'Inteligência de Vendas e Demanda', tag: 'Curva ABC', cls: 'tag-badge tag-b2b' },
+    'view-compras-teto': { title: 'Engradado • Teto de Compra por Fornecedor (Budget)', sub: 'Controle Orçamentário e Verbas', tag: 'Budget Fornecedor', cls: 'tag-badge tag-b2b' },
+    'view-compras-precos': { title: 'Engradado • Análise Comparativa de Preços de Fábrica', sub: 'Cotação e Histórico de Preços', tag: 'Cotação Fábrica', cls: 'tag-badge tag-b2b' },
+    'view-fin-vendas': { title: 'Engradado • Analytics & Inteligência de Vendas', sub: 'Picos de Demanda, Formas de Pagamento e Tendências', tag: 'Analytics Vendas', cls: 'tag-badge tag-b2b' },
+    'view-fin-pagar': { title: 'Engradado • Contas a Pagar (Notas Fornecedores)', sub: 'Títulos, Duplicatas e Boletos de Fábrica', tag: 'Contas a Pagar', cls: 'tag-badge tag-b2b' },
+    'view-fin-receber': { title: 'Engradado • Contas a Receber (Faturamento B2B)', sub: 'Crédito, Boletos Faturados e Cobrança', tag: 'Contas a Receber', cls: 'tag-badge tag-b2b' },
+    'view-fin-boletos': { title: 'Engradado • Emissão & Gestão de Boletos Bancários', sub: 'Remessa e Retorno CNAB 240/400', tag: 'Boletos CNAB', cls: 'tag-badge tag-b2b' },
+    'view-fin-previsao': { title: 'Engradado • Previsão de Fluxo de Caixa (30 Dias)', sub: 'Liquidez Projetada e Inadimplência Prevista', tag: 'Fluxo Caixa 30d', cls: 'tag-badge tag-b2b' },
+    'view-admin-exportar': { title: 'Engradado • Central de Exportação 100% Completa', sub: 'Excel & PDF Consolidado de Todas as Tabelas', tag: 'Exportação Total', cls: 'tag-badge tag-b2b' },
+    'view-admin-usuarios': { title: 'Engradado • Gestão de Usuários & Operadores', sub: 'Acessos, Perfis e Auditoria de Logins', tag: 'Segurança', cls: 'tag-badge tag-b2b' },
+    'view-admin-permissoes': { title: 'Engradado • Matriz de Perfis & Permissões', sub: 'Controle de Acesso RBAC por Módulo', tag: 'Permissões RBAC', cls: 'tag-badge tag-b2b' },
+    'view-assistente-ia': { title: 'Engradado • Assistente Engradado (Inteligência B2B)', sub: 'Motor IA Fast + Pro · Orçamentos Determinísticos', tag: 'IA Determinística', cls: 'tag-badge tag-b2b' },
+    'view-plano-mestre': { title: 'Engradado • Plano-Mestre do Sistema', sub: 'Diagnóstico HERA vs Engradado, Arquitetura, Custos de IA e Roadmap', tag: 'Proposta Oficial v1.0', cls: 'tag-badge tag-b2b' }
+  };
+
   const handleSubmenuNavigation = (viewTarget, subItemLabel) => {
     const headerTitle = document.getElementById('header-view-title');
+    const headerSubtitle = document.getElementById('header-view-subtitle');
     const headerTag = document.getElementById('header-view-tag');
 
     // Alterna view containers
     const allViews = document.querySelectorAll('.view-container');
-    let viewFound = false;
+    let targetViewEl = null;
     allViews.forEach(v => {
       if (v.id === viewTarget) {
         v.classList.add('active');
-        viewFound = true;
+        targetViewEl = v;
       } else {
         v.classList.remove('active');
       }
     });
 
-    if (!viewFound) {
-      console.warn(`View target ${viewTarget} not found in DOM.`);
+    if (!targetViewEl) {
+      console.warn('View target ' + viewTarget + ' not found in DOM.');
       return;
     }
 
     state.currentView = viewTarget;
 
-    // Roteamento Dedicado para Cada Aba
+    // Atualiza cabeçalho com alinhamento perfeito
+    if (areaTitles[viewTarget]) {
+      const meta = areaTitles[viewTarget];
+      if (headerTitle) headerTitle.textContent = meta.title;
+      if (headerSubtitle) headerSubtitle.textContent = meta.sub;
+      if (headerTag) {
+        headerTag.className = meta.cls || 'tag-badge tag-b2b';
+        headerTag.textContent = meta.tag;
+      }
+    } else if (subItemLabel) {
+      if (headerTitle) headerTitle.textContent = 'Engradado • ' + subItemLabel.replace(/^[•\s-]+/, '');
+      if (headerSubtitle) headerSubtitle.textContent = 'Gestão & PDV Distribuidora de Bebidas';
+    }
+
+    // Sincroniza classes ativas no submenu e abre o grupo sanfona correspondente
+    document.querySelectorAll('.nav-subitem').forEach(sub => {
+      const isCurrent = sub.getAttribute('data-view') === viewTarget;
+      sub.classList.toggle('active', isCurrent);
+      if (isCurrent) {
+        const parentGroup = sub.closest('.nav-accordion-group');
+        if (parentGroup) {
+          document.querySelectorAll('.nav-accordion-group').forEach(g => {
+            if (g !== parentGroup) g.classList.remove('open');
+          });
+          parentGroup.classList.add('open');
+        }
+      }
+    });
+
+    // Reset de scroll para topo
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) mainContent.scrollTop = 0;
+    targetViewEl.scrollTop = 0;
+
+    // Roteamento Dedicado para Funções de Renderização
     switch (viewTarget) {
-      // 0. DASHBOARD GERAL
       case 'view-dashboard-geral':
-        headerTitle.textContent = 'Dashboard • Visão Geral & Inteligência da Distribuidora';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Visão Executiva em Tempo Real';
         renderDashboardGeralView();
         break;
-
-      // 1. CLIENTE
+      case 'view-vender-balcao':
+        if (typeof window.renderVenderBalcao === 'function') window.renderVenderBalcao();
+        break;
       case 'view-cliente-cadastro':
-        headerTitle.textContent = 'Cliente • Cadastro de Nova Empresa (PJ)';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Módulo Cadastral';
         renderClienteCadastroView();
         break;
-
       case 'view-cliente-consulta':
-        headerTitle.textContent = 'Cliente • Consulta & Ficha Cadastral 360°';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Módulo Comercial';
         renderClientsModule();
         break;
-
-      // 2. VENDAS
       case 'view-vendas-varejo':
-        headerTitle.textContent = 'Vendas • Varejo (PDV Frente de Caixa)';
-        headerTag.className = 'tag-badge tag-b2c';
-        headerTag.textContent = 'Frente de Caixa • Terminal 02';
         renderPDVCart();
         break;
-
       case 'view-vendas-atacado':
-        headerTitle.textContent = 'Vendas • Atacado (B2B Corporativo & Faturamento)';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Faturamento & Vasilhames';
         renderB2BOrdersView();
         break;
-
       case 'view-vendas-orcamento':
-        headerTitle.textContent = 'Vendas • Gestão de Orçamentos & Cotações';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Propostas Comerciais';
         renderOrcamentosGrid();
         break;
-
-      // 3. FISCAL
       case 'view-fiscal-geradas':
-        headerTitle.textContent = 'Fiscal • Notas Geradas & Monitor Sefaz';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'NFC-e / NF-e em Tempo Real';
-        renderFiscalGrid('all');
+        renderFiscalGrid();
         break;
-
       case 'view-fiscal-pendentes':
-        headerTitle.textContent = 'Fiscal • Notas Pendentes, Contingência & Rejeições';
-        headerTag.className = 'tag-badge tag-b2c';
-        headerTag.textContent = 'Fila de Transmissão Sefaz';
         renderFiscalPendentesGrid();
         break;
-
       case 'view-fiscal-conciliacao':
-        headerTitle.textContent = 'Fiscal • Conciliação Fiscal vs Títulos & TEF/PIX';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Auditoria & Cruzamento';
         renderFiscalConciliacaoGrid();
         break;
-
-      // 4. CAIXA
       case 'view-caixa-abertura':
-        headerTitle.textContent = 'Caixa • Abertura de Turno & Status dos Terminais';
-        headerTag.className = 'tag-badge tag-b2c';
-        headerTag.textContent = 'Painel de Terminais PDV';
         renderCaixasAberturaGrid();
         break;
-
       case 'view-caixa-fechamento':
-        headerTitle.textContent = 'Caixa • Fechamento de Turno & Conferência Cega';
-        headerTag.className = 'tag-badge tag-b2c';
-        headerTag.textContent = 'Terminal 02 • Conferência';
         renderCaixaFechamentoView();
         break;
-
       case 'view-caixa-movimentacao':
-        headerTitle.textContent = 'Caixa • Movimentação, Sangrias & Suprimentos';
-        headerTag.className = 'tag-badge tag-b2c';
-        headerTag.textContent = 'Lançamentos em Dinheiro';
         renderCaixaMovementsGrid();
         break;
-
       case 'view-caixa-todos':
-        headerTitle.textContent = 'Caixa • Histórico Consolidado de Todos os Caixas';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Auditoria & Sessões';
         renderCaixaTodosGrid();
         break;
-
-      // 5. ESTOQUE
       case 'view-estoque-avulsa':
-        headerTitle.textContent = 'Estoque • Entrada & Saída Avulsa (Ajuste Manual)';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Avarias / Brindes / Inventário';
         renderEstoqueAvulsoView();
         break;
-
       case 'view-estoque-cadastro':
-        headerTitle.textContent = 'Estoque • Cadastrar Novo Produto';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Almoxarifado & Catálogo';
         renderEstoqueCadastroForm();
         break;
-
       case 'view-estoque-historico':
-        headerTitle.textContent = 'Estoque • Extrato Analítico Kardex';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Rastreabilidade Completa';
         renderEstoqueHistoricoKardex();
         break;
-
       case 'view-estoque-todos':
-        headerTitle.textContent = 'Estoque • Gestão de Itens & Níveis de Segurança';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Controle Físico & Localização';
         renderEstoqueGrid();
         break;
-
       case 'view-estoque-lote':
-        headerTitle.textContent = 'Estoque • Alterações em Lote & Reajustes em Massa';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Edição Coletiva por Categoria';
         renderEstoqueLoteGrid();
         break;
-
       case 'view-estoque-minmax':
-        headerTitle.textContent = 'Estoque • Níveis Mínimo e Máximo & Ponto de Pedido';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Prevenção de Ruptura';
         renderEstoqueMinMaxGrid();
         break;
-
       case 'view-estoque-movimentacao':
-        headerTitle.textContent = 'Estoque • Movimentação Entre Locais & Câmaras';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Transferência Interna';
         renderEstoqueMovimentacaoView();
         break;
-
-      // 6. COMPRAS
       case 'view-compras-sugestao':
-        headerTitle.textContent = 'Compras • Sugestão Automática de Reposição';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Suprimentos & Giro';
         renderComprasSugestaoGrid();
         break;
-
       case 'view-compras-saida':
-        headerTitle.textContent = 'Compras • Análise de Saída por Período & Curva ABC';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Inteligência de Vendas';
         renderComprasSaidaGrid();
         break;
-
       case 'view-compras-teto':
-        headerTitle.textContent = 'Compras • Teto de Compra por Fornecedor (Budget)';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Controle Orçamentário';
         renderComprasTetoGrid();
         break;
-
       case 'view-compras-precos':
-        headerTitle.textContent = 'Compras • Análise Comparativa de Preços de Fábrica';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Cotação & Fornecedores';
         renderComprasPrecosGrid();
         break;
-
-      // 7. RELATÓRIOS
       case 'view-rel-dashboard':
-        headerTitle.textContent = 'Relatórios • Painel Dinâmico Multi-Relatórios Lado a Lado';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Cards Dinâmicos em Paralelo';
         renderReportsBoard();
         break;
-
       case 'view-rel-movimento':
-        headerTitle.textContent = 'Relatórios • Movimentação Geral Diária';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Fluxo Físico & Financeiro';
         renderRelMovimentoGrid();
         break;
-
       case 'view-rel-auditoria':
-        headerTitle.textContent = 'Relatórios • Auditoria Fiscal & Cancelamentos';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Compliance Sefaz';
         renderRelAuditoriaGrid();
         break;
-
       case 'view-rel-vendas':
-        headerTitle.textContent = 'Relatórios • Demonstrativo Geral de Vendas';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Controladoria Comercial';
         renderReportsModule();
         break;
-
       case 'view-rel-compras':
-        headerTitle.textContent = 'Relatórios • Histórico Analítico de Compras';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Entradas por Fornecedor';
         renderRelComprasGrid();
         break;
-
       case 'view-rel-variacao':
-        headerTitle.textContent = 'Relatórios • Variação de Preço & Custos de Reposição';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Inflação de Insumos';
         renderRelVariacaoGrid();
         break;
-
       case 'view-rel-lucro':
-        headerTitle.textContent = 'Relatórios • Rentabilidade & Lucro por Produto';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Margem de Contribuição';
         renderRelLucroGrid();
         break;
-
       case 'view-rel-dre':
-        headerTitle.textContent = 'Relatórios • DRE Gerencial & Resultado Operacional';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Demonstrativo Contábil';
         renderRelDREGrid();
         break;
-
       case 'view-rel-funcionarios':
-        headerTitle.textContent = 'Relatórios • Desempenho & Comissões de Vendedores';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Metas & Produtividade';
         renderRelFuncionariosGrid();
         break;
-
-      // 8. FINANCEIRO
       case 'view-fin-vendas':
-        headerTitle.textContent = 'Financeiro • Analytics & Inteligência de Vendas';
-        headerTag.className = 'tag-badge tag-b2c';
-        headerTag.textContent = 'Dados, Picos & Tendências';
         renderFinancialSalesAnalytics();
         break;
-
       case 'view-fin-pagar':
-        headerTitle.textContent = 'Financeiro • Contas a Pagar (Vinculado a Notas de Fornecedores)';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Títulos & Duplicatas';
         renderFinanceiroGrid();
         break;
-
       case 'view-fin-receber':
-        headerTitle.textContent = 'Financeiro • Contas a Receber (Faturamento B2B)';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Crédito & Carteira';
         renderFinancialBillsToReceiveGrid();
         break;
-
       case 'view-fin-boletos':
-        headerTitle.textContent = 'Financeiro • Emissão & Gestão de Boletos Bancários';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Cobrança CNAB 240/400';
         renderFinancialBoletosGrid();
         break;
-
       case 'view-fin-previsao':
-        headerTitle.textContent = 'Financeiro • Previsão de Fluxo de Caixa (30 Dias)';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Liquidez Projetada';
         renderFinancialPrevisaoView();
         break;
-
-      // 9. ADMIN
       case 'view-admin-exportar':
-        headerTitle.textContent = 'Admin • Central de Exportação 100% Completa';
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = 'Excel & PDF Consolidado';
         renderAdminExportView();
         break;
-
       case 'view-admin-usuarios':
-        headerTitle.textContent = 'Admin • Gestão de Usuários & Operadores';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Acesso & Segurança';
         renderAdminUsuariosGrid();
         break;
-
       case 'view-admin-permissoes':
-        headerTitle.textContent = 'Admin • Matriz de Perfis & Permissões';
-        headerTag.className = 'tag-badge';
-        headerTag.textContent = 'Controle de Acesso RBAC';
         renderAdminPermissoesGrid();
         break;
-
       default:
-        console.log('Navegação padrão para: ' + viewTarget);
         break;
     }
   };
@@ -5084,65 +5019,6 @@ window.abrirNovoOrcamento = () => {
       window.openAIAssistantModal();
     }
   });
-
-  // Reconciliação do handleSubmenuNavigation para as novas views
-  const originalHandleSubmenu = window.handleSubmenuNavigation;
-  window.handleSubmenuNavigation = function(viewTarget, label) {
-    const headerTitle = document.getElementById('header-view-title');
-    const headerSubtitle = document.getElementById('header-view-subtitle');
-    const headerTag = document.getElementById('header-view-tag');
-
-    // Mapeamento das 6 Áreas de Trabalho
-    const areaTitles = {
-      'view-vender-balcao': { title: 'Engradado • Vender (Balcão em 2 Toques)', sub: 'Frente de Caixa Rápido · 73% PIX Dinâmico · Sem Travar SEFAZ', tag: 'Workspace 1' },
-      'view-pedidos-quadro': { title: 'Engradado • Pedidos (Documento Único)', sub: 'Orçamento ➔ Pedido ➔ Separação ➔ Entrega ➔ Faturado', tag: 'Workspace 2' },
-      'view-pedidos-entregas': { title: 'Engradado • Entregas & Romaneio R-77', sub: 'Rotas de Cuiabá (CPA, Centro, Morada do Ouro) · Acerto de Motorista', tag: 'Logística' },
-      'view-pedidos-motorista': { title: 'Engradado • App do Motorista (Offline-First)', sub: 'Simulador Mobile Capacitor com SQLite Nativo', tag: 'Mobile App' },
-      'view-produtos-grade': { title: 'Engradado • Produtos (Grade-Planilha)', sub: 'Embalagens UN / FD / CX no mesmo produto · Estoque Razão', tag: 'Workspace 3' },
-      'view-produtos-dfe': { title: 'Engradado • Notas a Receber (DF-e Sefaz)', sub: 'Download Automático com Ciência e Fator Memorizado', tag: 'Fiscal & Compras' },
-      'view-produtos-contar': { title: 'Engradado • Contar Hoje (Cíclica 15 itens)', sub: 'Rotina Diária para Smartphone · 100% Curva A Auditada em 60d', tag: 'Inventário' },
-      'view-clientes-fiado': { title: 'Engradado • Fiado & Régua WhatsApp (Aging)', sub: 'Faixas 0-30, 31-60, 61-90 e >90 dias com Chave PIX Dinâmica', tag: 'Workspace 4' },
-      'view-clientes-cascos': { title: 'Engradado • Livro de Cascos & Vasilhames', sub: 'Saldo de Garrafas 600ml, Litro e Barris por Cliente', tag: 'Retornáveis' },
-      'view-clientes-comodato': { title: 'Engradado • Comodato de Freezers & Chopeiras', sub: 'Patrimônio, Contratos e Metas Mensais de Venda de Engradados', tag: 'Gestão de Ativos' },
-      'view-caixa-livro': { title: 'Engradado • Livro-Caixa Único da Loja', sub: 'Consolidação em Tempo Real de Todos os Caixas e Terminais', tag: 'Workspace 5' },
-      'view-fiscal-painel': { title: 'Engradado • Painel Fiscal SEFAZ-MT', sub: 'Fila de Emissão Assíncrona · Contingência tpEmis 9', tag: 'Motor Fiscal Node' },
-      'view-dispositivos-saude': { title: 'Engradado • Saúde dos Dispositivos (Observabilidade)', sub: 'Status de Sync, Filas Locais, Impressoras e Certificado A1', tag: 'Hardware' },
-      'view-assistente-ia': { title: 'Engradado • Assistente Engradado (Inteligência B2B)', sub: 'Motor IA Fast + Pro · Orçamentos Determinísticos', tag: 'IA Determinística' },
-      'view-plano-mestre': { title: 'Engradado • Plano-Mestre do Sistema', sub: 'Diagnóstico HERA vs Engradado, Arquitetura, Custos de IA e Roadmap', tag: 'Proposta Oficial v1.0' }
-    };
-
-    if (areaTitles[viewTarget]) {
-      const info = areaTitles[viewTarget];
-      if (headerTitle) headerTitle.textContent = info.title;
-      if (headerSubtitle) headerSubtitle.textContent = info.sub;
-      if (headerTag) {
-        headerTag.className = 'tag-badge tag-b2b';
-        headerTag.textContent = info.tag;
-      }
-    }
-
-    // Toggle view containers
-    document.querySelectorAll('.view-container').forEach(v => {
-      v.classList.toggle('active', v.id === viewTarget);
-    });
-
-    // Submenu item active class
-    document.querySelectorAll('.nav-subitem').forEach(sub => {
-      if (sub.getAttribute('data-view') === viewTarget) {
-        document.querySelectorAll('.nav-subitem').forEach(s => s.classList.remove('active'));
-        sub.classList.add('active');
-      }
-    });
-
-    // Call original handler if view exists there
-    if (typeof originalHandleSubmenu === 'function') {
-      try {
-        originalHandleSubmenu(viewTarget, label);
-      } catch (e) {
-        // Safe fallback
-      }
-    }
-  };
 
   console.log('Engradado Operational Core successfully initialized!');
 })();
